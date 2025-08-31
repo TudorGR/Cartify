@@ -9,7 +9,7 @@ import Testimonials from "./components/Testimonials";
 
 const Home = () => {
   return (
-    <div className="relative flex flex-col gap-20">
+    <div className="relative flex flex-col gap-20 overflow-hidden">
       <Navbar color="white" />
       <Hero />
       <Featured />

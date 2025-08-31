@@ -53,7 +53,7 @@ const Testimonials = () => {
           ref={scrollRef}
         >
           <div className="flex flex-col gap-6">
-            <p className="text-3xl w-100">
+            <p className="text-2xl w-100">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Exercitationem magni soluta sit.
             </p>
@@ -63,7 +63,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="flex flex-col gap-6">
-            <p className="text-3xl w-100">
+            <p className="text-2xl w-100">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Exercitationem magni soluta sit.
             </p>
@@ -73,7 +73,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="flex flex-col gap-6">
-            <p className="text-3xl w-100">
+            <p className="text-2xl w-100">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Exercitationem magni soluta sit.
             </p>
@@ -83,7 +83,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="flex flex-col gap-6">
-            <p className="text-3xl w-100">
+            <p className="text-2xl w-100">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Exercitationem magni soluta sit.
             </p>
@@ -93,7 +93,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="flex flex-col gap-6 ">
-            <p className="text-3xl w-100">
+            <p className="text-2xl w-100">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Exercitationem magni soluta sit.
             </p>

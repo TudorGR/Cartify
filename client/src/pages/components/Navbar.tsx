@@ -1,19 +1,49 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ color }: { color: string }) => {
+  const [dropDown, setDropDown] = useState(false);
+
   return (
     <div
-      className="w-full absolute top-0"
-      style={{ color: color == "black" ? "black" : "white" }}
+      className="w-full top-0 absolute"
+      style={{
+        color: color == "black" ? "black" : dropDown ? "black" : "white",
+        background: dropDown ? "white" : "transparent",
+      }}
     >
-      <div className="flex justify-between items-center w-full max-w-5xl mx-auto  h-16">
+      <div className=" flex justify-between items-center w-full max-w-5xl mx-auto  h-16">
         <img alt="img" className="flex-1" />
         <nav>
           <ul className="flex gap-4 flex-1">
-            <Link to={"/"}>Home</Link>
-            <Link to={"/products"}>Shop</Link>
-            <li>Categories</li>
-            <li>Contact Us</li>
+            <Link to={"/"} className="py-4">
+              Home
+            </Link>
+            <Link to={"/products"} className="py-4">
+              Shop
+            </Link>
+            <li
+              onMouseLeave={() => setDropDown(false)}
+              onMouseEnter={() => setDropDown(true)}
+              className="relative py-4"
+            >
+              Categories ↓
+              <div
+                className={`${
+                  dropDown ? "open" : ""
+                }  dropdown mt-4 overflow-hidden translate-x-[-50%] w-[120vw] top-[1]  bg-white absolute`}
+              >
+                <ul className="text-black w-full flex flex-col items-center h-100 p-6">
+                  <li>Electronics</li>
+                  <li>Clothing</li>
+                  <li>Accessories</li>
+                  <li>Electronics</li>
+                  <li>Clothing</li>
+                  <li>Accessories</li>
+                </ul>
+              </div>
+            </li>
+            <li className="py-4">Contact Us</li>
           </ul>
         </nav>
         <div className="flex justify-end gap-4 flex-1">

@@ -1,0 +1,9 @@
+.dropdown {
+  height: 0%;
+  overflow: hidden;
+  transition: none;
+}
+.dropdown.open {
+  height: 200px;
+  transition: height 0.1s ease-out;
+}

@@ -9,7 +9,7 @@ const NewsLetter = () => {
         </p>
         <div className="flex gap-4">
           <input
-            type="text"
+            type="email"
             placeholder="example@email.com"
             className="border-neutral-500 rounded-full px-6 py-3 border"
           />

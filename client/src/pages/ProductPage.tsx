@@ -1,13 +1,20 @@
+import Filters from "./components/Filters";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import Products from "./components/Products";
 
 const ProductPage = () => {
   return (
-    <div className="relative flex flex-col gap-20 pt-20">
+    <div className="relative flex flex-col gap-20 pt-16 overflow-hidden">
       <Navbar color="black" />
       <div className="w-full max-w-5xl  mx-auto h-full">
-        <p>Home {">"} All</p>
-        <div className="flex"></div>
+        <p className="my-2">Home {">"} All</p>
+        <div className="flex gap-6">
+          <Filters />
+          <Products category="All" />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

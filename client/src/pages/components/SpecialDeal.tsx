@@ -52,26 +52,26 @@ const SpecialDeal = () => {
   return (
     <div className="grid grid-cols-2 max-w-5xl w-full mx-auto">
       <div className="grid grid-cols-4 gap-4 p-4">
-        <div className="bg-neutral-500 rounded-3xl text-white py-16 flex items-center justify-center flex-col">
+        <div className="bg-neutral-500 rounded-2xl text-white py-16 flex items-center justify-center flex-col">
           <div className="text-5xl">{countDown.days}</div>
           <div>Days</div>
         </div>
-        <div className="bg-neutral-500 rounded-3xl text-white py-12 flex items-center justify-center flex-col">
+        <div className="bg-neutral-500 rounded-2xl text-white py-12 flex items-center justify-center flex-col">
           <div className="text-5xl">{countDown.hours}</div>
           <div>Hours</div>
         </div>
-        <div className="bg-neutral-500 rounded-3xl text-white py-12 flex items-center justify-center flex-col">
+        <div className="bg-neutral-500 rounded-2xl text-white py-12 flex items-center justify-center flex-col">
           <div className="text-5xl">{countDown.minutes}</div>
           <div>Minutes</div>
         </div>
-        <div className="bg-neutral-500 rounded-3xl text-white py-12 flex items-center justify-center flex-col">
+        <div className="bg-neutral-500 rounded-2xl text-white py-12 flex items-center justify-center flex-col">
           <div className="text-5xl">{countDown.seconds}</div>
           <div>Seconds</div>
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center justify-center">
         <p className="text-7xl">10%</p>
-        <p className="text-3xl">
+        <p className="text-2xl">
           Special{" "}
           <span className="text-neutral-400 underline">{countDownDay}</span>{" "}
           Deal
