@@ -14,42 +14,42 @@ const Navbar = ({ color }: { color: string }) => {
     >
       <div className=" flex justify-between items-center w-full max-w-5xl mx-auto  h-16">
         <img alt="img" className="flex-1" />
-        <nav>
-          <ul className="flex gap-4 flex-1">
-            <Link to={"/"} className="py-4">
-              Home
-            </Link>
-            <Link to={"/products"} className="py-4">
-              Shop
-            </Link>
-            <li
-              onMouseLeave={() => setDropDown(false)}
-              onMouseEnter={() => setDropDown(true)}
-              className="relative py-4"
+        <div className="flex gap-4 flex-1">
+          <Link to={"/"} className="py-4">
+            Home
+          </Link>
+          <Link to={"/products"} className="py-4">
+            Shop
+          </Link>
+          <div
+            onMouseLeave={() => setDropDown(false)}
+            onMouseEnter={() => setDropDown(true)}
+            className="relative py-4"
+          >
+            Categories ↓
+            <div
+              className={`${
+                dropDown ? "open" : ""
+              }  dropdown mt-4 overflow-hidden translate-x-[-50%] w-[120vw] top-[1]  bg-white absolute`}
             >
-              Categories ↓
-              <div
-                className={`${
-                  dropDown ? "open" : ""
-                }  dropdown mt-4 overflow-hidden translate-x-[-50%] w-[120vw] top-[1]  bg-white absolute`}
-              >
-                <ul className="text-black w-full flex flex-col items-center h-100 p-6">
-                  <li>Electronics</li>
-                  <li>Clothing</li>
-                  <li>Accessories</li>
-                  <li>Electronics</li>
-                  <li>Clothing</li>
-                  <li>Accessories</li>
-                </ul>
-              </div>
-            </li>
-            <li className="py-4">Contact Us</li>
-          </ul>
-        </nav>
+              <ul className="text-black w-full flex flex-col items-center h-100 p-6">
+                <li>Electronics</li>
+                <li>Clothing</li>
+                <li>Accessories</li>
+                <li>Electronics</li>
+                <li>Clothing</li>
+                <li>Accessories</li>
+              </ul>
+            </div>
+          </div>
+          <Link to={"/contact"} className="py-4">
+            Contact Us
+          </Link>
+        </div>
         <div className="flex justify-end gap-4 flex-1">
           <button>Search</button>
           <button>Profile</button>
-          <button>Cart</button>
+          <Link to={"/cart"}>Cart</Link>
         </div>
       </div>
     </div>

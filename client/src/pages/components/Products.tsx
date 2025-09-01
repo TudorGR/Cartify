@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import Product from "./Product";
 
 const Products = ({ category }: { category: string }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex justify-between items-center">

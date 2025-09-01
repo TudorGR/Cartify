@@ -6,4 +6,5 @@
 .dropdown.open {
   height: 200px;
   transition: height 0.1s ease-out;
+  border-bottom: 1px solid lightgray;
 }
