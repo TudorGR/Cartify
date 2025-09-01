@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ContactForm = () => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,8 +54,13 @@ const ContactForm = () => {
           </button>
           <p>
             By contacting us, you agree to our{" "}
-            <span className="font-bold cursor-pointer">Terms of service</span>{" "}
-            and <span className="font-bold cursor-pointer">Privacy Policy</span>
+            <Link to={"/terms"} className="font-bold cursor-pointer">
+              Terms of service
+            </Link>{" "}
+            and{" "}
+            <Link to={"/privacy"} className="font-bold cursor-pointer">
+              Privacy Policy
+            </Link>
           </p>
         </div>
       </form>
