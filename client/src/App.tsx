@@ -12,23 +12,39 @@ import Signup from "./pages/Signup";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Profile from "./pages/Profile";
+import { Toaster } from "react-hot-toast";
+import { UserContextProvider } from "../context/userContext";
+import axios from "axios";
+import ProtectedRoute from "./pages/components/ProtectedRoute";
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/products" element={<ProductPage />} />
-      <Route path="/product/:id" element={<ProductDetails />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="/privacy" element={<Privacy />} />
-      <Route path="/profile" element={<Profile />} />
-    </Routes>
+    <UserContextProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+      <Toaster />
+    </UserContextProvider>
   );
 }
 

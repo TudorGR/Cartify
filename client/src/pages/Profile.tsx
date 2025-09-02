@@ -1,9 +1,29 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const [option, setOption] = useState("info");
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  async function handleSignOut() {
+    try {
+      await axios.post(
+        "http://localhost:3000/logout",
+        {},
+        { withCredentials: true }
+      );
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      toast.error("An error occurred during sign out");
+    }
+  }
 
   return (
     <div className="relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
@@ -12,8 +32,8 @@ const Profile = () => {
         <div className="flex flex-col gap-10 flex-1">
           <div className="flex flex-col gap-1">
             <img alt="img" className="w-20 h-20 rounded-full bg-neutral-500" />
-            <h2>Profile Name</h2>
-            <p>example@email.com</p>
+            <h2>{user?.name}</h2>
+            <p>{user?.email}</p>
           </div>
           <div className="flex flex-col gap-4 items-start">
             <button
@@ -39,6 +59,12 @@ const Profile = () => {
               onClick={() => setOption("orders")}
             >
               Order History
+            </button>
+            <button
+              className="cursor-pointer text-red-500"
+              onClick={handleSignOut}
+            >
+              Sign Out
             </button>
           </div>
         </div>
