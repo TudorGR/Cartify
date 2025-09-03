@@ -17,27 +17,36 @@ const ProductDetails = () => {
     price: 0,
   });
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
 
     async function fetchProduct() {
       try {
+        setLoading(true);
         const response = await axios.get(`http://localhost:3000/product/${id}`);
 
         setData(response.data);
       } catch (error) {
         console.log(error);
       }
+      setLoading(false);
     }
 
     fetchProduct();
-  }, []);
+  }, [id]);
 
   return (
     <div className="relative flex flex-col gap-20 pt-24 overflow-hidden">
       <Navbar color="black" />
-      <ProductHero data={data} />
+      <ProductHero
+        data={data}
+        loading={loading}
+        quantity={quantity}
+        setQuantity={setQuantity}
+      />
       <DescriptionReview />
       <SimilarProducts />
       <Footer />

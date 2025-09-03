@@ -24,7 +24,7 @@ const Product = ({
       <Link to={`/product/${id}`}>
         <img
           alt="some 'preview' hover effect..."
-          className="w-60 h-80  bg-neutral-500 rounded-2xl"
+          className="w-60 h-80  bg-neutral-200 rounded-2xl"
         />
       </Link>
       <div className="flex justify-between max-w-60 w-full">
@@ -35,8 +35,8 @@ const Product = ({
         <button
           onClick={() => setClicked(!clicked)}
           className={`${
-            clicked ? "bg-neutral-500" : ""
-          } cursor-pointer rounded-full border w-10 h-10 shrink-0 transition-all`}
+            clicked ? "bg-neutral-400" : "border border-gray-400"
+          } cursor-pointer text-gray-400 rounded-full w-10 h-10 shrink-0 transition-all`}
         >
           {clicked ? "" : "+"}
         </button>

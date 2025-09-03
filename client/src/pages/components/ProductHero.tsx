@@ -1,3 +1,7 @@
+import type { Dispatch, SetStateAction } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 interface ProductProps {
   data: {
     id: string;
@@ -7,41 +11,118 @@ interface ProductProps {
     image: string;
     price: number;
   };
+  loading: boolean;
+  quantity: number;
+  setQuantity: Dispatch<SetStateAction<number>>;
 }
 
-const ProductHero = ({ data }: ProductProps) => {
+const ProductHero = ({
+  data,
+  loading,
+  quantity,
+  setQuantity,
+}: ProductProps) => {
   return (
     <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
-      <p className="my-2">
-        Home {">"} All {">"} {data.category} {">"} {data.name}
+      <p className="my-2 flex">
+        {loading ? (
+          <Skeleton
+            containerClassName=" w-100"
+            className="pt-1 h-full rounded-2xl "
+          />
+        ) : (
+          `Home > All > ${data.category} > ${data.name}`
+        )}
       </p>
       <div className="grid grid-cols-2 gap-10">
         <div className="flex flex-col items-start">
           <div className="grid grid-cols-[1fr_3fr] h-full w-full gap-6">
-            <div className="flex flex-col justify-between gap-6">
-              <div className="bg-neutral-500 rounded-2xl flex-1"></div>
-              <div className="bg-neutral-500 rounded-2xl flex-1"></div>
-              <div className="bg-neutral-500 rounded-2xl flex-1"></div>
-            </div>
-            <div className="bg-neutral-500 rounded-2xl">hover to zoom</div>
+            {loading ? (
+              <>
+                <div className="flex flex-col justify-between gap-6">
+                  <div className="bg-neutral-200 rounded-2xl overflow-hidden flex-1">
+                    <Skeleton
+                      containerClassName="flex-1 w-20"
+                      className="pt-10 h-full rounded-2xl"
+                    />
+                  </div>
+                  <div className="bg-neutral-200 rounded-2xl overflow-hidden flex-1">
+                    <Skeleton
+                      containerClassName="flex-1 w-20"
+                      className="pt-10 h-full rounded-2xl"
+                    />
+                  </div>
+                  <div className="bg-neutral-200 rounded-2xl overflow-hidden flex-1">
+                    <Skeleton
+                      containerClassName="flex-1 w-20"
+                      className="pt-10 h-full rounded-2xl"
+                    />
+                  </div>
+                </div>
+                <div className="bg-neutral-200 rounded-2xl overflow-hidden">
+                  <Skeleton
+                    containerClassName="flex-1 w-20"
+                    className="pt-10 h-full rounded-2xl"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col justify-between gap-6">
+                  <div className="bg-neutral-200 rounded-2xl flex-1"></div>
+                  <div className="bg-neutral-200 rounded-2xl flex-1"></div>
+                  <div className="bg-neutral-200 rounded-2xl flex-1"></div>
+                </div>
+                <div className="bg-neutral-200 rounded-2xl">hover to zoom</div>
+              </>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-6 min-h-100">
-          <h2 className="text-4xl">{data.name}</h2>
+          <p className="text-4xl flex">
+            {loading ? (
+              <Skeleton
+                containerClassName="w-70"
+                className=" h-full rounded-2xl "
+              />
+            ) : (
+              <>{data.name}</>
+            )}
+          </p>
           <div className="flex gap-4">
             <p>${data.price}</p>
-            <p className="text-neutral-500 line-through">${data.price * 2}</p>
-            <p>x x x x x (20 reviews)</p>
+            <p className="text-neutral-200 line-through">${data.price * 2}</p>
+            <p>★★★☆☆ (20 reviews)</p>
           </div>
           <div className="w-full border-b border-neutral-200"></div>
-          <p>{data.shortDescription}</p>
+          <p className="">
+            {loading ? (
+              <Skeleton className="pt-7 h-full rounded-2xl " />
+            ) : (
+              <>{data.shortDescription}</>
+            )}
+          </p>
           <div className="flex gap-4">
-            <div className="flex gap-6 border border-neutral-200 px-4 py-2 rounded-full">
-              <button>{"-"}</button>
-              <p>1</p>
-              <button>{"+"}</button>
+            <div className="flex gap-4 border border-neutral-200  py-2 rounded-full">
+              <button
+                className=" px-4 cursor-pointer"
+                onClick={() => {
+                  if (quantity > 1) {
+                    setQuantity(quantity - 1);
+                  }
+                }}
+              >
+                {"-"}
+              </button>
+              <p>{quantity}</p>
+              <button
+                className=" px-4 cursor-pointer"
+                onClick={() => setQuantity(quantity + 1)}
+              >
+                {"+"}
+              </button>
             </div>
-            <button className="text-white w-full bg-neutral-500 rounded-full">
+            <button className="cursor-pointer text-white w-full bg-neutral-500 rounded-full">
               Add to Cart (animation go to cart icon)
             </button>
           </div>

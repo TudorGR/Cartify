@@ -233,7 +233,7 @@ const Navbar = ({ color }: { color: string }) => {
         <>
           <div
             ref={searchBarRef}
-            className="absolute left-0 top-0 w-full bg-white border-b border-neutral-300 z-20 flex items-center justify-center h-20"
+            className="absolute left-0 top-0 w-full bg-white border-b border-neutral-400 z-20 flex items-center justify-center h-20"
           >
             <div className="max-w-2xl w-full flex">
               <input
@@ -256,7 +256,7 @@ const Navbar = ({ color }: { color: string }) => {
           {items.length > 0 && (
             <div
               ref={resultsRef}
-              className="absolute left-0 top-20 w-full bg-white border-b border-neutral-300 z-20 flex items-center justify-center"
+              className="absolute left-0 top-20 w-full bg-white border-b border-neutral-400 z-20 flex items-center justify-center"
             >
               <ul className="w-full max-w-2xl flex gap-2 flex-col my-6 max-h-100 overflow-auto">
                 {items.map((item) => (

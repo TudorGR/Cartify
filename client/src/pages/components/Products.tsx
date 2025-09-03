@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Product from "./Product";
+import LoadingProduct from "./LoadingProduct";
 import { Link } from "react-router-dom";
 
 interface ProductType {
@@ -15,6 +16,9 @@ interface ProductsProps {
   products: ProductType[];
   visible: number;
   setVisible: React.Dispatch<React.SetStateAction<number>>;
+  loading: boolean;
+  leftSlider: number;
+  rightSlider: number;
 }
 
 const Products = ({
@@ -22,6 +26,9 @@ const Products = ({
   products,
   visible,
   setVisible,
+  loading,
+  leftSlider,
+  rightSlider,
 }: ProductsProps) => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -36,7 +43,10 @@ const Products = ({
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex justify-between items-center">
         <h2 className="text-4xl">{category}</h2>
-        <p>Showing 1-10 of 100 Products</p>
+        <p>
+          Showing {visible > products.length ? products.length : visible} of{" "}
+          {products.length} Products
+        </p>
       </div>
       <div className="grid grid-cols-3 justify-items-center gap-6">
         {products.length > 0 &&
@@ -53,12 +63,13 @@ const Products = ({
                 price={product.price}
               />
             ))}
+        {loading && Array.from({ length: 18 }, (_, i) => <LoadingProduct />)}
       </div>
       {products.length == 0 && (
-        <div className="flex flex-col items-center justify-center p-20">
+        <div className="max-w-2xl mx-auto flex flex-col items-center justify-center py-20">
           <h2>
             We're sorry, there are no products in the "{category}" category
-            right now.
+            between ${leftSlider} and ${rightSlider} right now.
           </h2>
           <p>Why not explore some of our other great categories?</p>
           <Link to="/" style={{ textDecoration: "underline" }}>

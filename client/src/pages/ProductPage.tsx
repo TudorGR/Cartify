@@ -16,13 +16,14 @@ interface ProductType {
 const ProductPage = () => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [leftSlider, setLeftSlider] = useState(0);
   const [rightSlider, setRightSlider] = useState(500);
   const [visible, setVisible] = useState(18);
 
   async function fetchProducts(leftSlider: number, rightSlider: number) {
     try {
+      setProducts([]);
       setLoading(true);
       const response = await axios.get(
         `http://localhost:3000/products/${category}`
@@ -35,6 +36,7 @@ const ProductPage = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   }
   useEffect(() => {
     fetchProducts(leftSlider, rightSlider);
@@ -56,10 +58,13 @@ const ProductPage = () => {
             fetchProducts={fetchProducts}
           />
           <Products
+            leftSlider={leftSlider}
+            rightSlider={rightSlider}
             category={category ?? "All"}
             products={products}
             visible={visible}
             setVisible={setVisible}
+            loading={loading}
           />
         </div>
       </div>

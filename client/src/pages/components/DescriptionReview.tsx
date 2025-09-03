@@ -28,38 +28,38 @@ const DescriptionReview = () => {
         {dorr == "d" ? (
           <>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-              atque enim ducimus nisi quisquam nihil facere tenetur explicabo
-              modi soluta dicta voluptatum dignissimos impedit iure neque,
-              possimus voluptatem veritatis minima! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Porro atque enim ducimus nisi
-              quisquam nihil facere tenetur explicabo modi soluta dicta
-              voluptatum dignissimos impedit iure neque, possimus voluptatem
-              veritatis minima! veritatis minima! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Porro atque enim ducimus nisi
-              quisquam nihil facere tenetur explicabo modi soluta dicta
-              voluptatum dignissimos impedit iure neque, possimus voluptatem
-              veritatis minima!
+              Experience the perfect blend of quality, functionality, and style
+              with this product. Designed with attention to detail, it offers
+              durability you can rely on and comfort you’ll appreciate every
+              day. Whether you’re using it at home, at work, or on the go, this
+              item adapts seamlessly to your lifestyle. With its sleek design
+              and premium materials, it not only performs exceptionally but also
+              looks great in any setting. An ideal choice for those who value
+              practicality without compromising on aesthetics.
             </p>
             <ul className="list-disc ml-6">
               <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                fugiat vero maiores fuga esse error minus deleniti nam?
+                ♻️ Made from premium recycled materials, reducing waste and
+                environmental impact
+              </li>
+              <li>🌱 Eco-friendly design that supports sustainable living</li>
+              <li>
+                💪 Durable and long-lasting, crafted to withstand daily use
               </li>
               <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                fugiat vero maiores fuga esse error minus deleniti nam?
+                ✨ Stylish yet practical, blending modern aesthetics with
+                functionality
               </li>
               <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                fugiat vero maiores fuga esse error minus deleniti nam?
+                🌍 A responsible choice for those who value both quality and the
+                planet
               </li>
             </ul>
           </>
         ) : (
           <>
             <div className="flex gap-1 flex-col items-start border-neutral-300 border p-4 rounded-2xl">
-              <div>x x x x x</div>
+              <div>★★★☆☆</div>
               <h2 className="text-xl">Alex B.</h2>
               <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
@@ -70,7 +70,7 @@ const DescriptionReview = () => {
               <p>Posted on September 23, 2024</p>
             </div>
             <div className="flex gap-1 flex-col items-start border-neutral-300 border p-4 rounded-2xl">
-              <div>x x x x x</div>
+              <div>★★★☆☆</div>
               <h2 className="text-xl">Alex B.</h2>
               <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
@@ -100,7 +100,7 @@ const DescriptionReview = () => {
                 className="w-full resize-none border border-neutral-300 px-6 py-3 rounded-4xl"
               ></textarea>
               <div className="flex justify-between items-center w-full">
-                <p>Your rating: x x x x x</p>
+                <p>Your rating: ★★★☆☆</p>
                 <button className="bg-neutral-500 text-white px-6 py-3 rounded-full">
                   Post Review
                 </button>

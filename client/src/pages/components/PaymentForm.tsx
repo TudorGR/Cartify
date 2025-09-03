@@ -53,7 +53,7 @@ const PaymentForm = ({ setPayed }: PaymentFormProps) => {
       </div>
       <button
         type="submit"
-        className="bg-neutral-500 rounded-full px-6 py-3 w-fit text-white"
+        className="cursor-pointer bg-neutral-500 rounded-full px-6 py-3 w-fit text-white"
       >
         Pay Now
       </button>

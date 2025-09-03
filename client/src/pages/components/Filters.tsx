@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface FilterProps {
   leftSlider: number;
@@ -39,80 +39,80 @@ const Filters = ({
 
   return (
     <div className="flex flex-col gap-6 w-80">
-      <div className="flex flex-col gap-4 border border-neutral-500 p-6 rounded-2xl">
+      <div className="flex flex-col gap-4 border border-neutral-300 p-6 rounded-2xl">
         <h2 className="text-2xl">Categories</h2>
-        <ul className="flex flex-col">
+        <ul className="flex flex-col gap-3">
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/All"}
           >
             All
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Electronics"}
           >
             Electronics
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/HomeGoods"}
           >
             Home Goods
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Toys"}
           >
             Toys
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Beauty"}
           >
             Beauty
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Automotive"}
           >
             Automotive
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Apparel"}
           >
             Apparel
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Books"}
           >
             Books
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Sports"}
           >
             Sports
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Food"}
           >
             Food
           </NavLink>
           <NavLink
-            className={({ isActive }) => `${isActive ? "font-extrabold" : ""}`}
+            className={({ isActive }) => `${isActive ? "underline" : ""}`}
             to={"/products/Pets"}
           >
             Pets
           </NavLink>
         </ul>
       </div>
-      <div className="border border-neutral-500 p-6 rounded-2xl">
+      <div className="border border-neutral-300 p-6 rounded-2xl">
         <h2 className="text-2xl">Price</h2>
-        <div className="relative w-full h-1 my-6 bg-neutral-500">
+        <div className="relative w-full h-1 my-6 bg-neutral-300">
           <span className="h-full absolute bg-red-500"></span>
           <input
             type="range"
