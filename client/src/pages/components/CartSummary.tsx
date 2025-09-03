@@ -27,7 +27,7 @@ const CartSummary = () => {
       >
         Proceed to Checkout
       </Link>
-      <Link to={"/products"} className="text-center">
+      <Link to={"/products/All"} className="text-center">
         Continue Shopping
       </Link>
     </div>

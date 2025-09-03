@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const SpecialDeal = () => {
   const [countDown, setCountDown] = useState({
@@ -76,9 +77,12 @@ const SpecialDeal = () => {
           <span className="text-neutral-400 underline">{countDownDay}</span>{" "}
           Deal
         </p>
-        <button className="bg-neutral-500 rounded-full px-4 py-2">
+        <Link
+          to={"/products/All"}
+          className="cursor-pointer bg-neutral-500 rounded-full px-4 py-2"
+        >
           Shop now
-        </button>
+        </Link>
       </div>
     </div>
   );

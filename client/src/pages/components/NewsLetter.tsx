@@ -21,7 +21,7 @@ const NewsLetter = () => {
           />
           <button
             type="submit"
-            className="text-white bg-neutral-500 rounded-full px-6 py-3 "
+            className="cursor-pointer text-white bg-neutral-500 rounded-full px-6 py-3 "
           >
             Subscribe
           </button>

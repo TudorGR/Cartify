@@ -13,7 +13,12 @@ const Navbar = ({ color }: { color: string }) => {
   return (
     <>
       <div
-        className="w-full top-0 absolute"
+        className={`fixed inset-0 bg-black/10 transition-opacity duration-300 ${
+          dropDown ? "opacity-100 z-5" : "opacity-0 pointer-events-none"
+        }`}
+      ></div>
+      <div
+        className="w-full top-0 absolute z-10"
         style={{
           color:
             color == "black"
@@ -27,35 +32,111 @@ const Navbar = ({ color }: { color: string }) => {
       >
         <div className=" flex justify-between items-center w-full max-w-5xl mx-auto  h-16">
           <img alt="img" className="flex-1" />
-          <div className="flex gap-4 flex-1">
+          <div className="flex gap-4 flex-1 justify-between">
             <Link to={"/"} className="py-4">
               Home
             </Link>
-            <Link to={"/products"} className="py-4">
+            <Link to={"/products/All"} className="py-4">
               Shop
             </Link>
             <div
               onMouseLeave={() => setDropDown(false)}
               onMouseEnter={() => setDropDown(true)}
-              className="relative py-4"
+              className="relative py-4 text-nowrap"
             >
               Categories ↓
               <div
                 className={`${
                   dropDown ? "open" : ""
-                }  dropdown mt-4 overflow-hidden translate-x-[-50%] w-[120vw] top-[1]  bg-white absolute`}
+                }  dropdown overflow-hidden translate-x-[-50%] left-1/2 w-[120vw] top-[100%]  bg-white  absolute`}
               >
-                <ul className="text-black w-full flex flex-col items-center h-100 p-6">
-                  <li>Electronics</li>
-                  <li>Clothing</li>
-                  <li>Accessories</li>
-                  <li>Electronics</li>
-                  <li>Clothing</li>
-                  <li>Accessories</li>
+                <ul className="text-black  justify-items-center flex max-w-5xl mx-auto w-full gap-4 p-6">
+                  <div className="flex-1 flex justify-center">
+                    <div className="flex flex-col gap-4">
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Electronics"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Electronics
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/HomeGoods"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Home Goods
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Toys"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Toys
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Beauty"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Beauty
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="flex-1 flex justify-center">
+                    <div className="flex flex-col gap-4">
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Automotive"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Automotive
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Apparel"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Apparel
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Books"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Books
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Sports"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Sports
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="flex-1 flex justify-center">
+                    <div className="flex flex-col gap-4">
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Food"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Food
+                      </Link>
+                      <Link
+                        onClick={() => setDropDown(false)}
+                        to={"/products/Pets"}
+                        className="hover:underline text-neutral-400 hover:text-black"
+                      >
+                        Pets
+                      </Link>
+                    </div>
+                  </div>
                 </ul>
               </div>
             </div>
-            <Link to={"/contact"} className="py-4">
+            <Link to={"/contact"} className="py-4 text-nowrap">
               Contact Us
             </Link>
           </div>

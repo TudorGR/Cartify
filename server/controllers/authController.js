@@ -69,15 +69,63 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const getProfile = (req, res) => {
+export const getProfile = async (req, res) => {
   const { token } = req.cookies;
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
       if (err) throw err;
+
+      const user = await UserModel.findById(decoded.id).select("-password");
+
+      if (!user) {
+        return res.json({ error: "User not found" });
+      }
+
       res.json(user);
     });
   } else {
     res.json(null);
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { token } = req.cookies;
+
+    if (!token) {
+      return res.json({ error: "No token provided" });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
+      if (err) {
+        return res.json({ error: "Invalid token" });
+      }
+
+      const { name, phone, street, city, country, zip } = req.body;
+
+      const updateData = {};
+      if (name) updateData.name = name;
+      if (phone) updateData.phone = phone;
+      if (street) updateData.street = street;
+      if (city) updateData.city = city;
+      if (country) updateData.country = country;
+      if (zip) updateData.zip = zip;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        decoded.id,
+        updateData,
+        { new: true, runValidators: true }
+      ).select("-password");
+
+      if (!updatedUser) {
+        return res.json({ error: "User not found" });
+      }
+
+      res.json(updatedUser);
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ error: "Server error" });
   }
 };
 

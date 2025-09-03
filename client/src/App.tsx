@@ -24,7 +24,7 @@ function App() {
     <UserContextProvider>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductPage />} />
+        <Route path="/products/:category" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
@@ -43,7 +43,35 @@ function App() {
           }
         />
       </Routes>
-      <Toaster />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#fff",
+            color: "#333",
+            border: "1px solid #e5e5e5",
+            borderRadius: "8px",
+            padding: "12px 16px",
+            fontSize: "14px",
+            fontWeight: "400",
+            boxShadow: "0 0 0 0",
+            width: "300px",
+          },
+          success: {
+            iconTheme: {
+              primary: "#10b981",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
     </UserContextProvider>
   );
 }

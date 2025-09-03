@@ -1,8 +1,19 @@
-const ProductHero = () => {
+interface ProductProps {
+  data: {
+    id: string;
+    name: string;
+    shortDescription: string;
+    category: string;
+    image: string;
+    price: number;
+  };
+}
+
+const ProductHero = ({ data }: ProductProps) => {
   return (
     <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
       <p className="my-2">
-        Home {">"} All {">"} Product
+        Home {">"} All {">"} {data.category} {">"} {data.name}
       </p>
       <div className="grid grid-cols-2 gap-10">
         <div className="flex flex-col items-start">
@@ -15,20 +26,15 @@ const ProductHero = () => {
             <div className="bg-neutral-500 rounded-2xl">hover to zoom</div>
           </div>
         </div>
-        <div className="flex flex-col gap-6">
-          <h2 className="text-4xl">Double bed & side tables</h2>
+        <div className="flex flex-col gap-6 min-h-100">
+          <h2 className="text-4xl">{data.name}</h2>
           <div className="flex gap-4">
-            <p>$29.99</p>
-            <p className="text-neutral-500 line-through">$54.99</p>
+            <p>${data.price}</p>
+            <p className="text-neutral-500 line-through">${data.price * 2}</p>
             <p>x x x x x (20 reviews)</p>
           </div>
           <div className="w-full border-b border-neutral-200"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-            officiis! Nobis corporis dolores cumque iusto, velit, impedit quasi
-            corrupti aliquid quam, sit fuga ab eveniet harum. Voluptatum, natus!
-            Exercitationem, facilis?
-          </p>
+          <p>{data.shortDescription}</p>
           <div className="flex gap-4">
             <div className="flex gap-6 border border-neutral-200 px-4 py-2 rounded-full">
               <button>{"-"}</button>

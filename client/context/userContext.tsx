@@ -9,8 +9,13 @@ import {
 } from "react";
 
 interface User {
-  name?: string;
-  email?: string;
+  name: string;
+  email: string;
+  phone?: number;
+  street?: string;
+  city?: string;
+  country?: string;
+  zip?: number;
 }
 
 interface UserContextType {
@@ -37,7 +42,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           setUser(data);
         });
     }
-  }, []);
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

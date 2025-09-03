@@ -15,25 +15,35 @@ const Signup = () => {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    try {
-      const { data } = await axios.post("http://localhost:3000/register", {
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const promise = axios
+      .post("http://localhost:3000/register", {
         name,
         email,
         password,
-      });
-      if (data.error) {
-        toast.error(data.error);
-      } else {
+      })
+      .then((response) => {
+        if (response.data.error) {
+          throw new Error(response.data.error);
+        }
         setName("");
         setEmail("");
         setPassword("");
         setConfirmPassword("");
-        toast.success("Signup succesful.");
         navigate("/login");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+        return "Signed up";
+      });
+
+    toast.promise(promise, {
+      loading: "Signing up",
+      success: (data) => data,
+      error: (err) => err.message,
+    });
   }
 
   return (

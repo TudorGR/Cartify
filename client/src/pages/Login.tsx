@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -11,28 +11,38 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    try {
-      const { data } = await axios.post("http://localhost:3000/login", {
+    const promise = axios
+      .post("http://localhost:3000/login", {
         email,
         password,
-      });
-      if (data.error) {
-        toast.error(data.error);
-      } else {
+      })
+      .then((response) => {
+        if (response.data.error) {
+          throw new Error(response.data.error);
+        }
         setEmail("");
         setPassword("");
-        setUser(data);
+        setUser(response.data);
         navigate("/");
-        toast.success("Logged in");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+        return "Logged in";
+      });
+
+    toast.promise(promise, {
+      loading: "Logging in...",
+      success: (data) => data,
+      error: (err) => err.message,
+    });
   }
+
+  useEffect(() => {
+    if (user) {
+      navigate("/profile");
+    }
+  }, [user]);
 
   return (
     <div className="relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
@@ -87,6 +97,7 @@ const Login = () => {
           <div className="flex-1 bg-neutral-500 p-6 shrink-0"></div>
         </div>
       </div>
+
       <Footer />
     </div>
   );

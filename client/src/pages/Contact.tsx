@@ -1,6 +1,7 @@
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import NewsLetter from "./components/NewsLetter";
 
 const Contact = () => {
   return (
@@ -66,6 +67,7 @@ const Contact = () => {
           ></iframe>
         </div>
       </section>
+      <NewsLetter />
       <Footer />
     </div>
   );

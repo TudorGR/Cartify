@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { UserContext } from "../../context/userContext";
@@ -8,6 +8,16 @@ import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const [option, setOption] = useState("info");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    phone: 0,
+    street: "",
+    city: "",
+    country: "",
+    zip: 0,
+  });
+
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -24,6 +34,39 @@ const Profile = () => {
       toast.error("An error occurred during sign out");
     }
   }
+  // { name, phone, street, city, country, zip }
+  async function handleSave() {
+    const promise = axios
+      .put("http://localhost:3000/profile", data)
+      .then((response) => {
+        if (response.data.error) {
+          throw new Error("Error saving profile");
+        }
+        setUser(response.data);
+
+        return "Saved Profile";
+      });
+
+    toast.promise(promise, {
+      loading: "",
+      success: (data) => data,
+      error: (err) => err.message,
+    });
+  }
+
+  useEffect(() => {
+    if (user) {
+      setData({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || 0,
+        street: user.street || "",
+        city: user.city || "",
+        country: user.country || "",
+        zip: user.zip || 0,
+      });
+    }
+  }, [user, setUser]);
 
   return (
     <div className="relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
@@ -78,41 +121,62 @@ const Profile = () => {
                   ratione, ab eos maxime voluptatum similique obcaecati
                   molestiae voluptatibus.
                 </p>
-                <button className="h-fit w-fit bg-neutral-500 rounded-full px-6 py-3  text-white">
+                <button
+                  onClick={handleSave}
+                  className="cursor-pointer h-fit w-fit bg-neutral-500  px-6 rounded-2xl  border-neutral-200 border py-3  text-white"
+                >
                   Save
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>First Name</h2>
+                  <div className="flex justify-between">
+                    <h2>Full Name</h2>
+                    <p className="text-neutral-400 italic">editable</p>
+                  </div>
                   <input
                     type="text"
-                    value={"Michael"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    value={data.name}
+                    onChange={(e) =>
+                      setData((prev) => ({ ...prev, name: e.target.value }))
+                    }
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
-                <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>Last Name</h2>
-                  <input
-                    type="text"
-                    value={"Daniel"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
-                  />
-                </div>
+
                 <div className="rounded-2xl w-full p-6 bg-gray-100">
                   <h2>Email</h2>
                   <input
                     type="email"
-                    value={"example@email.com"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    value={data.email}
+                    onChange={() => {}}
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
                 <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>Phone</h2>
+                  <div className="flex justify-between">
+                    <h2>Phone</h2>
+                    <p className="text-neutral-400 italic">editable</p>
+                  </div>
                   <input
-                    type="tel"
-                    value={"+123456789"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    type="number"
+                    value={data.phone != 0 ? data.phone : ""}
+                    onChange={(e) =>
+                      setData((prev) => ({
+                        ...prev,
+                        phone: Number(e.target.value),
+                      }))
+                    }
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
+                  />
+                </div>
+                <div className="rounded-2xl w-full p-6 bg-gray-100 ">
+                  <h2>Password</h2>
+                  <input
+                    type="text"
+                    value={"*********"}
+                    onChange={() => {}}
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
               </div>
@@ -126,41 +190,74 @@ const Profile = () => {
                   ratione, ab eos maxime voluptatum similique obcaecati
                   molestiae voluptatibus.
                 </p>
-                <button className="h-fit w-fit bg-neutral-500 rounded-full px-6 py-3  text-white">
+                <button
+                  onClick={handleSave}
+                  className="cursor-pointer h-fit w-fit bg-neutral-500  px-6 rounded-2xl  border-neutral-200 border py-3  text-white"
+                >
                   Save
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>Street</h2>
+                  <div className="flex justify-between">
+                    <h2>Street</h2>
+                    <p className="text-neutral-400 italic">editable</p>
+                  </div>
                   <input
+                    onChange={(e) =>
+                      setData((prev) => ({
+                        ...prev,
+                        street: e.target.value,
+                      }))
+                    }
                     type="text"
-                    value={"Street 2"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    value={data.street}
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
                 <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>Town / City</h2>
+                  <div className="flex justify-between">
+                    <h2>Town / City</h2>
+                    <p className="text-neutral-400 italic">editable</p>
+                  </div>
                   <input
+                    onChange={(e) =>
+                      setData((prev) => ({ ...prev, city: e.target.value }))
+                    }
                     type="text"
-                    value={"Italy"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    value={data.city}
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
                 <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>Country</h2>
+                  <div className="flex justify-between">
+                    <h2>Country</h2>
+                    <p className="text-neutral-400 italic">editable</p>
+                  </div>
                   <input
+                    onChange={(e) =>
+                      setData((prev) => ({ ...prev, country: e.target.value }))
+                    }
                     type="text"
-                    value={"Malta"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    value={data.country}
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
                 <div className="rounded-2xl w-full p-6 bg-gray-100 ">
-                  <h2>Zip Code</h2>
+                  <div className="flex justify-between">
+                    <h2>Zip Code</h2>
+                    <p className="text-neutral-400 italic">editable</p>
+                  </div>
                   <input
+                    onChange={(e) =>
+                      setData((prev) => ({
+                        ...prev,
+                        zip: Number(e.target.value),
+                      }))
+                    }
                     type="number"
-                    value={"11241"}
-                    className="py-2  border-neutral-500 w-full text-neutral-500"
+                    value={data.zip != 0 ? data.zip : ""}
+                    className="rounded-2xl px-4 border-neutral-200 border py-2   w-full text-neutral-500"
                   />
                 </div>
               </div>
