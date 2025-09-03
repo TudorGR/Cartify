@@ -49,7 +49,7 @@ const Testimonials = () => {
           </div>
         </div>
         <div
-          className="max-w-100 flex overflow-x-scroll scroll-smooth no-scrollbar"
+          className="pointer-events-none max-w-100 flex overflow-x-scroll scroll-smooth no-scrollbar"
           ref={scrollRef}
         >
           <div className="flex flex-col gap-6">

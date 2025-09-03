@@ -13,12 +13,24 @@ interface ProductType {
 interface ProductsProps {
   category: string;
   products: ProductType[];
+  visible: number;
+  setVisible: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Products = ({ category, products }: ProductsProps) => {
+const Products = ({
+  category,
+  products,
+  visible,
+  setVisible,
+}: ProductsProps) => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
+
+  function handleLoadMore() {
+    setVisible((prev) => prev + 12);
+    console.log(visible);
+  }
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -28,17 +40,19 @@ const Products = ({ category, products }: ProductsProps) => {
       </div>
       <div className="grid grid-cols-3 justify-items-center gap-6">
         {products.length > 0 &&
-          products.map((product) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              description={product.description}
-              category={product.category}
-              image={product.image}
-              price={product.price}
-            />
-          ))}
+          products
+            .slice(0, visible)
+            .map((product) => (
+              <Product
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                category={product.category}
+                image={product.image}
+                price={product.price}
+              />
+            ))}
       </div>
       {products.length == 0 && (
         <div className="flex flex-col items-center justify-center p-20">
@@ -52,9 +66,14 @@ const Products = ({ category, products }: ProductsProps) => {
           </Link>
         </div>
       )}
-      <button className="text-white bg-neutral-500 mx-auto mt-10 rounded-full w-fit px-6 py-3">
-        Load More
-      </button>
+      {products.length > visible && (
+        <button
+          onClick={handleLoadMore}
+          className="cursor-pointer text-white bg-neutral-500 mx-auto mt-10 rounded-full w-fit px-6 py-3"
+        >
+          Load More
+        </button>
+      )}
     </div>
   );
 };

@@ -1,20 +1,97 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+}
 
 const Navbar = ({ color }: { color: string }) => {
   const [dropDown, setDropDown] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [items, setItems] = useState<Product[]>([]);
+  const searchBarRef = useRef<HTMLDivElement | null>(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
-  function handleSearch() {
-    console.log(searchValue);
+  async function handleSearch() {
+    const q = searchValue.trim();
+    if (!q) {
+      setItems([]);
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/search", {
+        q,
+      });
+      setItems(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
+  function closeSearch() {
+    setSearchBar(false);
+    setSearchValue("");
+    setItems([]);
+  }
+
+  useEffect(() => {
+    if (!searchBar) return;
+    function handleClickOutside(e: MouseEvent) {
+      const target = e.target as Node;
+      const clickedInsideSearchBar =
+        searchBarRef.current?.contains(target) ?? false;
+      const clickedInsideResults =
+        resultsRef.current?.contains(target) ?? false;
+
+      if (!clickedInsideSearchBar && !clickedInsideResults) {
+        closeSearch();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [searchBar]);
+
+  function useDebounce<T extends (...args: any[]) => void>(func: T, wait = 0) {
+    const timeoutRef = useRef<number | null>(null);
+
+    return useCallback(
+      (...args: Parameters<T>) => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = window.setTimeout(() => {
+          func(...args);
+        }, wait);
+      },
+      [func, wait]
+    );
+  }
+
+  function clg() {
+    handleSearch();
+  }
+  const clgFunc = useDebounce(clg, 1000);
+
+  useEffect(() => {
+    if (searchValue) {
+      clgFunc();
+    } else {
+      setItems([]);
+    }
+  }, [searchValue]);
 
   return (
     <>
       <div
         className={`fixed inset-0 bg-black/10 transition-opacity duration-300 ${
-          dropDown ? "opacity-100 z-5" : "opacity-0 pointer-events-none"
+          dropDown || searchBar
+            ? "opacity-100 z-5"
+            : "opacity-0 pointer-events-none"
         }`}
       ></div>
       <div
@@ -153,9 +230,12 @@ const Navbar = ({ color }: { color: string }) => {
         </div>
       </div>
       {searchBar && (
-        <div className="absolute left-0 top-0 w-full bg-white border-b border-neutral-300 z-20 flex items-center justify-center h-20">
-          <div className="max-w-2xl w-full flex">
-            <div className="w-full relative">
+        <>
+          <div
+            ref={searchBarRef}
+            className="absolute left-0 top-0 w-full bg-white border-b border-neutral-300 z-20 flex items-center justify-center h-20"
+          >
+            <div className="max-w-2xl w-full flex">
               <input
                 type="text"
                 placeholder="Search products..."
@@ -164,21 +244,40 @@ const Navbar = ({ color }: { color: string }) => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
+
               <button
-                onClick={handleSearch}
-                className="cursor-pointer absolute px-6 right-0 rounded-r-2xl bg-neutral-500 text-white h-full"
+                className="cursor-pointer ml-4 px-4 py-2"
+                onClick={closeSearch}
               >
-                Search
+                X
               </button>
             </div>
-            <button
-              className="cursor-pointer ml-4 px-4 py-2"
-              onClick={() => setSearchBar(false)}
-            >
-              X
-            </button>
           </div>
-        </div>
+          {items.length > 0 && (
+            <div
+              ref={resultsRef}
+              className="absolute left-0 top-20 w-full bg-white border-b border-neutral-300 z-20 flex items-center justify-center"
+            >
+              <ul className="w-full max-w-2xl flex gap-2 flex-col my-6 max-h-100 overflow-auto">
+                {items.map((item) => (
+                  <li
+                    onClick={() => {
+                      closeSearch();
+                      navigate(`/product/${item.id}`);
+                    }}
+                    className={
+                      "mr-10 py-2 flex justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline"
+                    }
+                    key={item.id}
+                  >
+                    <p>{item.name}</p>
+                    <p>${item.price}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </>
       )}
     </>
   );

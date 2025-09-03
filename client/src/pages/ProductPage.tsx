@@ -19,6 +19,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(false);
   const [leftSlider, setLeftSlider] = useState(0);
   const [rightSlider, setRightSlider] = useState(500);
+  const [visible, setVisible] = useState(18);
 
   async function fetchProducts(leftSlider: number, rightSlider: number) {
     try {
@@ -54,7 +55,12 @@ const ProductPage = () => {
             setRightSlider={setRightSlider}
             fetchProducts={fetchProducts}
           />
-          <Products category={category ?? "All"} products={products} />
+          <Products
+            category={category ?? "All"}
+            products={products}
+            visible={visible}
+            setVisible={setVisible}
+          />
         </div>
       </div>
       <Footer />

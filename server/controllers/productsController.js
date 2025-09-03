@@ -39,6 +39,7 @@ export async function getProduct(req, res) {
     }
   }, randomDelay(200, 500));
 }
+
 export async function getFeatured(req, res) {
   setTimeout(() => {
     const r1 = 22;
@@ -50,4 +51,19 @@ export async function getFeatured(req, res) {
       .status(200)
       .json([products[r1], products[r2], products[r3], products[r4]]);
   }, randomDelay(200, 500));
+}
+
+export async function searchProducts(req, res) {
+  const { q = "" } = req.body;
+  const query = String(q).trim().toLowerCase();
+
+  let filtered = products;
+  if (query) {
+    filtered = filtered.filter(
+      (p) =>
+        p.name.toLowerCase().includes(query) ||
+        (p.shortDescription || "").toLowerCase().includes(query)
+    );
+  }
+  setTimeout(() => res.status(200).json(filtered), randomDelay(200, 500));
 }
