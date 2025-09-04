@@ -65,7 +65,8 @@ const Products = ({
                 price={product.price}
               />
             ))}
-        {loading && Array.from({ length: 18 }, (_, i) => <LoadingProduct />)}
+        {loading &&
+          Array.from({ length: 18 }, (_, i) => <LoadingProduct key={i} />)}
       </div>
       {products.length == 0 && (
         <div className="max-w-2xl mx-auto flex flex-col items-center justify-center py-20">

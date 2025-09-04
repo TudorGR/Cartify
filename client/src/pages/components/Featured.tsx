@@ -20,7 +20,6 @@ const Featured = () => {
       setLoading(true);
       const response = await axios.get("http://localhost:3000/featured");
       setProducts(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +50,8 @@ const Featured = () => {
             image={p.image}
           />
         ))}
-        {loading && Array.from({ length: 4 }, (_, i) => <LoadingProduct />)}
+        {loading &&
+          Array.from({ length: 4 }, (_, i) => <LoadingProduct key={i} />)}
       </div>
     </div>
   );

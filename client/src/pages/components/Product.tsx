@@ -21,10 +21,6 @@ const Product = ({
 }: ProductProps) => {
   const [clicked, setClicked] = useState(false);
 
-  const imageUrl = image
-    ? `http://localhost:3000${image.replace(".", "")}`
-    : "";
-
   return (
     <div className="flex flex-col gap-2 relative">
       {discountedPrice && (
@@ -36,7 +32,7 @@ const Product = ({
         <img
           alt="some 'preview' hover effect..."
           className="pointer-events-none w-60 h-80  bg-neutral-200 rounded-2xl object-cover"
-          src={imageUrl}
+          src={image}
         />
       </Link>
       <div className="flex justify-between max-w-60 w-full">

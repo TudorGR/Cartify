@@ -28,10 +28,6 @@ const ProductHero = ({
   quantity,
   setQuantity,
 }: ProductProps) => {
-  const imageUrl = data.image
-    ? `http://localhost:3000${data.image.replace(".", "")}`
-    : "";
-
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomOrigin, setZoomOrigin] = useState<{ x: number; y: number }>({
     x: 50,
@@ -94,21 +90,21 @@ const ProductHero = ({
                 <div className="flex flex-col justify-between gap-6">
                   <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
                     <img
-                      src={imageUrl}
+                      src={data.image}
                       alt={data.name}
                       className="pointer-events-none h-full"
                     />
                   </div>
                   <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
                     <img
-                      src={imageUrl}
+                      src={data.image}
                       alt={data.name}
                       className="pointer-events-none h-full"
                     />
                   </div>
                   <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
                     <img
-                      src={imageUrl}
+                      src={data.image}
                       alt={data.name}
                       className="pointer-events-none h-full"
                     />
@@ -121,7 +117,7 @@ const ProductHero = ({
                   onMouseLeave={() => setIsZoomed(false)}
                 >
                   <img
-                    src={imageUrl}
+                    src={data.image}
                     alt={data.name}
                     draggable={false}
                     className="h-full w-full object-cover select-none will-change-transform"
