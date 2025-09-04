@@ -15,6 +15,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use("/images", express.static("images"));
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use(express.urlencoded({ extended: false }));

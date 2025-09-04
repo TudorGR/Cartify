@@ -6,8 +6,9 @@ export const products = [
     shortDescription:
       "Immerse yourself in high-fidelity sound with these comfortable over-ear headphones.",
     category: "Electronics",
-    image: "/images/electronics/headphones.jpg",
+    image: "./images/Wireless Bluetooth Headphones.png",
     price: 99.99,
+    discountedPrice: 89.99, // Added discount
   },
   {
     id: "prod_002",
@@ -15,8 +16,9 @@ export const products = [
     shortDescription:
       "Experience stunning visuals and built-in streaming apps with this sleek television.",
     category: "Electronics",
-    image: "/images/electronics/smart-tv.jpg",
+    image: "./images/Ultra HD Smart TV.png",
     price: 399.99,
+    discountedPrice: 359.99, // Added discount
   },
   {
     id: "prod_003",
@@ -24,7 +26,7 @@ export const products = [
     shortDescription:
       "Stay charged on the go with this high-capacity power bank. Perfect for travel.",
     category: "Electronics",
-    image: "/images/electronics/power-bank.jpg",
+    image: "./images/Portable Power Bank 20000mAh.png",
     price: 29.99,
   },
   {
@@ -33,7 +35,7 @@ export const products = [
     shortDescription:
       "Enjoy your music without distractions with these compact, powerful earbuds.",
     category: "Electronics",
-    image: "/images/electronics/earbuds.jpg",
+    image: "./images/Noise-Cancelling Earbuds.png",
     price: 149.5,
   },
   {
@@ -42,8 +44,9 @@ export const products = [
     shortDescription:
       "Capture your memories with sharp detail using this easy-to-use digital camera.",
     category: "Electronics",
-    image: "/images/electronics/digital-camera.jpg",
+    image: "./images/Compact Digital Camera.png",
     price: 199.99,
+    discountedPrice: 179.99, // Added discount
   },
   // Apparel
   {
@@ -52,7 +55,7 @@ export const products = [
     shortDescription:
       "A comfortable and stylish hoodie perfect for everyday wear.",
     category: "Apparel",
-    image: "/images/apparel/mens-hoodie.jpg",
+    image: "./images/Men's Casual Hoodie.png",
     price: 45.0,
   },
   {
@@ -61,8 +64,9 @@ export const products = [
     shortDescription:
       "Stretchy, breathable leggings designed for comfort during your workout.",
     category: "Apparel",
-    image: "/images/apparel/yoga-leggings.jpg",
+    image: "./images/Women's Yoga Leggings.png",
     price: 35.5,
+    discountedPrice: 31.95, // Added discount
   },
   {
     id: "prod_008",
@@ -70,7 +74,7 @@ export const products = [
     shortDescription:
       "An essential staple for any wardrobe, made from 100% soft cotton.",
     category: "Apparel",
-    image: "/images/apparel/white-tshirt.jpg",
+    image: "./images/Classic White T-Shirt.png",
     price: 15.0,
   },
   {
@@ -79,7 +83,7 @@ export const products = [
     shortDescription:
       "A timeless denim jacket that adds a classic touch to any outfit.",
     category: "Apparel",
-    image: "/images/apparel/denim-jacket.jpg",
+    image: "./images/Denim Jacket.png",
     price: 75.99,
   },
   {
@@ -88,8 +92,9 @@ export const products = [
     shortDescription:
       "Lightweight and supportive shoes designed for peak performance on your runs.",
     category: "Apparel",
-    image: "/images/apparel/running-shoes.jpg",
+    image: "./images/Running Shoes.png",
     price: 89.0,
+    discountedPrice: 80.1, // Added discount
   },
   // Home Goods
   {
@@ -98,7 +103,7 @@ export const products = [
     shortDescription:
       "Brew the perfect cup of coffee every morning with this durable machine.",
     category: "HomeGoods",
-    image: "/images/home-goods/coffee-maker.jpg",
+    image: "./images/Stainless Steel Coffee Maker.png",
     price: 59.99,
   },
   {
@@ -107,7 +112,7 @@ export const products = [
     shortDescription:
       "Contour to your head and neck for a restful night's sleep.",
     category: "Home Goods",
-    image: "/images/home-goods/memory-foam-pillow.jpg",
+    image: "./images/Memory Foam Pillow.png",
     price: 24.5,
   },
   {
@@ -116,8 +121,9 @@ export const products = [
     shortDescription:
       "Create a relaxing atmosphere with this elegant essential oil diffuser.",
     category: "Home Goods",
-    image: "/images/home-goods/diffuser.jpg",
+    image: "./images/Aromatherapy Diffuser   .png",
     price: 39.99,
+    discountedPrice: 35.99, // Added discount
   },
   {
     id: "prod_014",
@@ -125,7 +131,7 @@ export const products = [
     shortDescription:
       "Everything you need to get started in the kitchen, with easy-to-clean surfaces.",
     category: "Home Goods",
-    image: "/images/home-goods/cookware-set.jpg",
+    image: "./images/Non-Stick Cookware Set   .png",
     price: 120.0,
   },
   {
@@ -134,7 +140,7 @@ export const products = [
     shortDescription:
       "Experience a sense of calm and comfort with this soft, therapeutic blanket.",
     category: "Home Goods",
-    image: "/images/home-goods/weighted-blanket.jpg",
+    image: "./images/Weighted Blanket.png",
     price: 85.0,
   },
   // Books
@@ -144,8 +150,9 @@ export const products = [
     shortDescription:
       "A gripping tale of space exploration and humanity's future.",
     category: "Books",
-    image: "/images/books/sci-fi-novel.jpg",
+    image: "./images/Science Fiction Epic Novel.png",
     price: 12.99,
+    discountedPrice: 11.69, // Added discount
   },
   {
     id: "prod_017",
@@ -153,7 +160,7 @@ export const products = [
     shortDescription:
       "Learn to make authentic Italian dishes with simple, step-by-step recipes.",
     category: "Books",
-    image: "/images/books/cookbook.jpg",
+    image: "./images/Cookbook- Italian Classics.png",
     price: 25.0,
   },
   {
@@ -161,7 +168,7 @@ export const products = [
     name: "Historical Non-Fiction",
     shortDescription: "An in-depth look at a pivotal moment in world history.",
     category: "Books",
-    image: "/images/books/history-book.jpg",
+    image: "./images/Historical Non-Fiction.png",
     price: 18.75,
   },
   {
@@ -170,7 +177,7 @@ export const products = [
     shortDescription:
       "A beautifully illustrated story for young readers, filled with adventure.",
     category: "Books",
-    image: "/images/books/childrens-book.jpg",
+    image: "./images/Children's Picture Book.png",
     price: 9.99,
   },
   {
@@ -179,7 +186,7 @@ export const products = [
     shortDescription:
       "Practical advice and exercises to help you achieve your personal goals.",
     category: "Books",
-    image: "/images/books/self-help-book.jpg",
+    image: "./images/Self-Help Guide.png",
     price: 16.5,
   },
   // Toys
@@ -189,7 +196,7 @@ export const products = [
     shortDescription:
       "Unleash creativity with this colorful set of building blocks for all ages.",
     category: "Toys",
-    image: "/images/toys/building-blocks.jpg",
+    image: "./images/Building Blocks Set.png",
     price: 29.99,
   },
   {
@@ -198,8 +205,9 @@ export const products = [
     shortDescription:
       "Fly high with this easy-to-operate drone, perfect for beginners.",
     category: "Toys",
-    image: "/images/toys/rc-drone.jpg",
+    image: "./images/Remote Control Drone.png",
     price: 85.0,
+    discountedPrice: 76.5, // Added discount
   },
   {
     id: "prod_023",
@@ -207,8 +215,9 @@ export const products = [
     shortDescription:
       "A soft and cuddly teddy bear, a timeless friend for any child.",
     category: "Toys",
-    image: "/images/toys/teddy-bear.jpg",
+    image: "./images/Plush Teddy Bear.png",
     price: 19.99,
+    discountedPrice: 17.99, // Added discount
   },
   {
     id: "prod_024",
@@ -216,7 +225,7 @@ export const products = [
     shortDescription:
       "Gather your friends and family for an epic night of strategic fun.",
     category: "Toys",
-    image: "/images/toys/board-game.jpg",
+    image: "./images/Board Game- Strategy Quest   .png",
     price: 32.5,
   },
   {
@@ -225,7 +234,7 @@ export const products = [
     shortDescription:
       "Encourage artistic expression with this double-sided easel for drawing and painting.",
     category: "Toys",
-    image: "/images/toys/art-easel.jpg",
+    image: "./images/Art Easel for Kids.png",
     price: 49.99,
   },
   // Sports
@@ -235,7 +244,7 @@ export const products = [
     shortDescription:
       "A durable, non-slip mat that provides a stable foundation for your practice.",
     category: "Sports",
-    image: "/images/sports/yoga-mat.jpg",
+    image: "./images/Yoga Mat.png",
     price: 28.0,
   },
   {
@@ -244,7 +253,7 @@ export const products = [
     shortDescription:
       "Essential for home workouts, this set includes a range of weights.",
     category: "Sports",
-    image: "/images/sports/dumbbell-set.jpg",
+    image: "./images/Dumbbell Set.png",
     price: 70.0,
   },
   {
@@ -253,8 +262,9 @@ export const products = [
     shortDescription:
       "Versatile bands for a full-body workout, perfect for all fitness levels.",
     category: "Sports",
-    image: "/images/sports/resistance-bands.jpg",
+    image: "./images/Resistance Bands Kit.png",
     price: 19.99,
+    discountedPrice: 17.99, // Added discount
   },
   {
     id: "prod_029",
@@ -262,7 +272,7 @@ export const products = [
     shortDescription:
       "A high-grip basketball suitable for both indoor and outdoor courts.",
     category: "Sports",
-    image: "/images/sports/basketball.jpg",
+    image: "./images/Basketball.png",
     price: 22.5,
   },
   {
@@ -271,7 +281,7 @@ export const products = [
     shortDescription:
       "A classic cardio tool that is lightweight and easily adjustable.",
     category: "Sports",
-    image: "/images/sports/jump-rope.jpg",
+    image: "./images/Jump Rope.png",
     price: 11.99,
   },
   // Beauty
@@ -281,7 +291,7 @@ export const products = [
     shortDescription:
       "Nourish your skin with this lightweight serum for a radiant glow.",
     category: "Beauty",
-    image: "/images/beauty/face-serum.jpg",
+    image: "./images/Hydrating Face Serum.png",
     price: 38.0,
   },
   {
@@ -290,7 +300,7 @@ export const products = [
     shortDescription:
       "A complete set of soft brushes for a flawless makeup application.",
     category: "Beauty",
-    image: "/images/beauty/makeup-brushes.jpg",
+    image: "./images/Makeup Brush Set.png",
     price: 25.0,
   },
   {
@@ -298,8 +308,9 @@ export const products = [
     name: "Organic Shampoo and Conditioner",
     shortDescription: "Gentle, natural hair care for healthy and shiny hair.",
     category: "Beauty",
-    image: "/images/beauty/shampoo-conditioner.jpg",
+    image: "./images/Organic Shampoo and Conditioner.png",
     price: 21.5,
+    discountedPrice: 19.35, // Added discount
   },
   {
     id: "prod_034",
@@ -307,7 +318,7 @@ export const products = [
     shortDescription:
       "Reveal smooth, soft skin with this luxurious and fragrant body scrub.",
     category: "Beauty",
-    image: "/images/beauty/body-scrub.jpg",
+    image: "./images/Exfoliating Body Scrub   .png",
     price: 14.99,
   },
   {
@@ -316,8 +327,9 @@ export const products = [
     shortDescription:
       "Deeply cleanse your pores for a healthier, brighter complexion.",
     category: "Beauty",
-    image: "/images/beauty/cleansing-brush.jpg",
+    image: "./images/Electric Facial Cleansing Brush.png",
     price: 49.99,
+    discountedPrice: 44.99, // Added discount
   },
   // Food
   {
@@ -326,7 +338,7 @@ export const products = [
     shortDescription:
       "Enjoy a rich, aromatic cup of coffee with these freshly roasted beans.",
     category: "Food",
-    image: "/images/food/coffee-beans.jpg",
+    image: "./images/Artisan Coffee Beans.png",
     price: 14.0,
   },
   {
@@ -335,8 +347,9 @@ export const products = [
     shortDescription:
       "A collection of fine chocolates with unique and exquisite flavors.",
     category: "Food",
-    image: "/images/food/chocolate-set.jpg",
+    image: "./images/Gourmet Chocolate Bar Set.png",
     price: 28.5,
+    discountedPrice: 25.65, // Added discount
   },
   {
     id: "prod_038",
@@ -344,7 +357,7 @@ export const products = [
     shortDescription:
       "Pure, raw honey sourced from local, sustainable beekeepers.",
     category: "Food",
-    image: "/images/food/honey.jpg",
+    image: "./images/Organic Honey.png",
     price: 10.99,
   },
   {
@@ -353,7 +366,7 @@ export const products = [
     shortDescription:
       "Discover new favorite flavors with this diverse selection of herbal and black teas.",
     category: "Food",
-    image: "/images/food/tea-set.jpg",
+    image: "./images/Assorted Tea Selection.png",
     price: 17.5,
   },
   {
@@ -362,7 +375,7 @@ export const products = [
     shortDescription:
       "Add a fiery kick to your meals with this handcrafted chili sauce.",
     category: "Food",
-    image: "/images/food/chili-sauce.jpg",
+    image: "./images/Spicy Chili Sauce.png",
     price: 8.99,
   },
   // Automotive
@@ -372,7 +385,7 @@ export const products = [
     shortDescription:
       "Keep your vehicle's interior spotless with this powerful and portable vacuum.",
     category: "Automotive",
-    image: "/images/automotive/car-vacuum.jpg",
+    image: "./images/Car Vacuum Cleaner.png",
     price: 49.0,
   },
   {
@@ -381,8 +394,9 @@ export const products = [
     shortDescription:
       "Ensure your tires are properly inflated for safety and fuel efficiency.",
     category: "Automotive",
-    image: "/images/automotive/tire-gauge.jpg",
+    image: "./images/Digital Tire Pressure Gauge.png",
     price: 15.99,
+    discountedPrice: 14.39, // Added discount
   },
   {
     id: "prod_043",
@@ -390,7 +404,7 @@ export const products = [
     shortDescription:
       "A must-have for emergencies, providing a quick boost for your car battery.",
     category: "Automotive",
-    image: "/images/automotive/jump-starter.jpg",
+    image: "./images/Jump Starter Kit.png",
     price: 89.99,
   },
   {
@@ -399,8 +413,9 @@ export const products = [
     shortDescription:
       "Easily fix minor scratches and restore your car's pristine finish.",
     category: "Automotive",
-    image: "/images/automotive/scratch-remover.jpg",
+    image: "./images/Car Scratch Remover Kit   .png",
     price: 24.5,
+    discountedPrice: 22.05, // Added discount
   },
   {
     id: "prod_045",
@@ -408,7 +423,7 @@ export const products = [
     shortDescription:
       "Charge your phone conveniently and securely while driving.",
     category: "Automotive",
-    image: "/images/automotive/car-charger.jpg",
+    image: "./images/Wireless Car Phone Charger.png",
     price: 32.0,
   },
   // Pets
@@ -418,7 +433,7 @@ export const products = [
     shortDescription:
       "Provide your furry friend with ultimate comfort and support.",
     category: "Pets",
-    image: "/images/pets/dog-bed.jpg",
+    image: "./images/Dog Bed with Orthopedic Foam.png",
     price: 65.0,
   },
   {
@@ -427,7 +442,7 @@ export const products = [
     shortDescription:
       "Keep your cat entertained for hours with this engaging and fun toy.",
     category: "Pets",
-    image: "/images/pets/cat-toy.jpg",
+    image: "./images/Interactive Cat Toy.png",
     price: 18.0,
   },
   {
@@ -436,8 +451,9 @@ export const products = [
     shortDescription:
       "Everything you need to keep your pet's coat healthy and shiny.",
     category: "Pets",
-    image: "/images/pets/grooming-kit.jpg",
+    image: "./images/Pet Grooming Kit   .png",
     price: 42.0,
+    discountedPrice: 37.8, // Added discount
   },
   {
     id: "prod_049",
@@ -445,7 +461,7 @@ export const products = [
     shortDescription:
       "A durable, easy-to-clean bowl perfect for food and water.",
     category: "Pets",
-    image: "/images/pets/pet-bowl.jpg",
+    image: "./images/Stainless Steel Pet Bowl.png",
     price: 9.99,
   },
   {
@@ -453,7 +469,7 @@ export const products = [
     name: "Leash and Harness Set",
     shortDescription: "A comfortable and secure set for walking your dog.",
     category: "Pets",
-    image: "/images/pets/leash-harness.jpg",
+    image: "./images/Leash and Harness Set.png",
     price: 25.0,
   },
   // Continue with 50 more products
@@ -464,7 +480,7 @@ export const products = [
     shortDescription:
       "Control your home with voice commands and stream music effortlessly.",
     category: "Electronics",
-    image: "/images/electronics/smart-speaker.jpg",
+    image: "./images/Smart Home Speaker.png",
     price: 59.99,
   },
   {
@@ -473,7 +489,7 @@ export const products = [
     shortDescription:
       "Precision and speed for the serious gamer with customizable buttons.",
     category: "Electronics",
-    image: "/images/electronics/gaming-mouse.jpg",
+    image: "./images/Gaming Mouse   .png",
     price: 49.99,
   },
   {
@@ -482,8 +498,9 @@ export const products = [
     shortDescription:
       "Charge your compatible devices without the clutter of cables.",
     category: "Electronics",
-    image: "/images/electronics/charging-pad.jpg",
+    image: "./images/Wireless Charging Pad   .png",
     price: 19.99,
+    discountedPrice: 17.99, // Added discount
   },
   {
     id: "prod_054",
@@ -491,7 +508,7 @@ export const products = [
     shortDescription:
       "Perfect for video calls and streaming with clear, sharp image quality.",
     category: "Electronics",
-    image: "/images/electronics/webcam.jpg",
+    image: "./images/Webcam 1080p Full HD.png",
     price: 75.0,
   },
   {
@@ -500,7 +517,7 @@ export const products = [
     shortDescription:
       "Turn any wall into a big screen for movies or presentations on the go.",
     category: "Electronics",
-    image: "/images/electronics/projector.jpg",
+    image: "./images/Portable Projector.png",
     price: 150.0,
   },
   // Apparel
@@ -510,7 +527,7 @@ export const products = [
     shortDescription:
       "Stay dry and comfortable with this waterproof and breathable jacket.",
     category: "Apparel",
-    image: "/images/apparel/rain-jacket.jpg",
+    image: "./images/Lightweight Rain Jacket.png",
     price: 55.0,
   },
   {
@@ -519,15 +536,16 @@ export const products = [
     shortDescription:
       "A crisp, professional shirt ideal for formal occasions and work.",
     category: "Apparel",
-    image: "/images/apparel/dress-shirt.jpg",
+    image: "./images/Men's Dress Shirt.png",
     price: 42.0,
+    discountedPrice: 37.8, // Added discount
   },
   {
     id: "prod_058",
     name: "Casual Sneakers",
     shortDescription: "Stylish and comfortable sneakers for everyday wear.",
     category: "Apparel",
-    image: "/images/apparel/casual-sneakers.jpg",
+    image: "./images/Casual Sneakers.png",
     price: 65.99,
   },
   {
@@ -536,7 +554,7 @@ export const products = [
     shortDescription:
       "Stay warm and cozy with this soft, fashionable winter scarf.",
     category: "Apparel",
-    image: "/images/apparel/winter-scarf.jpg",
+    image: "./images/Winter Scarf   .png",
     price: 20.0,
   },
   {
@@ -545,7 +563,7 @@ export const products = [
     shortDescription:
       "A flattering and versatile dress that works for any occasion.",
     category: "Apparel",
-    image: "/images/apparel/a-line-dress.jpg",
+    image: "./images/Women's A-line Dress.png",
     price: 50.0,
   },
   // Home Goods
@@ -555,8 +573,9 @@ export const products = [
     shortDescription:
       "Automate your cleaning with this smart vacuum that navigates on its own.",
     category: "Home Goods",
-    image: "/images/home-goods/robot-vacuum.jpg",
+    image: "./images/Robot Vacuum Cleaner.png",
     price: 250.0,
+    discountedPrice: 225.0, // Added discount
   },
   {
     id: "prod_062",
@@ -564,7 +583,7 @@ export const products = [
     shortDescription:
       "Perfect for searing, sautéing, and baking, built to last a lifetime.",
     category: "Home Goods",
-    image: "/images/home-goods/cast-iron-skillet.jpg",
+    image: "./images/Cast Iron Skillet.png",
     price: 45.0,
   },
   {
@@ -573,7 +592,7 @@ export const products = [
     shortDescription:
       "Boil water quickly and efficiently for your tea or coffee.",
     category: "Home Goods",
-    image: "/images/home-goods/electric-kettle.jpg",
+    image: "./images/Electric Kettle.png",
     price: 35.0,
   },
   {
@@ -582,8 +601,9 @@ export const products = [
     shortDescription:
       "A plush comforter set for a luxurious and comfortable night's sleep.",
     category: "Home Goods",
-    image: "/images/home-goods/comforter-set.jpg",
+    image: "./images/Bedding Comforter Set   .png",
     price: 95.0,
+    discountedPrice: 85.5, // Added discount
   },
   {
     id: "prod_065",
@@ -591,7 +611,7 @@ export const products = [
     shortDescription:
       "Fill your home with a beautiful aroma with these long-lasting candles.",
     category: "Home Goods",
-    image: "/images/home-goods/scented-candles.jpg",
+    image: "./images/Scented Candles.png",
     price: 18.0,
   },
   // Books
@@ -601,7 +621,7 @@ export const products = [
     shortDescription:
       "Follow a brilliant detective as he solves a complex and thrilling case.",
     category: "Books",
-    image: "/images/books/mystery-novel.jpg",
+    image: "./images/The Great Detective- A Mystery Novel.png",
     price: 13.5,
   },
   {
@@ -610,7 +630,7 @@ export const products = [
     shortDescription:
       "A comprehensive guide to starting your own garden from scratch.",
     category: "Books",
-    image: "/images/books/gardening-book.jpg",
+    image: "./images/Gardening for Beginners.png",
     price: 22.0,
   },
   {
@@ -619,7 +639,7 @@ export const products = [
     shortDescription:
       "An epic journey through a magical land with dragons and wizards.",
     category: "Books",
-    image: "/images/books/fantasy-novel.jpg",
+    image: "./images/Fantasy Novel- The Sorcerer's Tower.png",
     price: 14.99,
   },
   {
@@ -628,8 +648,9 @@ export const products = [
     shortDescription:
       "Key strategies and insights for aspiring entrepreneurs and leaders.",
     category: "Books",
-    image: "/images/books/business-book.jpg",
+    image: "./images/Business and Leadership.png",
     price: 20.0,
+    discountedPrice: 18.0, // Added discount
   },
   {
     id: "prod_070",
@@ -637,7 +658,7 @@ export const products = [
     shortDescription:
       "A selection of profound and moving poems from a contemporary poet.",
     category: "Books",
-    image: "/images/books/poetry-book.jpg",
+    image: "./images/Poetry Collection.png",
     price: 11.0,
   },
   // Toys
@@ -647,7 +668,7 @@ export const products = [
     shortDescription:
       "Encourage curiosity and learning with this fun and educational science kit.",
     category: "Toys",
-    image: "/images/toys/science-kit.jpg",
+    image: "./images/Science Experiment Kit.png",
     price: 35.0,
   },
   {
@@ -656,8 +677,9 @@ export const products = [
     shortDescription:
       "A classic train set with tracks and an engine, perfect for young children.",
     category: "Toys",
-    image: "/images/toys/train-set.jpg",
+    image: "./images/Toy Train Set   .png",
     price: 45.0,
+    discountedPrice: 40.5, // Added discount
   },
   {
     id: "prod_073",
@@ -665,7 +687,7 @@ export const products = [
     shortDescription:
       "Highly detailed action figures for imaginative play and display.",
     category: "Toys",
-    image: "/images/toys/action-figures.jpg",
+    image: "./images/Action Figure Collection.png",
     price: 28.0,
   },
   {
@@ -674,7 +696,7 @@ export const products = [
     shortDescription:
       "A large box filled with everything needed for creative art projects.",
     category: "Toys",
-    image: "/images/toys/art-crafts.jpg",
+    image: "./images/Art and Craft Supplies Box.png",
     price: 26.5,
   },
   {
@@ -683,8 +705,9 @@ export const products = [
     shortDescription:
       "Introduce your child to music with this colorful instrument set.",
     category: "Toys",
-    image: "/images/toys/kids-instruments.jpg",
+    image: "./images/Musical Instruments for Kids   .png",
     price: 39.0,
+    discountedPrice: 35.1, // Added discount
   },
   // Sports
   {
@@ -693,7 +716,7 @@ export const products = [
     shortDescription:
       "A durable and spacious backpack for all your hiking and outdoor adventures.",
     category: "Sports",
-    image: "/images/sports/hiking-backpack.jpg",
+    image: "./images/Hiking Backpack.png",
     price: 70.0,
   },
   {
@@ -702,7 +725,7 @@ export const products = [
     shortDescription:
       "Enhance your yoga practice with these supportive blocks and a sturdy strap.",
     category: "Sports",
-    image: "/images/sports/yoga-kit.jpg",
+    image: "./images/Yoga Blocks and Strap   .png",
     price: 25.0,
   },
   {
@@ -711,7 +734,7 @@ export const products = [
     shortDescription:
       "Stay hydrated with this leak-proof, insulated water bottle.",
     category: "Sports",
-    image: "/images/sports/water-bottle.jpg",
+    image: "./images/Portable Water Bottle.png",
     price: 15.0,
   },
   {
@@ -720,8 +743,9 @@ export const products = [
     shortDescription:
       "Monitor your health and track your workouts with this sleek device.",
     category: "Sports",
-    image: "/images/sports/fitness-watch.jpg",
+    image: "./images/Fitness Tracker Watch.png",
     price: 120.0,
+    discountedPrice: 108.0, // Added discount
   },
   {
     id: "prod_080",
@@ -729,7 +753,7 @@ export const products = [
     shortDescription:
       "A lightweight and easy-to-set-up tent for your next camping trip.",
     category: "Sports",
-    image: "/images/sports/camping-tent.jpg",
+    image: "./images/Camping Tent   .png",
     price: 80.0,
   },
   // Beauty
@@ -739,7 +763,7 @@ export const products = [
     shortDescription:
       "Soothe and protect your hands with this rich, nourishing cream.",
     category: "Beauty",
-    image: "/images/beauty/hand-cream.jpg",
+    image: "./images/Moisturizing Hand Cream.png",
     price: 12.0,
   },
   {
@@ -748,7 +772,7 @@ export const products = [
     shortDescription:
       "Shield your skin from harmful UV rays with this broad-spectrum sunscreen.",
     category: "Beauty",
-    image: "/images/beauty/sunscreen.jpg",
+    image: "./images/Sunscreen SPF 50.png",
     price: 16.5,
   },
   {
@@ -757,8 +781,9 @@ export const products = [
     shortDescription:
       "Style your hair quickly and efficiently with multiple heat settings.",
     category: "Beauty",
-    image: "/images/beauty/hair-dryer.jpg",
+    image: "./images/Electric Hair Dryer.png",
     price: 55.0,
+    discountedPrice: 49.5, // Added discount
   },
   {
     id: "prod_084",
@@ -766,8 +791,9 @@ export const products = [
     shortDescription:
       "Keep your lips soft and hydrated with a variety of natural balms.",
     category: "Beauty",
-    image: "/images/beauty/lip-balm.jpg",
+    image: "./images/Organic Lip Balm Set.png",
     price: 9.0,
+    discountedPrice: 8.1, // Added discount
   },
   {
     id: "prod_085",
@@ -775,7 +801,7 @@ export const products = [
     shortDescription:
       "Pamper your skin with a selection of revitalizing and detoxifying masks.",
     category: "Beauty",
-    image: "/images/beauty/face-masks.jpg",
+    image: "./images/Face Mask Collection.png",
     price: 29.0,
   },
   // Food
@@ -785,7 +811,7 @@ export const products = [
     shortDescription:
       "A healthy and crunchy snack mix with a variety of nuts and seeds.",
     category: "Food",
-    image: "/images/food/nuts-seeds.jpg",
+    image: "./images/Assorted Nuts and Seeds   .png",
     price: 11.5,
   },
   {
@@ -794,8 +820,9 @@ export const products = [
     shortDescription:
       "A high-quality olive oil for cooking and dressing, with a robust flavor.",
     category: "Food",
-    image: "/images/food/olive-oil.jpg",
+    image: "./images/Olive Oil Extra Virgin   .png",
     price: 18.0,
+    discountedPrice: 16.2, // Added discount
   },
   {
     id: "prod_088",
@@ -803,7 +830,7 @@ export const products = [
     shortDescription:
       "Classic Italian pasta, perfect for a wide range of sauces.",
     category: "Food",
-    image: "/images/food/spaghetti.jpg",
+    image: "./images/Spaghetti Pasta.png",
     price: 4.99,
   },
   {
@@ -812,7 +839,7 @@ export const products = [
     shortDescription:
       "A delicious and healthy start to your day with wholesome oats and fruit.",
     category: "Food",
-    image: "/images/food/granola.jpg",
+    image: "./images/Granola Cereal.png",
     price: 7.0,
   },
   {
@@ -821,7 +848,7 @@ export const products = [
     shortDescription:
       "Organize your kitchen and elevate your cooking with this comprehensive spice set.",
     category: "Food",
-    image: "/images/food/spice-rack.jpg",
+    image: "./images/Spice Rack Set.png",
     price: 35.0,
   },
   // Automotive
@@ -831,7 +858,7 @@ export const products = [
     shortDescription:
       "Lint-free and super-absorbent cloths for a streak-free shine on your car.",
     category: "Automotive",
-    image: "/images/automotive/microfiber-cloths.jpg",
+    image: "./images/Microfiber Cleaning Cloths.png",
     price: 9.99,
   },
   {
@@ -840,8 +867,9 @@ export const products = [
     shortDescription:
       "Securely hold your phone for easy navigation and hands-free calling.",
     category: "Automotive",
-    image: "/images/automotive/phone-mount.jpg",
+    image: "./images/Car Phone Mount   .png",
     price: 14.5,
+    discountedPrice: 13.05, // Added discount
   },
   {
     id: "prod_093",
@@ -849,8 +877,9 @@ export const products = [
     shortDescription:
       "Keep your car cool and protect the interior from sun damage.",
     category: "Automotive",
-    image: "/images/automotive/sun-shade.jpg",
+    image: "./images/Windshield Sun Shade.png",
     price: 17.0,
+    discountedPrice: 15.3, // Added discount
   },
   {
     id: "prod_094",
@@ -858,7 +887,7 @@ export const products = [
     shortDescription:
       "Give your car a deep, glossy shine with this easy-to-apply wax.",
     category: "Automotive",
-    image: "/images/automotive/car-wax.jpg",
+    image: "./images/Car Wax Polish   .png",
     price: 21.99,
   },
   {
@@ -867,7 +896,7 @@ export const products = [
     shortDescription:
       "Eliminate odors and keep your car smelling fresh and clean.",
     category: "Automotive",
-    image: "/images/automotive/air-freshener.jpg",
+    image: "./images/Air Freshener Vent Clips.png",
     price: 5.0,
   },
   // Pets
@@ -877,7 +906,7 @@ export const products = [
     shortDescription:
       "A simple tool for positive reinforcement training with your pet.",
     category: "Pets",
-    image: "/images/pets/training-clicker.jpg",
+    image: "./images/Pet Training Clicker.png",
     price: 8.0,
   },
   {
@@ -885,8 +914,9 @@ export const products = [
     name: "Aquarium Starter Kit",
     shortDescription: "Everything you need to set up a new home for your fish.",
     category: "Pets",
-    image: "/images/pets/aquarium-kit.jpg",
+    image: "./images/Aquarium Starter Kit   .png",
     price: 40.0,
+    discountedPrice: 36.0, // Added discount
   },
   {
     id: "prod_098",
@@ -894,7 +924,7 @@ export const products = [
     shortDescription:
       "Attract beautiful birds to your garden with this durable and easy-to-fill feeder.",
     category: "Pets",
-    image: "/images/pets/bird-feeder.jpg",
+    image: "./images/Bird Feeder.png",
     price: 25.0,
   },
   {
@@ -903,8 +933,9 @@ export const products = [
     shortDescription:
       "A safe and spacious home for your rabbit, perfect for indoor or outdoor use.",
     category: "Pets",
-    image: "/images/pets/rabbit-hutch.jpg",
+    image: "./images/Rabbit Hutch.png",
     price: 110.0,
+    discountedPrice: 99.0, // Added discount
   },
   {
     id: "prod_100",
@@ -912,7 +943,7 @@ export const products = [
     shortDescription:
       "Safely and comfortably transport your small pet to the vet or on trips.",
     category: "Pets",
-    image: "/images/pets/pet-carrier.jpg",
+    image: "./images/Small Animal Carrier.png",
     price: 30.0,
   },
 ];

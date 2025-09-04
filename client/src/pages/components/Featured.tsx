@@ -8,6 +8,7 @@ interface ProductType {
   name: string;
   price: number;
   [key: string]: any;
+  discountedPrice: number;
 }
 
 const Featured = () => {
@@ -19,6 +20,7 @@ const Featured = () => {
       setLoading(true);
       const response = await axios.get("http://localhost:3000/featured");
       setProducts(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +42,14 @@ const Featured = () => {
       </div>
       <div className="flex justify-between">
         {products.map((p: ProductType) => (
-          <Product key={p.id} id={p.id} name={p.name} price={p.price} />
+          <Product
+            discountedPrice={p.discountedPrice}
+            key={p.id}
+            id={p.id}
+            name={p.name}
+            price={p.price}
+            image={p.image}
+          />
         ))}
         {loading && Array.from({ length: 4 }, (_, i) => <LoadingProduct />)}
       </div>

@@ -1,4 +1,9 @@
-import type { Dispatch, SetStateAction } from "react";
+import {
+  // ...existing code...
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -10,6 +15,7 @@ interface ProductProps {
     category: string;
     image: string;
     price: number;
+    discountedPrice: number;
   };
   loading: boolean;
   quantity: number;
@@ -22,6 +28,23 @@ const ProductHero = ({
   quantity,
   setQuantity,
 }: ProductProps) => {
+  const imageUrl = data.image
+    ? `http://localhost:3000${data.image.replace(".", "")}`
+    : "";
+
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState<{ x: number; y: number }>({
+    x: 50,
+    y: 50,
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomOrigin({ x, y });
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
       <p className="my-2 flex">
@@ -69,11 +92,46 @@ const ProductHero = ({
             ) : (
               <>
                 <div className="flex flex-col justify-between gap-6">
-                  <div className="bg-neutral-200 rounded-2xl flex-1"></div>
-                  <div className="bg-neutral-200 rounded-2xl flex-1"></div>
-                  <div className="bg-neutral-200 rounded-2xl flex-1"></div>
+                  <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
+                    <img
+                      src={imageUrl}
+                      alt={data.name}
+                      className="pointer-events-none h-full"
+                    />
+                  </div>
+                  <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
+                    <img
+                      src={imageUrl}
+                      alt={data.name}
+                      className="pointer-events-none h-full"
+                    />
+                  </div>
+                  <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
+                    <img
+                      src={imageUrl}
+                      alt={data.name}
+                      className="pointer-events-none h-full"
+                    />
+                  </div>
                 </div>
-                <div className="bg-neutral-200 rounded-2xl">hover to zoom</div>
+                <div
+                  className={`bg-neutral-200 rounded-2xl overflow-hidden "cursor-zoom-in`}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => setIsZoomed(true)}
+                  onMouseLeave={() => setIsZoomed(false)}
+                >
+                  <img
+                    src={imageUrl}
+                    alt={data.name}
+                    draggable={false}
+                    className="h-full w-full object-cover select-none will-change-transform"
+                    style={{
+                      transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+                      transform: isZoomed ? "scale(1.6)" : "scale(1)",
+                      transition: "transform 150ms ease-out",
+                    }}
+                  />
+                </div>
               </>
             )}
           </div>
@@ -90,8 +148,14 @@ const ProductHero = ({
             )}
           </p>
           <div className="flex gap-4">
-            <p>${data.price}</p>
-            <p className="text-neutral-200 line-through">${data.price * 2}</p>
+            {data.discountedPrice ? (
+              <>
+                <p>${data.discountedPrice}</p>
+                <p className="text-neutral-200 line-through">${data.price}</p>
+              </>
+            ) : (
+              <p>${data.price}</p>
+            )}
             <p>★★★☆☆ (20 reviews)</p>
           </div>
           <div className="w-full border-b border-neutral-200"></div>

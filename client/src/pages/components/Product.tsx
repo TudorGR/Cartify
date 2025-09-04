@@ -7,6 +7,7 @@ interface ProductProps {
   price: number;
   image?: string;
   [key: string]: any;
+  discountedPrice: number;
 }
 
 const Product = ({
@@ -14,23 +15,41 @@ const Product = ({
   name,
   // description,
   // category,
-  // image,
+  discountedPrice,
+  image,
   price,
 }: ProductProps) => {
   const [clicked, setClicked] = useState(false);
 
+  const imageUrl = image
+    ? `http://localhost:3000${image.replace(".", "")}`
+    : "";
+
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className="flex flex-col gap-2 relative">
+      {discountedPrice && (
+        <div className="absolute text-white w-fit h-fit rounded-full left-2 top-2 bg-red-500/50 px-2 right-0">
+          -10%
+        </div>
+      )}
       <Link to={`/product/${id}`}>
         <img
           alt="some 'preview' hover effect..."
-          className="w-60 h-80  bg-neutral-200 rounded-2xl"
+          className="pointer-events-none w-60 h-80  bg-neutral-200 rounded-2xl object-cover"
+          src={imageUrl}
         />
       </Link>
       <div className="flex justify-between max-w-60 w-full">
         <div>
           <p className="max-h-8 text-nowrap truncate max-w-50">{name}</p>
-          <p>${price}</p>
+          {discountedPrice ? (
+            <div className="flex gap-2">
+              <p>${discountedPrice}</p>
+              <p className="text-neutral-400 line-through">${price}</p>
+            </div>
+          ) : (
+            <p>${price}</p>
+          )}
         </div>
         <button
           onClick={() => setClicked(!clicked)}

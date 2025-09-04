@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface Product {
   id: number;
@@ -16,23 +18,29 @@ const Navbar = ({ color }: { color: string }) => {
   const searchBarRef = useRef<HTMLDivElement | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const [isSearching, setIsSearching] = useState(false);
 
   async function handleSearch() {
     const q = searchValue.trim();
     if (!q) {
       setItems([]);
+      setIsSearching(false); // end loading if cleared
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/search", {
-        q,
-      });
+      // keep immediate loading feedback from useEffect, but safe to set here too
+      setIsSearching(true);
+      const response = await axios.post("http://localhost:3000/search", { q });
       setItems(response.data);
     } catch (error) {
       console.log(error);
+      setItems([]); // ensure items is empty on error
+    } finally {
+      setIsSearching(false); // always end loading, even if 0 results
     }
   }
+
   function closeSearch() {
     setSearchBar(false);
     setSearchValue("");
@@ -79,8 +87,10 @@ const Navbar = ({ color }: { color: string }) => {
 
   useEffect(() => {
     if (searchValue) {
+      setIsSearching(true);
       clgFunc();
     } else {
+      setIsSearching(false);
       setItems([]);
     }
   }, [searchValue]);
@@ -253,7 +263,63 @@ const Navbar = ({ color }: { color: string }) => {
               </button>
             </div>
           </div>
-          {items.length > 0 && (
+          {isSearching && (
+            <div
+              ref={resultsRef}
+              className="absolute left-0 top-20 w-full bg-white border-b border-neutral-400 z-20 flex items-center justify-center"
+            >
+              <div className="w-full max-w-2xl flex gap-2 flex-col my-6 max-h-100 overflow-auto">
+                <ul className="w-full max-w-2xl flex gap-2 flex-col  max-h-100 overflow-auto">
+                  <li
+                    className={
+                      "mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline"
+                    }
+                  >
+                    <Skeleton
+                      containerClassName=" w-[50%]"
+                      className=" rounded-2xl"
+                    />
+
+                    <Skeleton
+                      containerClassName=" w-[9%]"
+                      className=" rounded-2xl"
+                    />
+                  </li>
+                  <li
+                    className={
+                      "mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline"
+                    }
+                  >
+                    <Skeleton
+                      containerClassName=" w-[30%]"
+                      className=" rounded-2xl"
+                    />
+
+                    <Skeleton
+                      containerClassName=" w-[10%]"
+                      className=" rounded-2xl"
+                    />
+                  </li>
+                  <li
+                    className={
+                      "mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline"
+                    }
+                  >
+                    <Skeleton
+                      containerClassName=" w-[40%]"
+                      className=" rounded-2xl"
+                    />
+
+                    <Skeleton
+                      containerClassName=" w-[15%]"
+                      className=" rounded-2xl"
+                    />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+          {!isSearching && items.length > 0 && (
             <div
               ref={resultsRef}
               className="absolute left-0 top-20 w-full bg-white border-b border-neutral-400 z-20 flex items-center justify-center"
@@ -275,6 +341,16 @@ const Navbar = ({ color }: { color: string }) => {
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+          {!isSearching && searchValue && items.length === 0 && (
+            <div
+              ref={resultsRef}
+              className="absolute left-0 top-20 w-full bg-white border-b border-neutral-400 z-20 flex items-center justify-center"
+            >
+              <div className="w-full max-w-2xl my-6 text-neutral-500 px-2">
+                No results found for “{searchValue}”.
+              </div>
             </div>
           )}
         </>

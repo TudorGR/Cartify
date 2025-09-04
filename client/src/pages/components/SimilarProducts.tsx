@@ -2,23 +2,40 @@ import { useEffect, useState } from "react";
 import Product from "./Product";
 import axios from "axios";
 import LoadingProduct from "./LoadingProduct";
+import { Link } from "react-router-dom";
 
 interface ProductType {
   id: string | number;
   name: string;
   price: number;
   [key: string]: any;
+  discountedPrice: number;
+}
+interface SimilarProps {
+  category: string | undefined;
+  productId?: string | number;
 }
 
-const SimilarProducts = () => {
+const SimilarProducts = ({ category, productId }: SimilarProps) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function fetchFeatured() {
     try {
+      if (!category) {
+        setProducts([]);
+        setLoading(false);
+        return;
+      }
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/featured");
-      setProducts(response.data);
+      const response = await axios.get(
+        `http://localhost:3000/products/${category}`
+      );
+      const items = response.data
+        // exclude current product if present
+        .filter((p: any) => String(p.id) !== String(productId))
+        .slice(0, 4);
+      setProducts(items);
     } catch (error) {
       console.log(error);
     }
@@ -27,22 +44,39 @@ const SimilarProducts = () => {
 
   useEffect(() => {
     fetchFeatured();
-  }, []);
+  }, [category, productId]);
 
   return (
     <div className="w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
       <div className="flex justify-between items-center">
         <h1 className="flex-1 text-2xl">Similar Products</h1>
-        <p className="flex-1 text-neutral-400">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          praesentium expedita quod error.
-        </p>
+        <div className="flex flex-1">
+          <p className=" text-neutral-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+            praesentium expedita quod error.
+          </p>
+          <Link
+            to={`/products/${category}`}
+            className="bg-neutral-500 text-white px-6 py-3 rounded-full"
+          >
+            See
+          </Link>
+        </div>
       </div>
       <div className="flex justify-between">
-        {products.map((p: ProductType) => (
-          <Product key={p.id} id={p.id} name={p.name} price={p.price} />
-        ))}
-        {loading && Array.from({ length: 4 }, (_, i) => <LoadingProduct />)}
+        {!loading &&
+          products.map((p: ProductType) => (
+            <Product
+              discountedPrice={p.discountedPrice}
+              key={p.id}
+              image={p.image}
+              id={p.id}
+              name={p.name}
+              price={p.price}
+            />
+          ))}
+        {loading &&
+          Array.from({ length: 4 }, (_, i) => <LoadingProduct key={i} />)}
       </div>
     </div>
   );

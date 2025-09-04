@@ -9,6 +9,7 @@ interface ProductType {
   price: number;
   image?: string;
   [key: string]: any;
+  discountedPrice: number;
 }
 
 interface ProductsProps {
@@ -54,6 +55,7 @@ const Products = ({
             .slice(0, visible)
             .map((product) => (
               <Product
+                discountedPrice={product.discountedPrice}
                 key={product.id}
                 id={product.id}
                 name={product.name}

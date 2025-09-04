@@ -8,6 +8,7 @@ interface ProductType {
   name: string;
   price: number;
   [key: string]: any;
+  discountedPrice: number;
 }
 
 const MayLike = () => {
@@ -40,7 +41,14 @@ const MayLike = () => {
       </div>
       <div className="flex justify-between">
         {products.map((p: ProductType) => (
-          <Product key={p.id} id={p.id} name={p.name} price={p.price} />
+          <Product
+            discountedPrice={p.discountedPrice}
+            key={p.id}
+            image={p.image}
+            id={p.id}
+            name={p.name}
+            price={p.price}
+          />
         ))}
         {loading && Array.from({ length: 4 }, (_, i) => <LoadingProduct />)}
       </div>

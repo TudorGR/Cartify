@@ -42,10 +42,10 @@ export async function getProduct(req, res) {
 
 export async function getFeatured(req, res) {
   setTimeout(() => {
-    const r1 = 22;
+    const r1 = 9;
     const r2 = 24;
     const r3 = 81;
-    const r4 = 2;
+    const r4 = 4;
 
     return res
       .status(200)

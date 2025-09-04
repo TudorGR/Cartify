@@ -15,6 +15,7 @@ const ProductDetails = () => {
     category: "",
     image: "",
     price: 0,
+    discountedPrice: 0,
   });
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ const ProductDetails = () => {
         setQuantity={setQuantity}
       />
       <DescriptionReview />
-      <SimilarProducts />
+      <SimilarProducts category={data.category} productId={data.id} />
       <Footer />
     </div>
   );
