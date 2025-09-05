@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../../context/userContext";
 
 const DescriptionReview = () => {
   const [dorr, setDorr] = useState("r");
+  const { lightMode } = useContext(UserContext);
 
   return (
-    <div className="bg-neutral-100">
+    <div className={`${lightMode ? "bg-neutral-100" : "bg-neutral-900"}`}>
       <div className="w-full my-20 max-w-5xl mx-auto h-full flex flex-col gap-6">
         <div className="flex gap-4 text-2xl">
           <button
             className={`${
-              dorr == "d" ? "text-black" : "text-neutral-400"
+              dorr == "d"
+                ? lightMode
+                  ? "text-black"
+                  : "text-white"
+                : lightMode
+                ? "text-neutral-400"
+                : "text-neutral-400"
             } cursor-pointer`}
             onClick={() => setDorr("d")}
           >
@@ -18,7 +26,13 @@ const DescriptionReview = () => {
           <div className="border-l "></div>
           <button
             className={`${
-              dorr == "r" ? "text-black" : "text-neutral-400"
+              dorr == "r"
+                ? lightMode
+                  ? "text-black"
+                  : "text-white"
+                : lightMode
+                ? "text-neutral-400"
+                : "text-neutral-400"
             } cursor-pointer`}
             onClick={() => setDorr("r")}
           >
@@ -58,7 +72,11 @@ const DescriptionReview = () => {
           </>
         ) : (
           <>
-            <div className="flex gap-1 flex-col items-start border-neutral-300 border p-4 rounded-2xl">
+            <div
+              className={`flex gap-1 flex-col items-start ${
+                lightMode ? "border-neutral-300" : "border-neutral-700"
+              } border p-4 rounded-2xl`}
+            >
               <div>★★★☆☆</div>
               <h2 className="text-xl">Alex B.</h2>
               <p>
@@ -69,7 +87,11 @@ const DescriptionReview = () => {
               </p>
               <p>Posted on September 23, 2024</p>
             </div>
-            <div className="flex gap-1 flex-col items-start border-neutral-300 border p-4 rounded-2xl">
+            <div
+              className={`flex gap-1 flex-col items-start ${
+                lightMode ? "border-neutral-300" : "border-neutral-700"
+              } border p-4 rounded-2xl`}
+            >
               <div>★★★☆☆</div>
               <h2 className="text-xl">Alex B.</h2>
               <p>
@@ -80,16 +102,28 @@ const DescriptionReview = () => {
               </p>
               <p>Posted on September 23, 2024</p>
             </div>
-            <div className="flex gap-4 flex-col items-start border-neutral-300 border p-4 rounded-2xl">
+            <div
+              className={`flex gap-4 flex-col items-start ${
+                lightMode ? "border-neutral-300" : "border-neutral-700"
+              } border p-4 rounded-2xl`}
+            >
               <div className="flex gap-4">
                 <input
                   type="text"
-                  className="border border-neutral-300 px-6 py-3 rounded-full"
+                  className={`border ${
+                    lightMode
+                      ? "border-neutral-300 bg-white text-black"
+                      : "border-neutral-600 bg-neutral-800 text-white"
+                  } px-6 py-3 rounded-full`}
                   placeholder="Your Name"
                 />
                 <input
                   type="text"
-                  className="border border-neutral-300 px-6 py-3 rounded-full"
+                  className={`border ${
+                    lightMode
+                      ? "border-neutral-300 bg-white text-black"
+                      : "border-neutral-600 bg-neutral-800 text-white"
+                  } px-6 py-3 rounded-full`}
                   placeholder="example@email.com"
                 />
               </div>
@@ -97,11 +131,21 @@ const DescriptionReview = () => {
                 name=""
                 rows={4}
                 placeholder="Write your review..."
-                className="w-full resize-none border border-neutral-300 px-6 py-3 rounded-4xl"
+                className={`w-full resize-none border ${
+                  lightMode
+                    ? "border-neutral-300 bg-white text-black"
+                    : "border-neutral-600 bg-neutral-800 text-white"
+                } px-6 py-3 rounded-4xl`}
               ></textarea>
               <div className="flex justify-between items-center w-full">
                 <p>Your rating: ★★★☆☆</p>
-                <button className="bg-neutral-500 text-white px-6 py-3 rounded-full">
+                <button
+                  className={`${
+                    lightMode
+                      ? "bg-neutral-800 hover:bg-neutral-700"
+                      : "bg-neutral-500 hover:bg-neutral-400"
+                  } text-white px-6 py-3 rounded-full transition-colors`}
+                >
                   Post Review
                 </button>
               </div>

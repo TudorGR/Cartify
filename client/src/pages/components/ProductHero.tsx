@@ -1,4 +1,5 @@
 import {
+  useContext,
   // ...existing code...
   useState,
   type Dispatch,
@@ -6,6 +7,7 @@ import {
 } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { UserContext } from "../../../context/userContext";
 
 interface ProductProps {
   data: {
@@ -40,14 +42,31 @@ const ProductHero = ({
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     setZoomOrigin({ x, y });
   };
+  const { lightMode, addToCart, cart } = useContext(UserContext);
+
+  const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      addToCart({
+        id: data.id,
+        name: data.name,
+        price: data.price,
+        discountedPrice: data.discountedPrice,
+        image: data.image,
+      });
+    }
+  };
+
+  const isInCart = cart.has(data.id);
 
   return (
     <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
       <p className="my-2 flex">
         {loading ? (
           <Skeleton
-            containerClassName=" w-100"
-            className="pt-1 h-full rounded-2xl "
+            containerClassName="  w-100"
+            className={`pt-1 h-full rounded-2xl ${
+              lightMode ? "" : "brightness-50"
+            }`}
           />
         ) : (
           `Home > All > ${data.category} > ${data.name}`
@@ -59,28 +78,36 @@ const ProductHero = ({
             {loading ? (
               <>
                 <div className="flex flex-col justify-between gap-6">
-                  <div className="bg-neutral-200 rounded-2xl overflow-hidden flex-1">
+                  <div className=" rounded-2xl overflow-hidden flex-1">
                     <Skeleton
-                      containerClassName="flex-1 w-20"
+                      containerClassName={`${
+                        lightMode ? "" : "brightness-50"
+                      } flex-1 w-20`}
                       className="pt-10 h-full rounded-2xl"
                     />
                   </div>
-                  <div className="bg-neutral-200 rounded-2xl overflow-hidden flex-1">
+                  <div className=" rounded-2xl overflow-hidden flex-1">
                     <Skeleton
-                      containerClassName="flex-1 w-20"
+                      containerClassName={`${
+                        lightMode ? "" : "brightness-50"
+                      } flex-1 w-20`}
                       className="pt-10 h-full rounded-2xl"
                     />
                   </div>
-                  <div className="bg-neutral-200 rounded-2xl overflow-hidden flex-1">
+                  <div className=" rounded-2xl overflow-hidden flex-1">
                     <Skeleton
-                      containerClassName="flex-1 w-20"
+                      containerClassName={`${
+                        lightMode ? "" : "brightness-50"
+                      } flex-1 w-20`}
                       className="pt-10 h-full rounded-2xl"
                     />
                   </div>
                 </div>
-                <div className="bg-neutral-200 rounded-2xl overflow-hidden">
+                <div className=" rounded-2xl overflow-hidden">
                   <Skeleton
-                    containerClassName="flex-1 w-20"
+                    containerClassName={`${
+                      lightMode ? "" : "brightness-50"
+                    } flex-1 w-20`}
                     className="pt-10 h-full rounded-2xl"
                   />
                 </div>
@@ -88,21 +115,29 @@ const ProductHero = ({
             ) : (
               <>
                 <div className="flex flex-col justify-between gap-6">
-                  <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
+                  <div className=" rounded-2xl flex-1 overflow-hidden">
                     <img
                       src={data.image}
                       alt={data.name}
                       className="pointer-events-none h-full"
                     />
                   </div>
-                  <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
+                  <div
+                    className={`${
+                      lightMode ? "bg-neutral-200" : "bg-neutral-700"
+                    } rounded-2xl flex-1 overflow-hidden`}
+                  >
                     <img
                       src={data.image}
                       alt={data.name}
                       className="pointer-events-none h-full"
                     />
                   </div>
-                  <div className="bg-neutral-200 rounded-2xl flex-1 overflow-hidden">
+                  <div
+                    className={`${
+                      lightMode ? "bg-neutral-200" : "bg-neutral-700"
+                    } rounded-2xl flex-1 overflow-hidden`}
+                  >
                     <img
                       src={data.image}
                       alt={data.name}
@@ -111,7 +146,9 @@ const ProductHero = ({
                   </div>
                 </div>
                 <div
-                  className={`bg-neutral-200 rounded-2xl overflow-hidden "cursor-zoom-in`}
+                  className={`${
+                    lightMode ? "bg-neutral-200" : "bg-neutral-700"
+                  } rounded-2xl overflow-hidden cursor-zoom-in`}
                   onMouseMove={handleMouseMove}
                   onMouseEnter={() => setIsZoomed(true)}
                   onMouseLeave={() => setIsZoomed(false)}
@@ -136,8 +173,8 @@ const ProductHero = ({
           <p className="text-4xl flex">
             {loading ? (
               <Skeleton
-                containerClassName="w-70"
-                className=" h-full rounded-2xl "
+                containerClassName={`${lightMode ? "" : "brightness-50"} w-70`}
+                className="h-full rounded-2xl "
               />
             ) : (
               <>{data.name}</>
@@ -147,25 +184,52 @@ const ProductHero = ({
             {data.discountedPrice ? (
               <>
                 <p>${data.discountedPrice}</p>
-                <p className="text-neutral-200 line-through">${data.price}</p>
+                <p
+                  className={`${
+                    lightMode ? "text-neutral-400" : "text-neutral-500"
+                  } line-through`}
+                >
+                  ${data.price}
+                </p>
               </>
             ) : (
               <p>${data.price}</p>
             )}
             <p>★★★☆☆ (20 reviews)</p>
           </div>
-          <div className="w-full border-b border-neutral-200"></div>
-          <p className="">
+          <div
+            className={`transition-all w-full border-b ${
+              lightMode ? "border-neutral-200" : "border-neutral-800"
+            }`}
+          ></div>
+          <p className="flex flex-col">
             {loading ? (
-              <Skeleton className="pt-7 h-full rounded-2xl " />
+              <>
+                <Skeleton
+                  containerClassName="w-full"
+                  className={`${
+                    lightMode ? "" : "brightness-50"
+                  } pt-4 h-5 rounded-2xl `}
+                />
+                <Skeleton
+                  containerClassName="w-40"
+                  className={`${
+                    lightMode ? "" : "brightness-50"
+                  } pt-4 h-5 rounded-2xl`}
+                />
+              </>
             ) : (
               <>{data.shortDescription}</>
             )}
           </p>
           <div className="flex gap-4">
-            <div className="flex gap-4 border border-neutral-200  py-2 rounded-full">
+            <div
+              className={`flex gap-4 border ${
+                lightMode ? "border-neutral-300" : "border-neutral-600"
+              } py-2 rounded-full`}
+            >
               <button
-                className=" px-4 cursor-pointer"
+                className="px-4 cursor-pointer"
                 onClick={() => {
                   if (quantity > 1) {
                     setQuantity(quantity - 1);
@@ -176,14 +240,21 @@ const ProductHero = ({
               </button>
               <p>{quantity}</p>
               <button
-                className=" px-4 cursor-pointer"
+                className="px-4 cursor-pointer"
                 onClick={() => setQuantity(quantity + 1)}
               >
                 {"+"}
               </button>
             </div>
-            <button className="cursor-pointer text-white w-full bg-neutral-500 rounded-full">
-              Add to Cart (animation go to cart icon)
+            <button
+              onClick={handleAddToCart}
+              className={`cursor-pointer text-white w-full ${
+                lightMode
+                  ? "bg-neutral-800 hover:bg-neutral-700"
+                  : "bg-neutral-500 hover:bg-neutral-400"
+              } rounded-full transition-colors`}
+            >
+              {isInCart ? "Added to Cart ✓" : "Add to Cart"}
             </button>
           </div>
           <div className="flex flex-col gap-4">

@@ -1,9 +1,17 @@
+import { useContext } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import { UserContext } from "../../context/userContext";
 
 const Privacy = () => {
+  const { lightMode } = useContext(UserContext);
+
   return (
-    <div className=" relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
+    <div
+      className={`${
+        lightMode ? "bg-white text-black" : "bg-black text-white"
+      } relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen`}
+    >
       <Navbar color="black" />
       <div className="mt-20 w-full max-w-5xl mx-auto h-full">
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>

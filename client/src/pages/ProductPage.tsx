@@ -3,23 +3,28 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Products from "./components/Products";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { UserContext } from "../../context/userContext";
 
-interface ProductType {
-  id: string | number;
+export interface ProductType {
+  id: string;
   name: string;
   price: number;
   image?: string;
+  discountedPrice?: number | null;
 }
 
 const ProductPage = () => {
   const { category } = useParams();
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
   const [leftSlider, setLeftSlider] = useState(0);
   const [rightSlider, setRightSlider] = useState(500);
+  const [discount, setDiscount] = useState(false);
   const [visible, setVisible] = useState(18);
+  const { lightMode } = useContext(UserContext);
 
   async function fetchProducts(leftSlider: number, rightSlider: number) {
     try {
@@ -32,18 +37,35 @@ const ProductPage = () => {
         (item: ProductType) =>
           item.price >= leftSlider && item.price <= rightSlider
       );
+      setAllProducts(filtered);
       setProducts(filtered);
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
   }
+
   useEffect(() => {
     fetchProducts(leftSlider, rightSlider);
   }, [category]);
 
+  useEffect(() => {
+    if (discount) {
+      const discountedProducts = allProducts.filter(
+        (p) => p.discountedPrice != null
+      );
+      setProducts(discountedProducts);
+    } else {
+      setProducts(allProducts);
+    }
+  }, [discount, allProducts]);
+
   return (
-    <div className="relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between">
+    <div
+      className={`${
+        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+      } relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between transition-all`}
+    >
       <Navbar color="black" />
       <div className="w-full max-w-5xl  mx-auto h-full">
         <p className="my-2">
@@ -51,6 +73,8 @@ const ProductPage = () => {
         </p>
         <div className="flex gap-6">
           <Filters
+            discount={discount}
+            setDiscount={setDiscount}
             leftSlider={leftSlider}
             rightSlider={rightSlider}
             setLeftSlider={setLeftSlider}

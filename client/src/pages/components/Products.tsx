@@ -1,15 +1,16 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Product from "./Product";
 import LoadingProduct from "./LoadingProduct";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../context/userContext";
 
 interface ProductType {
-  id: string | number;
+  id: string;
   name: string;
   price: number;
   image?: string;
   [key: string]: any;
-  discountedPrice: number;
+  discountedPrice?: number | null;
 }
 
 interface ProductsProps {
@@ -31,6 +32,8 @@ const Products = ({
   leftSlider,
   rightSlider,
 }: ProductsProps) => {
+  const { lightMode } = useContext(UserContext);
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
@@ -55,7 +58,7 @@ const Products = ({
             .slice(0, visible)
             .map((product) => (
               <Product
-                discountedPrice={product.discountedPrice}
+                discountedPrice={product.discountedPrice ?? null}
                 key={product.id}
                 id={product.id}
                 name={product.name}
@@ -69,13 +72,24 @@ const Products = ({
           Array.from({ length: 18 }, (_, i) => <LoadingProduct key={i} />)}
       </div>
       {products.length == 0 && (
-        <div className="max-w-2xl mx-auto flex flex-col items-center justify-center py-20">
+        <div
+          className={`max-w-2xl mx-auto flex flex-col items-center justify-center py-20 ${
+            lightMode ? "text-black" : "text-white"
+          }`}
+        >
           <h2>
             We're sorry, there are no products in the "{category}" category
             between ${leftSlider} and ${rightSlider} right now.
           </h2>
           <p>Why not explore some of our other great categories?</p>
-          <Link to="/" style={{ textDecoration: "underline" }}>
+          <Link
+            to="/"
+            className={`underline ${
+              lightMode
+                ? "text-blue-600 hover:text-blue-800"
+                : "text-blue-400 hover:text-blue-300"
+            } transition-colors`}
+          >
             Go to Home Page
           </Link>
         </div>
@@ -83,7 +97,11 @@ const Products = ({
       {products.length > visible && (
         <button
           onClick={handleLoadMore}
-          className="cursor-pointer text-white bg-neutral-500 mx-auto mt-10 rounded-full w-fit px-6 py-3"
+          className={`cursor-pointer text-white ${
+            lightMode
+              ? "bg-neutral-800 hover:bg-neutral-700"
+              : "bg-neutral-500 hover:bg-neutral-400"
+          } mx-auto mt-10 rounded-full w-fit px-6 py-3 transition-colors`}
         >
           Load More
         </button>

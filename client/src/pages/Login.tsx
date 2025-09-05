@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, lightMode } = useContext(UserContext);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,18 +45,33 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
+    <div
+      className={`relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen ${
+        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+      } transition-all`}
+    >
       <Navbar color="black" />
-      <div className=" w-full max-w-5xl mx-auto h-full">
-        <div className="mt-20 border border-neutral-200 overflow-hidden  w-full rounded-2xl flex">
+      <div className="w-full max-w-5xl mx-auto h-full">
+        <div
+          className={`mt-20 border overflow-hidden w-full rounded-2xl flex ${
+            lightMode ? "border-neutral-300" : "border-neutral-700"
+          }`}
+        >
           <form
             onSubmit={handleSubmit}
-            className="flex-1 flex flex-col gap-6 p-6 shrink-0"
+            className={`flex-1 flex flex-col gap-6 p-6 shrink-0 ${
+              lightMode ? "bg-white" : "bg-neutral-900"
+            }`}
           >
             <h2 className="text-3xl">Login</h2>
             <p>
               Do not have an account?{" "}
-              <Link to={"/signup"} className="underline cursor-pointer">
+              <Link
+                to={"/signup"}
+                className={`underline cursor-pointer ${
+                  lightMode ? "text-blue-600" : "text-blue-400"
+                } hover:opacity-80 transition-opacity`}
+              >
                 create a new one
               </Link>
             </p>
@@ -67,7 +82,11 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                className="border border-neutral-300 px-4 py-2 rounded-full"
+                className={`border px-4 py-2 rounded-full ${
+                  lightMode
+                    ? "border-neutral-300 bg-white text-black"
+                    : "border-neutral-600 bg-neutral-800 text-white"
+                }`}
                 name="email"
                 id="email"
                 placeholder="example@email.com"
@@ -80,7 +99,11 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                className="border border-neutral-300 px-4 py-2 rounded-full"
+                className={`border px-4 py-2 rounded-full ${
+                  lightMode
+                    ? "border-neutral-300 bg-white text-black"
+                    : "border-neutral-600 bg-neutral-800 text-white"
+                }`}
                 name="password"
                 id="password"
                 placeholder="***********"
@@ -88,13 +111,27 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="bg-neutral-500 rounded-full px-6 py-3 w-full text-white"
+              className={`${
+                lightMode
+                  ? "bg-neutral-800 hover:bg-neutral-700"
+                  : "bg-neutral-500 hover:bg-neutral-400"
+              } rounded-full px-6 py-3 w-full text-white transition-colors`}
             >
               Login
             </button>
-            <p className="text-center underline">Forgot your password</p>
+            <p
+              className={`text-center underline cursor-pointer ${
+                lightMode ? "text-blue-600" : "text-blue-400"
+              } hover:opacity-80 transition-opacity`}
+            >
+              Forgot your password
+            </p>
           </form>
-          <div className="flex-1 bg-neutral-500 p-6 shrink-0"></div>
+          <div
+            className={`flex-1 p-6 shrink-0 ${
+              lightMode ? "bg-neutral-200" : "bg-neutral-700"
+            }`}
+          ></div>
         </div>
       </div>
 

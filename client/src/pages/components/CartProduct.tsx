@@ -1,22 +1,80 @@
-export const CartProduct = () => {
+import { useContext } from "react";
+import { UserContext } from "../../../context/userContext";
+import { MdDelete, MdDeleteOutline } from "react-icons/md";
+import { Link } from "react-router-dom";
+
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  discountedPrice?: number;
+  image?: string;
+  quantity: number;
+}
+
+interface CartProductProps {
+  item: CartItem;
+}
+
+export const CartProduct = ({ item }: CartProductProps) => {
+  const { lightMode, removeFromCart, updateQuantity } = useContext(UserContext);
+
+  const handleIncrement = () => {
+    updateQuantity(item.id, item.quantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (item.quantity > 1) {
+      updateQuantity(item.id, item.quantity - 1);
+    } else {
+      removeFromCart(item.id);
+    }
+  };
+
+  const handleRemove = () => {
+    removeFromCart(item.id);
+  };
+
+  const displayPrice = item.discountedPrice || item.price;
+
   return (
     <li className="flex gap-6">
       <img
-        alt="product"
-        className="h-20 w-15 shrink-0 bg-neutral-500 rounded-2xl"
+        alt={item.name}
+        src={item.image}
+        className={`h-20 w-15 shrink-0 rounded-2xl object-cover ${
+          lightMode ? "bg-neutral-300" : "bg-neutral-600"
+        }`}
       />
       <div className="flex justify-between w-full">
         <div className="flex flex-col justify-between">
-          <h2>Product Name</h2>
-          <div className="flex gap-6 border border-neutral-200 px-4 py-2 rounded-full">
-            <button>{"-"}</button>
-            <p>1</p>
-            <button>{"+"}</button>
+          <Link to={`/product/${item.id}`}>{item.name}</Link>
+          <div
+            className={`w-fit flex gap-6 border px-4 py-2 rounded-full ${
+              lightMode ? "border-neutral-300" : "border-neutral-600"
+            }`}
+          >
+            <button onClick={handleDecrement} className="cursor-pointer">
+              -
+            </button>
+            <p>{item.quantity}</p>
+            <button onClick={handleIncrement} className="cursor-pointer">
+              +
+            </button>
           </div>
         </div>
         <div className="flex flex-col items-end justify-between">
-          <button>X</button>
-          <p>$399.99</p>
+          <button onClick={handleRemove} className="cursor-pointer">
+            <MdDelete className="w-6 h-6" />
+          </button>
+          <div className="text-right">
+            <p>${displayPrice}</p>
+            {item.discountedPrice && (
+              <p className="text-sm text-neutral-400 line-through">
+                ${item.price}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </li>

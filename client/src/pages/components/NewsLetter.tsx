@@ -1,14 +1,21 @@
+import { useContext } from "react";
+import { UserContext } from "../../../context/userContext";
+import { IoMail } from "react-icons/io5";
+
 const NewsLetter = () => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("submited");
   }
 
+  const { lightMode } = useContext(UserContext);
   return (
     <div className="h-75">
       <div className="w-full max-w-5xl mx-auto h-full flex flex-col gap-6 items-center">
-        <h2 className="text-4xl">Get 10% off your first order!</h2>
-        <p>
+        <h2 className={`${lightMode ? "text-black" : "text-white"} text-4xl`}>
+          Get 10% off your first order!
+        </h2>
+        <p className={`${lightMode ? "text-black" : "text-white"}`}>
           Subscribe to our newsletter to get a 10% off your first order and to
           never miss any discounts.
         </p>
@@ -17,13 +24,22 @@ const NewsLetter = () => {
             required
             type="email"
             placeholder="example@email.com"
-            className="border-neutral-500 rounded-full px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "text-black bg-white border-neutral-300"
+                : "text-white bg-neutral-800 border-neutral-600"
+            } rounded-full px-6 py-3 border`}
           />
           <button
             type="submit"
-            className="cursor-pointer text-white bg-neutral-500 rounded-full px-6 py-3 "
+            className={`cursor-pointer text-white ${
+              lightMode
+                ? "bg-neutral-800 hover:bg-neutral-700"
+                : "bg-neutral-500 hover:bg-neutral-400"
+            } rounded-full px-6 py-3 transition-colors flex items-center gap-2`}
           >
             Subscribe
+            <IoMail className="w-6 h-6" />
           </button>
         </form>
       </div>

@@ -1,24 +1,37 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  useContext,
+  useEffect,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import { UserContext } from "../../../context/userContext";
 
-const CheckoutForm = () => {
-  const { user } = useContext(UserContext);
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    phone: 0,
-    street: "",
-    city: "",
-    country: "",
-    zip: 0,
-  });
-  const navigate = useNavigate();
+interface CheckoutProps {
+  setCorp: Dispatch<SetStateAction<string>>;
+  data: {
+    name: string;
+    email: string;
+    phone: number;
+    street: string;
+    city: string;
+    country: string;
+    zip: number;
+  };
+  setData: Dispatch<
+    SetStateAction<{
+      name: string;
+      email: string;
+      phone: number;
+      street: string;
+      city: string;
+      country: string;
+      zip: number;
+    }>
+  >;
+}
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    navigate("/payment");
-  }
+const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
+  const { user, lightMode } = useContext(UserContext);
 
   useEffect(() => {
     if (user) {
@@ -36,8 +49,11 @@ const CheckoutForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit}
-      className="flex-2 border border-neutral-300 h-fit rounded-2xl p-6 flex flex-col gap-4"
+      className={`flex-2 ${
+        lightMode
+          ? "border-neutral-300 bg-white text-black"
+          : "border-neutral-700 bg-neutral-900 text-white"
+      } border h-fit rounded-2xl p-6 flex flex-col gap-4`}
     >
       <div className="flex gap-4">
         <div className="flex flex-col gap-2 flex-1">
@@ -50,7 +66,11 @@ const CheckoutForm = () => {
             }
             type="text"
             id="Name"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -63,7 +83,11 @@ const CheckoutForm = () => {
             }
             type="tel"
             id="Phone"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
       </div>
@@ -78,7 +102,11 @@ const CheckoutForm = () => {
             }
             type="email"
             id="Email"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
       </div>
@@ -93,7 +121,11 @@ const CheckoutForm = () => {
               setData((prev) => ({ ...prev, street: e.target.value }))
             }
             id="Street"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -106,7 +138,11 @@ const CheckoutForm = () => {
             }
             type="text"
             id="City"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
       </div>
@@ -121,7 +157,11 @@ const CheckoutForm = () => {
             }
             type="text"
             id="Country"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -134,16 +174,26 @@ const CheckoutForm = () => {
             }
             type="text"
             id="Zip"
-            className="border-neutral-300 rounded-2xl px-6 py-3 border"
+            className={`${
+              lightMode
+                ? "border-neutral-300 bg-white text-black"
+                : "border-neutral-600 bg-neutral-800 text-white"
+            } rounded-2xl px-6 py-3 border`}
           />
         </div>
       </div>
-      <button
-        type="submit"
-        className="cursor-pointer bg-neutral-500 rounded-full px-6 py-3 w-fit text-white"
-      >
-        Proceed to Next Step
-      </button>
+      <div className="flex justify-end">
+        <button
+          onClick={() => setCorp("p")}
+          className={`cursor-pointer ${
+            lightMode
+              ? "bg-neutral-800 hover:bg-neutral-700"
+              : "bg-neutral-600 hover:bg-neutral-500"
+          } rounded-full px-6 py-3 w-fit text-white transition-colors`}
+        >
+          Proceed to Next Step
+        </button>
+      </div>
     </form>
   );
 };

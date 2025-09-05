@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Product from "./Product";
 import axios from "axios";
 import LoadingProduct from "./LoadingProduct";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../context/userContext";
 
 interface ProductType {
   id: string | number;
@@ -19,12 +20,13 @@ interface SimilarProps {
 const SimilarProducts = ({ category, productId }: SimilarProps) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { lightMode } = useContext(UserContext);
 
   async function fetchFeatured() {
     try {
       if (!category) {
         setProducts([]);
-        setLoading(false);
+        setLoading(true);
         return;
       }
       setLoading(true);
@@ -49,15 +51,25 @@ const SimilarProducts = ({ category, productId }: SimilarProps) => {
   return (
     <div className="w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
       <div className="flex justify-between items-center">
-        <h1 className="flex-1 text-2xl">Similar Products</h1>
+        <h1
+          className={`flex-1 text-2xl ${
+            lightMode ? "text-black" : "text-white"
+          }`}
+        >
+          Similar Products
+        </h1>
         <div className="flex flex-1">
-          <p className=" text-neutral-400">
+          <p className="text-neutral-400">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
             praesentium expedita quod error.
           </p>
           <Link
             to={`/products/${category}`}
-            className="bg-neutral-500 text-white px-6 py-3 rounded-full"
+            className={`${
+              lightMode
+                ? "bg-neutral-800 hover:bg-neutral-700"
+                : "bg-neutral-500 hover:bg-neutral-400"
+            } text-white px-6 py-3 rounded-full transition-colors`}
           >
             See
           </Link>
@@ -75,6 +87,13 @@ const SimilarProducts = ({ category, productId }: SimilarProps) => {
               price={p.price}
             />
           ))}
+        {!loading && products.length == 0 && (
+          <div
+            className={`${lightMode ? "text-neutral-600" : "text-neutral-400"}`}
+          >
+            No similar products found.
+          </div>
+        )}
         {loading &&
           Array.from({ length: 4 }, (_, i) => <LoadingProduct key={i} />)}
       </div>

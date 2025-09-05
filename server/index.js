@@ -5,6 +5,7 @@ import "dotenv/config";
 import authRoutes from "./routes/authRoutes.js";
 import productsRoutes from "./routes/productsRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -16,11 +17,11 @@ app.use(
   })
 );
 app.use(cookieParser());
-// Removed static file serving - now using ImageKit
 // app.use("/images", express.static("images"));
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use(imageRoutes);
+app.use(orderRoutes);
 app.use(express.urlencoded({ extended: false }));
 
 const dbUri = process.env.MONGODB_URI;

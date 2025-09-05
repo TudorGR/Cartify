@@ -1,12 +1,20 @@
+import { useContext } from "react";
 import CartProducts from "./components/CartProducts";
 import CartSummary from "./components/CartSummary";
 import Footer from "./components/Footer";
 import MayLike from "./components/MayLike";
 import Navbar from "./components/Navbar";
+import { UserContext } from "../../context/userContext";
 
 const Cart = () => {
+  const { lightMode } = useContext(UserContext);
+
   return (
-    <div className="relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between">
+    <div
+      className={`transition-all relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between ${
+        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+      }`}
+    >
       <Navbar color="black" />
       <div className="flex flex-col gap-6">
         <div className="w-full max-w-5xl mx-auto h-full flex flex-col">

@@ -28,7 +28,6 @@
   transition: transform 0.2s ease;
 }
 
-/* Firefox */
 .thumb::-moz-range-thumb {
   pointer-events: all;
   width: 30px;
@@ -40,7 +39,13 @@
   transition: transform 0.2s ease;
 }
 
-/* Focus styles for accessibility */
 .thumb:focus {
   outline: none;
+}
+
+.bg-hero-light {
+  background-color: #d8a16b;
+}
+.bg-hero-dark {
+  background-color: #9f7f5f;
 }

@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { UserContext } from "../../../context/userContext";
 
 const LoadingProduct = () => {
+  const { lightMode } = useContext(UserContext);
+
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className={`flex flex-col gap-2 ${lightMode ? "" : "brightness-50"}`}>
       <div className="w-60 rounded-2xl overflow-hidden">
         <Skeleton
           containerClassName="flex-1 w-60"
@@ -23,8 +27,11 @@ const LoadingProduct = () => {
           </div>
         </div>
         <button
-          className={`border border-gray-400
-          cursor-pointer text-gray-400 rounded-full w-10 h-10 shrink-0 transition-all`}
+          className={`${
+            lightMode
+              ? "border border-neutral-400 text-neutral-400"
+              : "border border-neutral-600 text-neutral-600"
+          } cursor-pointer rounded-full w-10 h-10 shrink-0 transition-all`}
         >
           +
         </button>

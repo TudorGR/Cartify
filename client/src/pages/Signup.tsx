@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { lightMode } = useContext(UserContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,18 +49,33 @@ const Signup = () => {
   }
 
   return (
-    <div className="relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
+    <div
+      className={`relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen ${
+        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+      } transition-all`}
+    >
       <Navbar color="black" />
-      <div className=" w-full max-w-5xl mx-auto h-full">
-        <div className="mt-20 border border-neutral-200 overflow-hidden  w-full rounded-2xl flex">
+      <div className="w-full max-w-5xl mx-auto h-full">
+        <div
+          className={`mt-20 border overflow-hidden w-full rounded-2xl flex ${
+            lightMode ? "border-neutral-300" : "border-neutral-700"
+          }`}
+        >
           <form
             onSubmit={handleSubmit}
-            className="flex-1 flex flex-col gap-6 p-6 shrink-0"
+            className={`flex-1 flex flex-col gap-6 p-6 shrink-0 ${
+              lightMode ? "bg-white" : "bg-neutral-900"
+            }`}
           >
             <h2 className="text-3xl">Signup</h2>
             <p>
               Already have an Account?{" "}
-              <Link to={"/login"} className="underline cursor-pointer">
+              <Link
+                to={"/login"}
+                className={`underline cursor-pointer ${
+                  lightMode ? "text-blue-600" : "text-blue-400"
+                } hover:opacity-80 transition-opacity`}
+              >
                 Login
               </Link>
             </p>
@@ -68,7 +85,11 @@ const Signup = () => {
                 <input
                   required
                   type="name"
-                  className="border border-neutral-300 px-4 py-2 rounded-full"
+                  className={`border px-4 py-2 rounded-full ${
+                    lightMode
+                      ? "border-neutral-300 bg-white text-black"
+                      : "border-neutral-600 bg-neutral-800 text-white"
+                  }`}
                   name="name"
                   id="name"
                   value={name}
@@ -81,7 +102,11 @@ const Signup = () => {
                 <input
                   required
                   type="email"
-                  className="border border-neutral-300 px-4 py-2 rounded-full"
+                  className={`border px-4 py-2 rounded-full ${
+                    lightMode
+                      ? "border-neutral-300 bg-white text-black"
+                      : "border-neutral-600 bg-neutral-800 text-white"
+                  }`}
                   name="email"
                   id="email"
                   value={email}
@@ -96,7 +121,11 @@ const Signup = () => {
                 <input
                   required
                   type="password"
-                  className="border border-neutral-300 px-4 py-2 rounded-full"
+                  className={`border px-4 py-2 rounded-full ${
+                    lightMode
+                      ? "border-neutral-300 bg-white text-black"
+                      : "border-neutral-600 bg-neutral-800 text-white"
+                  }`}
                   name="password"
                   id="password"
                   value={password}
@@ -109,7 +138,11 @@ const Signup = () => {
                 <input
                   required
                   type="password"
-                  className="border border-neutral-300 px-4 py-2 rounded-full"
+                  className={`border px-4 py-2 rounded-full ${
+                    lightMode
+                      ? "border-neutral-300 bg-white text-black"
+                      : "border-neutral-600 bg-neutral-800 text-white"
+                  }`}
                   name="password"
                   id="confirmPassword"
                   value={confirmPassword}
@@ -123,11 +156,21 @@ const Signup = () => {
               <input required type="checkbox" className="h-5 w-5" />
               <p>
                 I have read and agreed to the{" "}
-                <Link to={"/terms"} className="font-bold cursor-pointer">
+                <Link
+                  to={"/terms"}
+                  className={`font-bold cursor-pointer ${
+                    lightMode ? "text-blue-600" : "text-blue-400"
+                  } hover:opacity-80 transition-opacity`}
+                >
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to={"/privacy"} className="font-bold cursor-pointer">
+                <Link
+                  to={"/privacy"}
+                  className={`font-bold cursor-pointer ${
+                    lightMode ? "text-blue-600" : "text-blue-400"
+                  } hover:opacity-80 transition-opacity`}
+                >
                   Privacy Policy
                 </Link>
                 .
@@ -135,7 +178,11 @@ const Signup = () => {
             </div>
             <button
               type="submit"
-              className="bg-neutral-500 rounded-full px-6 py-3 w-full text-white"
+              className={`rounded-full px-6 py-3 w-full text-white transition-colors ${
+                lightMode
+                  ? "bg-neutral-800 hover:bg-neutral-700"
+                  : "bg-neutral-500 hover:bg-neutral-400"
+              }`}
             >
               Create Account
             </button>

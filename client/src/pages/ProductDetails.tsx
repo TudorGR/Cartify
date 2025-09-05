@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DescriptionReview from "./components/DescriptionReview";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -6,6 +6,7 @@ import ProductHero from "./components/ProductHero";
 import SimilarProducts from "./components/SimilarProducts";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../context/userContext";
 
 const ProductDetails = () => {
   const [data, setData] = useState({
@@ -39,8 +40,13 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
+  const { lightMode } = useContext(UserContext);
   return (
-    <div className="relative flex flex-col gap-20 pt-24 overflow-hidden">
+    <div
+      className={`transition-all relative flex flex-col gap-20 pt-24 overflow-hidden ${
+        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+      }`}
+    >
       <Navbar color="black" />
       <ProductHero
         data={data}

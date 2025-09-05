@@ -1,15 +1,27 @@
+import { useContext } from "react";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import NewsLetter from "./components/NewsLetter";
+import { UserContext } from "../../context/userContext";
 
 const Contact = () => {
+  const { lightMode } = useContext(UserContext);
+
   return (
-    <div className="relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen">
+    <div
+      className={`${
+        lightMode ? "bg-white" : "bg-neutral-950"
+      } transition-all relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen`}
+    >
       <Navbar color="white" />
-      <div className=" bg-neutral-500">
+      <div
+        className={`transition-all ${
+          lightMode ? "bg-neutral-300 text-black" : "bg-neutral-700 text-white"
+        } `}
+      >
         <div className="w-full max-w-5xl  mx-auto h-full gap-6 flex">
-          <div className="flex-1 gap-4 text-white flex flex-col justify-center">
+          <div className="flex-1 gap-4  flex flex-col justify-center">
             <h2 className="text-5xl">Contact Us</h2>
             <p className="max-w-60">
               Email, call, or complete the form to contact us regarding
@@ -17,14 +29,21 @@ const Contact = () => {
             </p>
             <a
               href="mailto:info@cartify.io"
-              className="text-blue-600 underline"
+              className={`${
+                lightMode ? "text-blue-600" : "text-blue-400"
+              } underline hover:opacity-80 transition-opacity`}
             >
               info@cartify.io
             </a>
             <div className="mt-6 space-y-2">
               <div>
                 <span className="font-semibold">Phone:</span>{" "}
-                <a href="tel:+1234567890" className="text-blue-600 underline">
+                <a
+                  href="tel:+1234567890"
+                  className={`${
+                    lightMode ? "text-blue-600" : "text-blue-400"
+                  } underline hover:opacity-80 transition-opacity`}
+                >
                   +1 (234) 567-890
                 </a>
               </div>
@@ -37,7 +56,9 @@ const Contact = () => {
                   href="https://twitter.com/cartify"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 underline"
+                  className={`${
+                    lightMode ? "text-blue-600" : "text-blue-400"
+                  } underline hover:opacity-80 transition-opacity`}
                 >
                   Twitter
                 </a>
@@ -45,7 +66,9 @@ const Contact = () => {
                   href="https://linkedin.com/company/cartify"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 underline"
+                  className={`${
+                    lightMode ? "text-blue-600" : "text-blue-400"
+                  } underline hover:opacity-80 transition-opacity`}
                 >
                   LinkedIn
                 </a>
@@ -56,8 +79,16 @@ const Contact = () => {
         </div>
       </div>
       <section className="w-full max-w-5xl mx-auto py-12 px-4">
-        <h3 className="text-4xl mb-6">Our Location</h3>
-        <div className="rounded-2xl border-neutral-300 border overflow-hidden">
+        <h3
+          className={`${lightMode ? "text-black" : "text-white"} text-4xl mb-6`}
+        >
+          Our Location
+        </h3>
+        <div
+          className={`rounded-2xl ${
+            lightMode ? "border-neutral-300" : "border-neutral-600"
+          } border overflow-hidden`}
+        >
           <iframe
             title="Cartify Office Location"
             src="https://www.google.com/maps?q=548+Market+St,+San+Francisco,+CA+94104&output=embed"
