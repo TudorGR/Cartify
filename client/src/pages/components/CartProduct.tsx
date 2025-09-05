@@ -7,7 +7,7 @@ interface CartItem {
   id: string;
   name: string;
   price: number;
-  discountedPrice?: number;
+  discountedPrice?: number | null;
   image?: string;
   quantity: number;
 }
@@ -42,7 +42,7 @@ export const CartProduct = ({ item }: CartProductProps) => {
       <img
         alt={item.name}
         src={item.image}
-        className={`h-20 w-15 shrink-0 rounded-2xl object-cover ${
+        className={`h-20 w-15 shrink-0 rounded-lg object-cover ${
           lightMode ? "bg-neutral-300" : "bg-neutral-600"
         }`}
       />
@@ -50,8 +50,10 @@ export const CartProduct = ({ item }: CartProductProps) => {
         <div className="flex flex-col justify-between">
           <Link to={`/product/${item.id}`}>{item.name}</Link>
           <div
-            className={`w-fit flex gap-6 border px-4 py-2 rounded-full ${
-              lightMode ? "border-neutral-300" : "border-neutral-600"
+            className={`w-fit  flex gap-6 border px-4 py-2 rounded-lg ${
+              lightMode
+                ? "bg-white border-neutral-300"
+                : "bg-black border-neutral-600"
             }`}
           >
             <button onClick={handleDecrement} className="cursor-pointer">
@@ -64,7 +66,14 @@ export const CartProduct = ({ item }: CartProductProps) => {
           </div>
         </div>
         <div className="flex flex-col items-end justify-between">
-          <button onClick={handleRemove} className="cursor-pointer">
+          <button
+            onClick={handleRemove}
+            className={`cursor-pointer rounded-lg border ${
+              lightMode
+                ? "border-red-400 bg-red-200 text-red-400"
+                : "border-red-600 bg-red-800 text-red-600"
+            } p-1`}
+          >
             <MdDelete className="w-6 h-6" />
           </button>
           <div className="text-right">

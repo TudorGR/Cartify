@@ -37,7 +37,7 @@ const NewsLetter = () => {
               lightMode
                 ? "text-black bg-white border-neutral-300"
                 : "text-white bg-neutral-800 border-neutral-600"
-            } rounded-full px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
           <button
             type="submit"
@@ -45,7 +45,7 @@ const NewsLetter = () => {
               lightMode
                 ? "bg-neutral-800 hover:bg-neutral-700"
                 : "bg-neutral-500 hover:bg-neutral-400"
-            } rounded-full px-6 py-3 transition-colors flex items-center gap-2`}
+            } rounded-lg px-6 py-3 transition-colors flex items-center gap-2`}
           >
             Subscribe
             <IoMail className="w-6 h-6" />

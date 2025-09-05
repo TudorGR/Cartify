@@ -8,6 +8,11 @@
   transition: height 0.1s ease-out;
   border-bottom: 1px solid lightgray;
 }
+.dropdown.open2 {
+  height: 200px;
+  transition: height 0.1s ease-out;
+  border-bottom: 1px solid rgb(30, 30, 30);
+}
 
 .thumb {
   pointer-events: none;

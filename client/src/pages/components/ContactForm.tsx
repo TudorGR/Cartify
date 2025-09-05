@@ -9,7 +9,7 @@ const ContactForm = () => {
   const { lightMode } = useContext(UserContext);
 
   return (
-    <div className="my-30 h-full flex-1 flex items-center justify-center">
+    <div className="my-20 z-10 h-full flex-1 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className={`rounded-2xl p-6 flex flex-col gap-4 ${
@@ -25,7 +25,7 @@ const ContactForm = () => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } px-4 py-2 rounded-full`}
+            } px-4 py-2 rounded-lg`}
             type="text"
             placeholder="First Name"
           />
@@ -35,7 +35,7 @@ const ContactForm = () => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } px-4 py-2 rounded-full`}
+            } px-4 py-2 rounded-lg`}
             type="text"
             placeholder="Last Name"
           />
@@ -46,7 +46,7 @@ const ContactForm = () => {
             lightMode
               ? "border-neutral-300 bg-white text-black"
               : "border-neutral-600 bg-neutral-800 text-white"
-          } px-4 py-2 rounded-full`}
+          } px-4 py-2 rounded-lg`}
           type="text"
           placeholder="example@email.com"
         />
@@ -56,7 +56,7 @@ const ContactForm = () => {
             lightMode
               ? "border-neutral-300 bg-white text-black"
               : "border-neutral-600 bg-neutral-800 text-white"
-          } px-4 py-2 rounded-full`}
+          } px-4 py-2 rounded-lg`}
           type="tel"
           placeholder="+1 (XXX) XXX - XXXX"
         />
@@ -68,7 +68,7 @@ const ContactForm = () => {
             lightMode
               ? "border-neutral-300 bg-white text-black"
               : "border-neutral-600 bg-neutral-800 text-white"
-          } px-4 py-2 rounded-2xl`}
+          } px-4 py-2 rounded-lg`}
         ></textarea>
         <div className="flex gap-4">
           <button
@@ -77,7 +77,7 @@ const ContactForm = () => {
               lightMode
                 ? "bg-neutral-800 hover:bg-neutral-700"
                 : "bg-neutral-500 hover:bg-neutral-400"
-            } rounded-full px-6 py-3 w-fit text-white transition-colors`}
+            } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
           >
             Submit
           </button>

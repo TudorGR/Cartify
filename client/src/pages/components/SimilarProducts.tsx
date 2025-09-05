@@ -69,7 +69,7 @@ const SimilarProducts = ({ category, productId }: SimilarProps) => {
               lightMode
                 ? "bg-neutral-800 hover:bg-neutral-700"
                 : "bg-neutral-500 hover:bg-neutral-400"
-            } text-white px-6 py-3 rounded-full transition-colors`}
+            } text-white px-6 py-3 rounded-lg transition-colors`}
           >
             See
           </Link>

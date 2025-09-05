@@ -60,7 +60,7 @@ const SpecialDeal = () => {
         <div
           className={`${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-2xl text-white py-16 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-16 flex items-center justify-center flex-col`}
         >
           <div className="text-5xl">{countDown.days}</div>
           <div>Days</div>
@@ -68,7 +68,7 @@ const SpecialDeal = () => {
         <div
           className={`${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-2xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
         >
           <div className="text-5xl">{countDown.hours}</div>
           <div>Hours</div>
@@ -76,7 +76,7 @@ const SpecialDeal = () => {
         <div
           className={`${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-2xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
         >
           <div className="text-5xl">{countDown.minutes}</div>
           <div>Minutes</div>
@@ -84,7 +84,7 @@ const SpecialDeal = () => {
         <div
           className={`${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-2xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
         >
           <div className="text-5xl">{countDown.seconds}</div>
           <div>Seconds</div>
@@ -112,7 +112,7 @@ const SpecialDeal = () => {
             lightMode
               ? "bg-neutral-800 hover:bg-neutral-700"
               : "bg-neutral-500 hover:bg-neutral-400"
-          } rounded-full px-6 py-3 text-white transition-colors gap-1 flex items-center`}
+          } rounded-lg px-6 py-3 text-white transition-colors gap-1 flex items-center`}
         >
           Shop now
           <MdNavigateNext className="w-6 h-6" />

@@ -36,8 +36,10 @@ const Navbar = ({ color }: { color: string }) => {
   const [searchBar, setSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [items, setItems] = useState<Product[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const searchBarRef = useRef<HTMLDivElement | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
   const [isSearching, setIsSearching] = useState(false);
   const { lightMode, setLightMode, cart } = useContext(UserContext);
@@ -66,24 +68,42 @@ const Navbar = ({ color }: { color: string }) => {
     setSearchBar(false);
     setSearchValue("");
     setItems([]);
+    setSelectedIndex(-1);
   }
 
-  useEffect(() => {
-    if (!searchBar) return;
-    function handleClickOutside(e: MouseEvent) {
-      const target = e.target as Node;
-      const clickedInsideSearchBar =
-        searchBarRef.current?.contains(target) ?? false;
-      const clickedInsideResults =
-        resultsRef.current?.contains(target) ?? false;
+  function navigateToProduct(productId: number) {
+    closeSearch();
+    navigate(`/product/${productId}`);
+  }
 
-      if (!clickedInsideSearchBar && !clickedInsideResults) {
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (!items.length) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev < items.length - 1 ? prev + 1 : prev));
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (selectedIndex >= 0 && selectedIndex < items.length) {
+          navigateToProduct(items[selectedIndex].id);
+        }
+        break;
+      case "Escape":
         closeSearch();
-      }
+        break;
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [searchBar]);
+  }
+
+  // Reset selected index when items change
+  useEffect(() => {
+    setSelectedIndex(-1);
+  }, [items]);
 
   function useDebounce<T extends (...args: any[]) => void>(func: T, wait = 0) {
     const timeoutRef = useRef<number | null>(null);
@@ -119,7 +139,9 @@ const Navbar = ({ color }: { color: string }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black/10 transition-opacity duration-300 ${
+        className={`fixed inset-0 ${
+          lightMode ? "bg-black/10" : "bg-black/20"
+        }  transition-opacity duration-300 ${
           dropDown || searchBar
             ? "opacity-100 z-5"
             : "opacity-0 pointer-events-none"
@@ -150,24 +172,24 @@ const Navbar = ({ color }: { color: string }) => {
             <p className="headings uppercase text-2xl">Cartify</p>
           </div>
           <div className="flex flex-1 justify-around">
-            <Link to={"/"} className="py-4">
+            <Link to={"/"} className="py-4 ">
               Home
             </Link>
-            <Link to={"/products/All"} className="py-4">
+            <Link to={"/products/All"} className="py-4 ">
               Shop
             </Link>
             <div
               onMouseLeave={() => setDropDown(false)}
               onMouseEnter={() => setDropDown(true)}
-              className="relative py-4 text-nowrap flex items-center"
+              className=" relative py-4 text-nowrap flex items-center"
             >
               Categories
               <RiArrowDownSFill className="w-6 h-6" />
               <div
-                className={`${
-                  dropDown ? "open" : ""
+                className={`font-normal ${
+                  dropDown ? (lightMode ? "open" : "open2") : ""
                 } dropdown overflow-hidden translate-x-[-50%] left-1/2 w-[120vw] top-[100%] ${
-                  lightMode ? "text-black bg-white" : "text-white bg-black"
+                  lightMode ? "text-black bg-white" : " text-white bg-black"
                 } absolute`}
               >
                 <ul className="justify-items-center flex max-w-5xl mx-auto w-full gap-4 p-6">
@@ -286,7 +308,7 @@ const Navbar = ({ color }: { color: string }) => {
                 </ul>
               </div>
             </div>
-            <Link to={"/contact"} className="py-4 text-nowrap">
+            <Link to={"/contact"} className="py-4 text-nowrap ">
               Contact Us
             </Link>
           </div>
@@ -332,9 +354,10 @@ const Navbar = ({ color }: { color: string }) => {
           >
             <div className="max-w-2xl w-full flex">
               <input
+                ref={inputRef}
                 type="text"
                 placeholder="Search products..."
-                className={`w-full p-3 border border-neutral-300 rounded-2xl outline-none ${
+                className={`w-full p-3 border border-neutral-300 rounded-lg outline-none ${
                   lightMode
                     ? "text-black bg-white"
                     : "text-white bg-neutral-800 border-neutral-600"
@@ -342,6 +365,7 @@ const Navbar = ({ color }: { color: string }) => {
                 autoFocus
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
               <button
                 className={`cursor-pointer px-4 py-2 ${
@@ -367,13 +391,13 @@ const Navbar = ({ color }: { color: string }) => {
                   <li className="mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline">
                     <Skeleton
                       containerClassName="w-[50%]"
-                      className="rounded-2xl"
+                      className="rounded-xl"
                       baseColor={lightMode ? "#f3f4f6" : "#374151"}
                       highlightColor={lightMode ? "#e5e7eb" : "#4b5563"}
                     />
                     <Skeleton
                       containerClassName="w-[9%]"
-                      className="rounded-2xl"
+                      className="rounded-xl"
                       baseColor={lightMode ? "#f3f4f6" : "#374151"}
                       highlightColor={lightMode ? "#e5e7eb" : "#4b5563"}
                     />
@@ -381,13 +405,13 @@ const Navbar = ({ color }: { color: string }) => {
                   <li className="mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline">
                     <Skeleton
                       containerClassName="w-[30%]"
-                      className="rounded-2xl"
+                      className="rounded-xl"
                       baseColor={lightMode ? "#f3f4f6" : "#374151"}
                       highlightColor={lightMode ? "#e5e7eb" : "#4b5563"}
                     />
                     <Skeleton
                       containerClassName="w-[10%]"
-                      className="rounded-2xl"
+                      className="rounded-xl"
                       baseColor={lightMode ? "#f3f4f6" : "#374151"}
                       highlightColor={lightMode ? "#e5e7eb" : "#4b5563"}
                     />
@@ -395,13 +419,13 @@ const Navbar = ({ color }: { color: string }) => {
                   <li className="mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline">
                     <Skeleton
                       containerClassName="w-[40%]"
-                      className="rounded-2xl"
+                      className="rounded-xl"
                       baseColor={lightMode ? "#f3f4f6" : "#374151"}
                       highlightColor={lightMode ? "#e5e7eb" : "#4b5563"}
                     />
                     <Skeleton
                       containerClassName="w-[15%]"
-                      className="rounded-2xl"
+                      className="rounded-xl"
                       baseColor={lightMode ? "#f3f4f6" : "#374151"}
                       highlightColor={lightMode ? "#e5e7eb" : "#4b5563"}
                     />
@@ -420,14 +444,15 @@ const Navbar = ({ color }: { color: string }) => {
               }`}
             >
               <ul className="w-full max-w-2xl flex gap-2 flex-col my-6 max-h-100 overflow-auto">
-                {items.map((item) => (
+                {items.map((item, index) => (
                   <li
-                    onClick={() => {
-                      closeSearch();
-                      navigate(`/product/${item.id}`);
-                    }}
+                    onClick={() => navigateToProduct(item.id)}
                     className={`mr-10 py-2 flex justify-between cursor-pointer hover:underline ${
-                      lightMode
+                      index === selectedIndex
+                        ? lightMode
+                          ? "bg-neutral-100 text-black  rounded-lg"
+                          : "bg-neutral-800 text-white  rounded-lg"
+                        : lightMode
                         ? "text-neutral-600 hover:text-black"
                         : "text-neutral-400 hover:text-white"
                     }`}

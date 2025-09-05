@@ -26,7 +26,7 @@ const CartSummaryCheckout = () => {
         lightMode
           ? "bg-neutral-100 border border-neutral-300"
           : "bg-neutral-900 border border-neutral-700"
-      }  flex-1 h-fit rounded-2xl flex flex-col gap-6 p-6`}
+      }  flex-1 h-fit rounded-xl flex flex-col gap-6 p-6`}
     >
       <h2>Order Summary</h2>
       <div className="flex">

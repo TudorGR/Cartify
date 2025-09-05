@@ -65,8 +65,10 @@ const Filters = ({
     <div className="flex flex-col gap-6 w-80">
       <div
         className={`transition-all flex flex-col gap-4 border ${
-          lightMode ? "border-neutral-300" : "border-neutral-700"
-        } p-6 rounded-2xl`}
+          lightMode
+            ? "bg-neutral-50 border-neutral-200"
+            : " bg-neutral-900 border-neutral-800"
+        } p-6 rounded-xl`}
       >
         <h2 className="text-2xl">Categories</h2>
         <ul className="flex flex-col gap-3">
@@ -172,13 +174,15 @@ const Filters = ({
       </div>
       <div
         className={`transition-all border ${
-          lightMode ? "border-neutral-300" : "border-neutral-700"
-        } p-6 rounded-2xl`}
+          lightMode
+            ? "bg-neutral-50 border-neutral-200"
+            : " bg-neutral-900 border-neutral-800"
+        } p-6 rounded-xl`}
       >
         <h2 className="text-2xl">Price</h2>
         <div
           className={`relative w-full h-1 my-6 ${
-            lightMode ? "bg-neutral-300" : "bg-neutral-600"
+            lightMode ? "bg-neutral-200" : "bg-neutral-600"
           }`}
         >
           <span className="h-full absolute bg-red-500"></span>
@@ -196,7 +200,7 @@ const Filters = ({
                 setLeftSlider(newValue);
               }
             }}
-            className="thumb absolute w-full bg-none top-[-300%] appearance-none"
+            className="thumb absolute w-full bg-none top-[-200%] appearance-none"
           />
           <input
             type="range"
@@ -212,7 +216,7 @@ const Filters = ({
                 setRightSlider(newValue);
               }
             }}
-            className="thumb  absolute w-full bg-none top-[-300%] appearance-none"
+            className="thumb  absolute w-full bg-none top-[-200%] appearance-none"
           />
           <div></div>
           <div></div>
@@ -224,8 +228,10 @@ const Filters = ({
       </div>
       <div
         className={`transition-all border ${
-          lightMode ? "border-neutral-300" : "border-neutral-700"
-        } p-6 rounded-2xl flex flex-col gap-4`}
+          lightMode
+            ? "bg-neutral-50 border-neutral-200"
+            : " bg-neutral-900 border-neutral-800"
+        } p-6 rounded-xl flex flex-col gap-4`}
       >
         <h2 className="text-2xl">Discount</h2>
         <div className="flex gap-2 items-center">
@@ -235,7 +241,7 @@ const Filters = ({
             id="discount"
             className={`w-5 h-5 rounded-full appearance-none border cursor-pointer ${
               lightMode
-                ? "bg-white border-neutral-300 checked:bg-black"
+                ? "bg-white border-neutral-200 checked:bg-black"
                 : "bg-black border-neutral-600 checked:bg-white"
             } focus:outline-none  `}
             onChange={(e) => setDiscount(e.target.checked)}

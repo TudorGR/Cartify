@@ -101,7 +101,7 @@ const Products = ({
             lightMode
               ? "bg-neutral-800 hover:bg-neutral-700"
               : "bg-neutral-500 hover:bg-neutral-400"
-          } mx-auto mt-10 rounded-full w-fit px-6 py-3 transition-colors`}
+          } mx-auto mt-10 rounded-lg w-fit px-6 py-3 transition-colors`}
         >
           Load More
         </button>

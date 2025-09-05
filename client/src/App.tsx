@@ -31,7 +31,7 @@ function ToasterWrapper() {
           background: lightMode ? "#fff" : "#374151",
           color: lightMode ? "#333" : "#f9fafb",
           border: lightMode ? "1px solid #e5e5e5" : "1px solid #4b5563",
-          borderRadius: "12px",
+          borderRadius: "8px",
           padding: "12px 16px",
           fontSize: "14px",
           fontWeight: "400",

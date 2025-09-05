@@ -106,7 +106,7 @@ const ProductHero = ({
         {loading ? (
           <Skeleton
             containerClassName="  w-100"
-            className={`pt-1 h-full rounded-2xl ${
+            className={`pt-1 h-full rounded-xl ${
               lightMode ? "" : "brightness-50"
             }`}
           />
@@ -120,44 +120,44 @@ const ProductHero = ({
             {loading ? (
               <>
                 <div className="flex flex-col justify-between gap-6">
-                  <div className=" rounded-2xl overflow-hidden flex-1">
+                  <div className=" rounded-xl overflow-hidden flex-1">
                     <Skeleton
                       containerClassName={`${
                         lightMode ? "" : "brightness-50"
                       } flex-1 w-20`}
-                      className="pt-10 h-full rounded-2xl"
+                      className="pt-10 h-full rounded-xl"
                     />
                   </div>
-                  <div className=" rounded-2xl overflow-hidden flex-1">
+                  <div className=" rounded-xl overflow-hidden flex-1">
                     <Skeleton
                       containerClassName={`${
                         lightMode ? "" : "brightness-50"
                       } flex-1 w-20`}
-                      className="pt-10 h-full rounded-2xl"
+                      className="pt-10 h-full rounded-xl"
                     />
                   </div>
-                  <div className=" rounded-2xl overflow-hidden flex-1">
+                  <div className=" rounded-xl overflow-hidden flex-1">
                     <Skeleton
                       containerClassName={`${
                         lightMode ? "" : "brightness-50"
                       } flex-1 w-20`}
-                      className="pt-10 h-full rounded-2xl"
+                      className="pt-10 h-full rounded-xl"
                     />
                   </div>
                 </div>
-                <div className=" rounded-2xl overflow-hidden">
+                <div className=" rounded-xl overflow-hidden">
                   <Skeleton
                     containerClassName={`${
                       lightMode ? "" : "brightness-50"
                     } flex-1 w-20`}
-                    className="pt-10 h-full rounded-2xl"
+                    className="pt-10 h-full rounded-xl"
                   />
                 </div>
               </>
             ) : (
               <>
                 <div className="flex flex-col justify-between gap-6">
-                  <div className=" rounded-2xl flex-1 overflow-hidden">
+                  <div className=" rounded-xl flex-1 overflow-hidden">
                     <img
                       src={data.image}
                       alt={data.name}
@@ -167,7 +167,7 @@ const ProductHero = ({
                   <div
                     className={`${
                       lightMode ? "bg-neutral-200" : "bg-neutral-700"
-                    } rounded-2xl flex-1 overflow-hidden`}
+                    } rounded-xl flex-1 overflow-hidden`}
                   >
                     <img
                       src={data.image}
@@ -178,7 +178,7 @@ const ProductHero = ({
                   <div
                     className={`${
                       lightMode ? "bg-neutral-200" : "bg-neutral-700"
-                    } rounded-2xl flex-1 overflow-hidden`}
+                    } rounded-xl flex-1 overflow-hidden`}
                   >
                     <img
                       src={data.image}
@@ -190,7 +190,7 @@ const ProductHero = ({
                 <div
                   className={`${
                     lightMode ? "bg-neutral-200" : "bg-neutral-700"
-                  } rounded-2xl overflow-hidden cursor-zoom-in`}
+                  } rounded-xl overflow-hidden cursor-zoom-in`}
                   onMouseMove={handleMouseMove}
                   onMouseEnter={() => setIsZoomed(true)}
                   onMouseLeave={() => setIsZoomed(false)}
@@ -216,7 +216,7 @@ const ProductHero = ({
             {loading ? (
               <Skeleton
                 containerClassName={`${lightMode ? "" : "brightness-50"} w-70`}
-                className="h-full rounded-2xl "
+                className="h-full rounded-xl "
               />
             ) : (
               <>{data.name}</>
@@ -240,7 +240,7 @@ const ProductHero = ({
             {reviewsLoading ? (
               <Skeleton
                 containerClassName={`${lightMode ? "" : "brightness-50"} w-32`}
-                className="h-5 rounded-2xl"
+                className="h-5 rounded-xl"
               />
             ) : reviewData.totalReviews > 0 ? (
               <p>
@@ -253,10 +253,10 @@ const ProductHero = ({
             )}
           </div>
           <div
-            className={`transition-all w-full border-b ${
+            className={`border-t ${
               lightMode ? "border-neutral-200" : "border-neutral-800"
             }`}
-          ></div>
+          />
           <p className="flex flex-col">
             {loading ? (
               <>
@@ -264,13 +264,13 @@ const ProductHero = ({
                   containerClassName="w-full"
                   className={`${
                     lightMode ? "" : "brightness-50"
-                  } pt-4 h-5 rounded-2xl `}
+                  } pt-4 h-5 rounded-xl `}
                 />
                 <Skeleton
                   containerClassName="w-40"
                   className={`${
                     lightMode ? "" : "brightness-50"
-                  } pt-4 h-5 rounded-2xl`}
+                  } pt-4 h-5 rounded-xl`}
                 />
               </>
             ) : (
@@ -281,7 +281,7 @@ const ProductHero = ({
             <div
               className={`flex gap-4 border ${
                 lightMode ? "border-neutral-300" : "border-neutral-600"
-              } py-2 rounded-full`}
+              } py-2 rounded-lg`}
             >
               <button
                 className="px-4 cursor-pointer"
@@ -307,7 +307,7 @@ const ProductHero = ({
                 lightMode
                   ? "bg-neutral-800 hover:bg-neutral-700"
                   : "bg-neutral-500 hover:bg-neutral-400"
-              } rounded-full transition-colors`}
+              } rounded-lg transition-colors`}
             >
               {isInCart ? "Added to Cart ✓" : "Add to Cart"}
             </button>

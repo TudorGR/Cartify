@@ -57,7 +57,7 @@ const Signup = () => {
       <Navbar color="black" />
       <div className="w-full max-w-5xl mx-auto h-full">
         <div
-          className={`mt-20 border overflow-hidden w-full rounded-2xl flex ${
+          className={`mt-20 border overflow-hidden w-full rounded-xl flex ${
             lightMode ? "border-neutral-300" : "border-neutral-700"
           }`}
         >
@@ -85,7 +85,7 @@ const Signup = () => {
                 <input
                   required
                   type="name"
-                  className={`border px-4 py-2 rounded-full ${
+                  className={`border px-4 py-2 rounded-lg ${
                     lightMode
                       ? "border-neutral-300 bg-white text-black"
                       : "border-neutral-600 bg-neutral-800 text-white"
@@ -102,7 +102,7 @@ const Signup = () => {
                 <input
                   required
                   type="email"
-                  className={`border px-4 py-2 rounded-full ${
+                  className={`border px-4 py-2 rounded-lg ${
                     lightMode
                       ? "border-neutral-300 bg-white text-black"
                       : "border-neutral-600 bg-neutral-800 text-white"
@@ -121,7 +121,7 @@ const Signup = () => {
                 <input
                   required
                   type="password"
-                  className={`border px-4 py-2 rounded-full ${
+                  className={`border px-4 py-2 rounded-lg ${
                     lightMode
                       ? "border-neutral-300 bg-white text-black"
                       : "border-neutral-600 bg-neutral-800 text-white"
@@ -138,7 +138,7 @@ const Signup = () => {
                 <input
                   required
                   type="password"
-                  className={`border px-4 py-2 rounded-full ${
+                  className={`border px-4 py-2 rounded-lg ${
                     lightMode
                       ? "border-neutral-300 bg-white text-black"
                       : "border-neutral-600 bg-neutral-800 text-white"
@@ -178,7 +178,7 @@ const Signup = () => {
             </div>
             <button
               type="submit"
-              className={`rounded-full px-6 py-3 w-full text-white transition-colors ${
+              className={`rounded-lg px-6 py-3 w-full text-white transition-colors ${
                 lightMode
                   ? "bg-neutral-800 hover:bg-neutral-700"
                   : "bg-neutral-500 hover:bg-neutral-400"

@@ -36,8 +36,10 @@ const CartSummary = () => {
     return (
       <div
         className={`border ${
-          lightMode ? "border-neutral-300" : "border-neutral-700"
-        } flex-1 h-fit rounded-2xl flex flex-col gap-6 p-6`}
+          lightMode
+            ? "border-neutral-300 bg-neutral-50"
+            : "border-neutral-700 bg-neutral-900"
+        } flex-1 h-fit rounded-xl flex flex-col gap-6 p-6`}
       >
         <h2>Order Summary</h2>
         <p className="text-center text-neutral-500">Your cart is empty</p>
@@ -47,7 +49,7 @@ const CartSummary = () => {
             lightMode
               ? "bg-neutral-800 hover:bg-neutral-700"
               : "bg-neutral-500 hover:bg-neutral-400"
-          } text-white px-6 py-3 rounded-full transition-colors`}
+          } text-white px-6 py-3 rounded-lg transition-colors`}
         >
           Start Shopping
         </Link>
@@ -58,8 +60,10 @@ const CartSummary = () => {
   return (
     <div
       className={`border ${
-        lightMode ? "border-neutral-300" : "border-neutral-700"
-      } flex-1 h-fit rounded-2xl flex flex-col gap-6 p-6`}
+        lightMode
+          ? "border-neutral-300 bg-neutral-50"
+          : "border-neutral-700 bg-neutral-900"
+      } flex-1 h-fit rounded-xl flex flex-col gap-6 p-6`}
     >
       <h2>Order Summary</h2>
       <div className="flex justify-between w-full">
@@ -91,7 +95,7 @@ const CartSummary = () => {
           lightMode
             ? "bg-neutral-800 hover:bg-neutral-700"
             : "bg-neutral-500 hover:bg-neutral-400"
-        } text-white px-6 py-3 rounded-full transition-colors`}
+        } text-white px-6 py-3 rounded-lg transition-colors`}
       >
         Proceed to Checkout
       </Link>

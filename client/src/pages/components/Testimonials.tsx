@@ -38,7 +38,7 @@ const Testimonials = () => {
         <div
           className={`flex flex-col items-start gap-6 ${
             lightMode ? "bg-white" : "bg-black"
-          } p-4 rounded-2xl`}
+          } p-4 rounded-xl`}
         >
           <div className="flex flex-col gap-6">
             <h2

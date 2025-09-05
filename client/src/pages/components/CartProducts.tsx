@@ -7,8 +7,10 @@ const CartProducts = () => {
 
   return (
     <div
-      className={`h-fit p-6 border  flex-2  rounded-2xl ${
-        lightMode ? "border-neutral-300" : "border-neutral-700"
+      className={`h-fit  p-6 border  flex-2  rounded-xl ${
+        lightMode
+          ? "bg-neutral-50 border-neutral-300"
+          : "bg-neutral-900 border-neutral-700"
       }`}
     >
       <ul className="flex flex-col gap-6">

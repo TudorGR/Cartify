@@ -88,7 +88,7 @@ const Product = ({
       <Link to={`/product/${id}`}>
         <img
           alt="some 'preview' hover effect..."
-          className="pointer-events-none w-60 h-80 bg-neutral-200 rounded-2xl object-cover"
+          className="pointer-events-none w-60 h-80 bg-neutral-200 rounded-xl object-cover"
           src={image}
         />
       </Link>
@@ -96,19 +96,19 @@ const Product = ({
         <div>
           <p className="max-h-8 text-nowrap truncate max-w-49">{name}</p>
           {discountedPrice ? (
-            <div className="flex gap-2 font-semibold">
+            <div className="flex gap-2 ">
               <p>${discountedPrice}</p>
               <p className="text-neutral-400 line-through">${price}</p>
             </div>
           ) : (
-            <p className="font-semibold">${price}</p>
+            <p className="">${price}</p>
           )}
         </div>
         <button
           className={`${
             lightMode
-              ? "border border-neutral-400 active:bg-neutral-300"
-              : "border border-neutral-600 active:bg-neutral-700"
+              ? "border border-neutral-300 active:bg-neutral-300"
+              : "border border-neutral-700 active:bg-neutral-700"
           } active:scale-90 flex items-center justify-center cursor-pointer text-neutral-400  rounded-full w-10 h-10 shrink-0 transition-all duration-100`}
           onClick={() => {
             addToCart({

@@ -40,9 +40,9 @@ const PaymentForm = ({
       onSubmit={handlePay}
       className={`flex-2 ${
         lightMode
-          ? "border-neutral-300 bg-white text-black"
+          ? "border-neutral-300 bg-neutral-50 text-black"
           : "border-neutral-700 bg-neutral-900 text-white"
-      } border h-fit rounded-2xl p-6 flex flex-col gap-4`}
+      } border h-fit rounded-xl p-6 flex flex-col gap-4`}
     >
       <div className="flex flex-col gap-2">
         <label htmlFor="CardName">Name on Card*</label>
@@ -58,7 +58,7 @@ const PaymentForm = ({
             lightMode
               ? "border-neutral-300 bg-white text-black"
               : "border-neutral-600 bg-neutral-800 text-white"
-          } rounded-2xl px-6 py-3 border`}
+          } rounded-lg px-6 py-3 border`}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -75,7 +75,7 @@ const PaymentForm = ({
             lightMode
               ? "border-neutral-300 bg-white text-black"
               : "border-neutral-600 bg-neutral-800 text-white"
-          } rounded-2xl px-6 py-3 border`}
+          } rounded-lg px-6 py-3 border`}
         />
       </div>
       <div className="flex gap-4">
@@ -93,7 +93,7 @@ const PaymentForm = ({
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -110,7 +110,7 @@ const PaymentForm = ({
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
       </div>
@@ -121,7 +121,7 @@ const PaymentForm = ({
             lightMode
               ? "text-black border-neutral-800 hover:border-neutral-500"
               : "text-white border-neutral-600 hover:border-neutral-300"
-          } rounded-full border px-6 py-3 w-fit  transition-colors`}
+          } rounded-lg border px-6 py-3 w-fit  transition-colors`}
         >
           Previous Step
         </button>
@@ -131,7 +131,7 @@ const PaymentForm = ({
             lightMode
               ? "bg-neutral-800 hover:bg-neutral-700"
               : "bg-neutral-600 hover:bg-neutral-500"
-          } rounded-full px-6 py-3 w-fit text-white transition-colors`}
+          } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
         >
           Pay Now
         </button>

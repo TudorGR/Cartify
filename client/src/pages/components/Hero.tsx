@@ -20,17 +20,17 @@ const Hero = () => {
       <div className="h-full relative top-0  w-5xl  mx-auto">
         <div className="hero-font absolute top-30 left-10 flex gap-4">
           <div className="flex flex-col text-black">
-            <p className="text-3xl">200+</p>
+            <p className="text-3xl font-semibold">200+</p>
             <p className="text-black/60">Suppliers</p>
           </div>
           <div className="w-[1px] border-l border-black h-14"></div>
           <div className="flex flex-col text-black">
-            <p className="text-3xl">2,000+</p>
+            <p className="text-3xl font-semibold">2,000+</p>
             <p className="text-black/60">High-Quality Products</p>
           </div>
           <div className="w-[1px] border-l border-black h-14"></div>
           <div className="flex flex-col text-black">
-            <p className="text-3xl">10,000+</p>
+            <p className="text-3xl font-semibold">10,000+</p>
             <p className="text-black/60">Happy customers</p>
           </div>
         </div>
@@ -44,7 +44,7 @@ const Hero = () => {
             lightMode
               ? "bg-white active:scale-90 hover:scale-110 "
               : "bg-black text-white active:scale-90 hover:scale-110"
-          } rounded-full px-6 text-3xl py-3  flex items-center gap-2`}
+          } rounded-lg  px-6 text-3xl py-3  flex items-center gap-2`}
         >
           Shop Now
         </Link>

@@ -135,8 +135,8 @@ const Checkout = () => {
                     ? "bg-black text-white"
                     : "bg-white text-black"
                   : lightMode
-                  ? "bg-gray-200 text-gray-500"
-                  : "bg-gray-700 text-gray-400"
+                  ? "bg-neutral-200 text-neutral-500"
+                  : "bg-neutral-700 text-neutral-400"
               }`}
             >
               1
@@ -148,8 +148,8 @@ const Checkout = () => {
                     ? "text-black"
                     : "text-white"
                   : lightMode
-                  ? "text-gray-500"
-                  : "text-gray-400"
+                  ? "text-neutral-500"
+                  : "text-neutral-400"
               }`}
             >
               Checkout
@@ -163,8 +163,8 @@ const Checkout = () => {
                   ? "bg-black"
                   : "bg-white"
                 : lightMode
-                ? "bg-gray-200"
-                : "bg-gray-700"
+                ? "bg-neutral-200"
+                : "bg-neutral-700"
             }`}
             style={{ minWidth: "60px" }}
           ></div>
@@ -177,8 +177,8 @@ const Checkout = () => {
                     ? "bg-black text-white"
                     : "bg-white text-black"
                   : lightMode
-                  ? "bg-gray-200 text-gray-500"
-                  : "bg-gray-700 text-gray-400"
+                  ? "bg-neutral-200 text-neutral-500"
+                  : "bg-neutral-700 text-neutral-400"
               }`}
             >
               2
@@ -190,8 +190,8 @@ const Checkout = () => {
                     ? "text-black"
                     : "text-white"
                   : lightMode
-                  ? "text-gray-500"
-                  : "text-gray-400"
+                  ? "text-neutral-500"
+                  : "text-neutral-400"
               }`}
             >
               Payment
@@ -220,7 +220,7 @@ const Checkout = () => {
       {payed && (
         <div className="z-20 absolute top-0 left-0 w-full h-screen bg-black/10 flex items-center justify-center">
           <div
-            className={`py-6 px-20 rounded-2xl flex items-center gap-4 flex-col w-fit h-fit ${
+            className={`py-6 px-20 rounded-xl flex items-center gap-4 flex-col w-fit h-fit ${
               lightMode ? "bg-white text-black" : "bg-neutral-800 text-white"
             }`}
           >
@@ -238,7 +238,7 @@ const Checkout = () => {
                 lightMode
                   ? "bg-neutral-800 hover:bg-neutral-700"
                   : "bg-neutral-600 hover:bg-neutral-500"
-              } rounded-full px-6 py-3 w-fit text-white transition-colors`}
+              } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
             >
               Go to Homepage
             </Link>

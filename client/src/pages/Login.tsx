@@ -82,7 +82,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                className={`border px-4 py-2 rounded-full ${
+                className={`border px-4 py-2 rounded-lg ${
                   lightMode
                     ? "border-neutral-300 bg-white text-black"
                     : "border-neutral-600 bg-neutral-800 text-white"
@@ -99,7 +99,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                className={`border px-4 py-2 rounded-full ${
+                className={`border px-4 py-2 rounded-lg ${
                   lightMode
                     ? "border-neutral-300 bg-white text-black"
                     : "border-neutral-600 bg-neutral-800 text-white"
@@ -115,7 +115,7 @@ const Login = () => {
                 lightMode
                   ? "bg-neutral-800 hover:bg-neutral-700"
                   : "bg-neutral-500 hover:bg-neutral-400"
-              } rounded-full px-6 py-3 w-full text-white transition-colors`}
+              } rounded-lg px-6 py-3 w-full text-white transition-colors`}
             >
               Login
             </button>

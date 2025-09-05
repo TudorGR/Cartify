@@ -51,9 +51,9 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
     <form
       className={`flex-2 ${
         lightMode
-          ? "border-neutral-300 bg-white text-black"
+          ? "border-neutral-300 bg-neutral-50 text-black"
           : "border-neutral-700 bg-neutral-900 text-white"
-      } border h-fit rounded-2xl p-6 flex flex-col gap-4`}
+      } border h-fit rounded-xl p-6 flex flex-col gap-4`}
     >
       <div className="flex gap-4">
         <div className="flex flex-col gap-2 flex-1">
@@ -70,7 +70,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -87,7 +87,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
       </div>
@@ -106,7 +106,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
       </div>
@@ -125,7 +125,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -142,7 +142,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
       </div>
@@ -161,7 +161,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
         <div className="flex flex-col gap-2 flex-1">
@@ -178,7 +178,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
               lightMode
                 ? "border-neutral-300 bg-white text-black"
                 : "border-neutral-600 bg-neutral-800 text-white"
-            } rounded-2xl px-6 py-3 border`}
+            } rounded-lg px-6 py-3 border`}
           />
         </div>
       </div>
@@ -189,7 +189,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
             lightMode
               ? "bg-neutral-800 hover:bg-neutral-700"
               : "bg-neutral-600 hover:bg-neutral-500"
-          } rounded-full px-6 py-3 w-fit text-white transition-colors`}
+          } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
         >
           Proceed to Next Step
         </button>
