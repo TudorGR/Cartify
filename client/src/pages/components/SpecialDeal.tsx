@@ -91,13 +91,19 @@ const SpecialDeal = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center justify-center">
-        <p className={`${lightMode ? "text-black" : "text-white"} text-7xl`}>
+        <p
+          className={`${
+            lightMode ? "text-black" : "text-white"
+          } text-7xl hero-font`}
+        >
           10%
         </p>
 
-        <p className={`${lightMode ? "text-black" : "text-white"} text-2xl`}>
+        <p className={` ${lightMode ? "text-black" : "text-white"} text-2xl`}>
           Special{" "}
-          <span className="text-neutral-400 underline">{countDownDay}</span>{" "}
+          <span className="text-2xl  text-neutral-400 underline">
+            {countDownDay}
+          </span>{" "}
           Deal
         </p>
         <Link

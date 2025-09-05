@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../../context/userContext";
 
 interface ProductType {
-  id: string | number;
+  id: string;
   name: string;
   price: number;
   [key: string]: any;
@@ -58,10 +58,10 @@ const SimilarProducts = ({ category, productId }: SimilarProps) => {
         >
           Similar Products
         </h1>
-        <div className="flex flex-1">
-          <p className="text-neutral-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            praesentium expedita quod error.
+        <div className="flex flex-1 gap-4">
+          <p className="text-end text-neutral-400">
+            Discover products that match your interests and find items you'll
+            love.
           </p>
           <Link
             to={`/products/${category}`}

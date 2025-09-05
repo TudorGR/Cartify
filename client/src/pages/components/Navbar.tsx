@@ -7,14 +7,14 @@ import { UserContext } from "../../../context/userContext";
 import { RiArrowDownSLine } from "react-icons/ri";
 
 import { RiComputerLine } from "react-icons/ri";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaShoppingCart } from "react-icons/fa";
 import { TbHorseToy } from "react-icons/tb";
 import { LuBrush } from "react-icons/lu";
 import { FaCar } from "react-icons/fa";
 import { FaTshirt } from "react-icons/fa";
 import { FaBook } from "react-icons/fa6";
 import { MdOutlineSportsBasketball } from "react-icons/md";
-import { IoFastFoodOutline } from "react-icons/io5";
+import { IoCartSharp, IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlinePets } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { IoPersonCircleOutline } from "react-icons/io5";
@@ -126,7 +126,7 @@ const Navbar = ({ color }: { color: string }) => {
         }`}
       ></div>
       <div
-        className="w-full top-0 absolute z-10"
+        className="w-full top-0 absolute z-20"
         style={{
           color: lightMode ? "black" : "white",
           background:
@@ -138,7 +138,10 @@ const Navbar = ({ color }: { color: string }) => {
         }}
       >
         <div className="flex justify-between items-center w-full max-w-5xl mx-auto h-16">
-          <div className="flex-1 flex items-center">
+          <div
+            onClick={() => navigate("/")}
+            className="flex-1 flex items-center cursor-pointer"
+          >
             <img
               src={logo}
               alt="logo"
@@ -146,7 +149,7 @@ const Navbar = ({ color }: { color: string }) => {
             />
             <p className="headings uppercase text-2xl">Cartify</p>
           </div>
-          <div className="flex gap-4 flex-1 justify-between">
+          <div className="flex flex-1 justify-around">
             <Link to={"/"} className="py-4">
               Home
             </Link>
@@ -308,7 +311,7 @@ const Navbar = ({ color }: { color: string }) => {
               <IoPersonCircleOutline className="w-8 h-8" />
             </Link>
             <Link to={"/cart"} className="flex gap-1 items-center">
-              <IoCartOutline className="w-8 h-8" />
+              <IoCartSharp className="w-8 h-8" />
               {Array.from(cart.values()).reduce(
                 (sum, item) => sum + item.quantity,
                 0

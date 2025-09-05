@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { UserContext } from "../../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { IoPersonSharp } from "react-icons/io5";
@@ -30,7 +30,15 @@ const Profile = () => {
     zip: 0,
   });
 
-  const { user, setUser, lightMode, setCart } = useContext(UserContext);
+  const {
+    user,
+    setUser,
+    lightMode,
+    setCart,
+    favourites,
+    removeFromFavourites,
+    setFavourites,
+  } = useContext(UserContext);
   const navigate = useNavigate();
 
   async function handleSignOut() {
@@ -43,6 +51,7 @@ const Profile = () => {
       setUser(null);
       navigate("/");
       setCart(new Map());
+      setFavourites(new Map());
     } catch (error) {
       toast.error("An error occurred during sign out");
     }
@@ -148,6 +157,16 @@ const Profile = () => {
               Order History
             </button>
             <button
+              className={`${
+                option == "favourites" ? "font-bold" : "text-neutral-400"
+              } cursor-pointer`}
+              onClick={() => {
+                setOption("favourites");
+              }}
+            >
+              Favourites
+            </button>
+            <button
               className="cursor-pointer text-red-500"
               onClick={handleSignOut}
             >
@@ -159,11 +178,10 @@ const Profile = () => {
           {option == "info" ? (
             <div className="flex flex-col gap-4">
               <h2 className="text-4xl">Personal Information</h2>
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet
-                  ratione, ab eos maxime voluptatum similique obcaecati
-                  molestiae voluptatibus.
+                  Manage your personal details and keep your account information
+                  up to date.
                 </p>
                 <button
                   onClick={handleSave}
@@ -266,11 +284,10 @@ const Profile = () => {
           ) : option == "address" ? (
             <div className="flex flex-col gap-4">
               <h2 className="text-4xl">Billing Adress</h2>
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet
-                  ratione, ab eos maxime voluptatum similique obcaecati
-                  molestiae voluptatibus.
+                  Update your billing address for accurate shipping and payment
+                  processing.
                 </p>
                 <button
                   onClick={handleSave}
@@ -380,7 +397,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : option == "orders" ? (
             <div className="flex flex-col">
               <div
                 className={`flex items-center text-white p-4 rounded-2xl ${
@@ -395,7 +412,9 @@ const Profile = () => {
               </div>
               {orders.map((order, index) => (
                 <div key={index} className="flex items-center p-4 rounded-2xl">
-                  <div className="flex-2">{order._id}</div>
+                  <div className="flex-2 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {order._id}
+                  </div>
                   <p className="flex-1 text-end">{order.productsIds.length}</p>
                   <p
                     className={`flex-1 text-end ${
@@ -416,7 +435,58 @@ const Profile = () => {
                 </div>
               )}
             </div>
-          )}
+          ) : option == "favourites" ? (
+            <div className="flex flex-col gap-4">
+              <h2 className="text-4xl">Favourites</h2>
+              <p>Your favourite products that you've saved for later.</p>
+              {favourites.size > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {Array.from(favourites.values()).map((item) => (
+                    <div
+                      key={item.id}
+                      className={`rounded-2xl p-4 flex gap-4 ${
+                        lightMode ? "bg-neutral-100" : "bg-neutral-900"
+                      }`}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-15 h-15 rounded-lg object-cover bg-neutral-200"
+                      />
+                      <div className="flex-1 flex flex-col justify-between">
+                        <Link
+                          to={`/product/${item.id}`}
+                          className="font-medium overflow-hidden"
+                        >
+                          {item.name}
+                        </Link>
+                        {item.discountedPrice ? (
+                          <div className="flex gap-2">
+                            <p>${item.discountedPrice}</p>
+                            <p className="text-neutral-400 line-through">
+                              ${item.price}
+                            </p>
+                          </div>
+                        ) : (
+                          <p>${item.price}</p>
+                        )}
+                        <button
+                          onClick={() => removeFromFavourites(item.id)}
+                          className="cursor-pointer text-red-500 text-sm hover:text-red-800 mt-2"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-40">
+                  <p className="text-neutral-500">No favourite items yet</p>
+                </div>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
       <Footer />

@@ -52,6 +52,18 @@ export async function getFeatured(req, res) {
       .json([products[r1], products[r2], products[r3], products[r4]]);
   }, randomDelay(200, 500));
 }
+export async function getDiscounted(req, res) {
+  setTimeout(() => {
+    const r1 = 27;
+    const r2 = 32;
+    const r3 = 56;
+    const r4 = 60;
+
+    return res
+      .status(200)
+      .json([products[r1], products[r2], products[r3], products[r4]]);
+  }, randomDelay(200, 500));
+}
 
 export async function searchProducts(req, res) {
   const { q = "" } = req.body;

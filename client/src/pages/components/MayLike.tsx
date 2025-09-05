@@ -5,7 +5,7 @@ import LoadingProduct from "./LoadingProduct";
 import { UserContext } from "../../../context/userContext";
 
 interface ProductType {
-  id: string | number;
+  id: string;
   name: string;
   price: number;
   [key: string]: any;
@@ -42,9 +42,9 @@ const MayLike = () => {
         >
           You may also like
         </h1>
-        <p className="flex-1 text-neutral-400">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          praesentium expedita quod error.
+        <p className="flex-1 text-neutral-400 text-end">
+          Handpicked recommendations based on your browsing and shopping
+          preferences.
         </p>
       </div>
       <div className="flex justify-between">

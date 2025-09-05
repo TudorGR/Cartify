@@ -12,7 +12,7 @@ interface ProductType {
   discountedPrice: number;
 }
 
-const Featured = () => {
+const Discounted = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lightMode } = useContext(UserContext);
@@ -20,7 +20,7 @@ const Featured = () => {
   async function fetchFeatured() {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/featured");
+      const response = await axios.get("http://localhost:3000/discounted");
       setProducts(response.data);
     } catch (error) {
       console.log(error);
@@ -40,10 +40,10 @@ const Featured = () => {
             lightMode ? "text-black" : "text-white"
           }`}
         >
-          Featured Products
+          Promotions
         </h1>
         <p className="flex-1 text-neutral-400 text-end">
-          Discover our handpicked selection of premium products, carefully
+          Discover our handpicked selection of discounted products, carefully
           curated for quality and customer satisfaction.
         </p>
       </div>
@@ -65,4 +65,4 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default Discounted;

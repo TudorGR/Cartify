@@ -1,11 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/userContext";
 import { IoMail } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 const NewsLetter = () => {
+  const [text, setText] = useState("");
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("submited");
+
+    setTimeout(() => {
+      setText("");
+      toast.success("Subscribed");
+    }, Math.floor(Math.random() * (500 - 200 + 1)) + 200);
   }
 
   const { lightMode } = useContext(UserContext);
@@ -22,6 +29,8 @@ const NewsLetter = () => {
         <form onSubmit={handleSubmit} className="flex gap-4">
           <input
             required
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             type="email"
             placeholder="example@email.com"
             className={`${

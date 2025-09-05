@@ -27,6 +27,14 @@ interface CartItem {
   quantity: number;
 }
 
+interface FavouriteItem {
+  id: string;
+  name: string;
+  price: number;
+  discountedPrice?: number | null;
+  image?: string;
+}
+
 interface UserContextType {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
@@ -37,6 +45,10 @@ interface UserContextType {
   addToCart: (product: Omit<CartItem, "quantity">) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
+  favourites: Map<string, FavouriteItem>;
+  setFavourites: Dispatch<SetStateAction<Map<string, FavouriteItem>>>;
+  addToFavourites: (product: FavouriteItem) => void;
+  removeFromFavourites: (productId: string) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -49,6 +61,10 @@ export const UserContext = createContext<UserContextType>({
   addToCart: () => {},
   removeFromCart: () => {},
   updateQuantity: () => {},
+  favourites: new Map(),
+  setFavourites: () => {},
+  addToFavourites: () => {},
+  removeFromFavourites: () => {},
 });
 
 interface UserContextProviderProps {
@@ -62,6 +78,9 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     return saved !== null ? JSON.parse(saved) : true;
   });
   const [cart, setCart] = useState<Map<string, CartItem>>(new Map());
+  const [favourites, setFavourites] = useState<Map<string, FavouriteItem>>(
+    new Map()
+  );
 
   const addToCart = (product: Omit<CartItem, "quantity">) => {
     setCart((prev) => {
@@ -111,6 +130,22 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       return newCart;
     });
   };
+
+  const addToFavourites = (product: FavouriteItem) => {
+    setFavourites((prev) => {
+      const newFavourites = new Map(prev);
+      newFavourites.set(product.id, product);
+      return newFavourites;
+    });
+  };
+
+  const removeFromFavourites = (productId: string) => {
+    setFavourites((prev) => {
+      const newFavourites = new Map(prev);
+      newFavourites.delete(productId);
+      return newFavourites;
+    });
+  };
   useEffect(() => {
     if (!user) {
       axios
@@ -137,6 +172,10 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         addToCart,
         removeFromCart,
         updateQuantity,
+        favourites,
+        setFavourites,
+        addToFavourites,
+        removeFromFavourites,
       }}
     >
       {children}

@@ -24,7 +24,7 @@ const Categories = () => {
     <div className="w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col items-center">
       <div className="cursor-pointer max-w-xl flex flex-col gap-2 items-center">
         <h1
-          className={`flex-1 text-2xl ${
+          className={`hero-font flex-1 text-5xl ${
             lightMode ? "text-black" : "text-white"
           }`}
         >
@@ -56,7 +56,7 @@ const Categories = () => {
               }`}
             />
           )}
-          <p className="text-xl absolute bottom-6 left-6 text-white">
+          <p className="text-2xl absolute bottom-6 left-6 text-white">
             Electronics
           </p>
         </div>
@@ -80,7 +80,7 @@ const Categories = () => {
                 }`}
               />
             )}
-            <p className="text-xl absolute bottom-6 left-6 text-white">Toys</p>
+            <p className="text-2xl absolute bottom-6 left-6 text-white">Toys</p>
           </div>
           <div
             onClick={() => navigate("/products/Beauty")}
@@ -101,7 +101,7 @@ const Categories = () => {
                 }`}
               />
             )}
-            <p className="text-xl absolute bottom-6 left-6 text-white">
+            <p className="text-2xl absolute bottom-6 left-6 text-white">
               Beauty
             </p>
           </div>
@@ -125,7 +125,7 @@ const Categories = () => {
               }`}
             />
           )}
-          <p className="text-xl absolute bottom-6 left-6 text-white">
+          <p className="text-2xl absolute bottom-6 left-6 text-white">
             Automotive
           </p>
         </div>
