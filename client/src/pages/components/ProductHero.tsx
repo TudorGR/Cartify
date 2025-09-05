@@ -1,6 +1,6 @@
 import {
   useContext,
-  // ...existing code...
+  useEffect,
   useState,
   type Dispatch,
   type SetStateAction,
@@ -8,6 +8,7 @@ import {
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { UserContext } from "../../../context/userContext";
+import axios from "axios";
 
 interface ProductProps {
   data: {
@@ -35,6 +36,47 @@ const ProductHero = ({
     x: 50,
     y: 50,
   });
+  const [reviewData, setReviewData] = useState({
+    averageRating: 0,
+    totalReviews: 0,
+  });
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+
+  useEffect(() => {
+    if (data.id) {
+      fetchReviewData();
+    }
+  }, [data.id]);
+
+  const fetchReviewData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/reviews/${data.id}/stats`
+      );
+      setReviewData({
+        averageRating: response.data.averageRating,
+        totalReviews: response.data.totalReviews,
+      });
+    } catch (error) {
+      console.error("Error fetching review data:", error);
+      setReviewData({
+        averageRating: 0,
+        totalReviews: 0,
+      });
+    } finally {
+      setReviewsLoading(false);
+    }
+  };
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating - fullStars >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    return (
+      "★".repeat(fullStars) + (hasHalfStar ? "☆" : "") + "☆".repeat(emptyStars)
+    );
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -195,7 +237,20 @@ const ProductHero = ({
             ) : (
               <p>${data.price}</p>
             )}
-            <p>★★★☆☆ (20 reviews)</p>
+            {reviewsLoading ? (
+              <Skeleton
+                containerClassName={`${lightMode ? "" : "brightness-50"} w-32`}
+                className="h-5 rounded-2xl"
+              />
+            ) : reviewData.totalReviews > 0 ? (
+              <p>
+                {renderStars(reviewData.averageRating)} (
+                {reviewData.totalReviews} review
+                {reviewData.totalReviews !== 1 ? "s" : ""})
+              </p>
+            ) : (
+              <p className="text-neutral-400">No reviews yet</p>
+            )}
           </div>
           <div
             className={`transition-all w-full border-b ${

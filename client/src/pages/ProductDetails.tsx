@@ -54,7 +54,7 @@ const ProductDetails = () => {
         quantity={quantity}
         setQuantity={setQuantity}
       />
-      <DescriptionReview />
+      <DescriptionReview productId={data.id} />
       <SimilarProducts category={data.category} productId={data.id} />
       <Footer />
     </div>
