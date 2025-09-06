@@ -44,7 +44,7 @@ const PaymentForm = ({
           : "border-neutral-700 bg-neutral-900 text-white"
       } border h-fit rounded-xl p-6 flex flex-col gap-4`}
     >
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 ">
         <label htmlFor="CardName">Name on Card*</label>
         <input
           required
@@ -78,7 +78,7 @@ const PaymentForm = ({
           } rounded-lg px-6 py-3 border`}
         />
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 sm:flex-row flex-col">
         <div className="flex flex-col gap-2 flex-1">
           <label htmlFor="ExpiryDate">Expiry Date*</label>
           <input

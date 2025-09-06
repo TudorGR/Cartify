@@ -30,6 +30,7 @@ const Testimonials = () => {
       } `}
     >
       <img
+        loading="lazy"
         alt="hero"
         className="z-0 pointer-events-none opacity-60 object-contain absolute w-full h-full left-0 top-0"
         src={testimonials}
@@ -54,6 +55,7 @@ const Testimonials = () => {
           </div>
           <div className="flex gap-6">
             <button
+              aria-label="previous"
               disabled={btnPress}
               className={`flex items-center justify-center rounded-full ${
                 lightMode
@@ -65,6 +67,7 @@ const Testimonials = () => {
               <FaAngleLeft className="w-7 h-7" />
             </button>
             <button
+              aria-label="next"
               disabled={btnPress}
               className={`flex items-center justify-center rounded-full ${
                 lightMode

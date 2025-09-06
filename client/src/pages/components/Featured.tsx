@@ -33,7 +33,7 @@ const Featured = () => {
   }, []);
 
   return (
-    <div className="pl-5 lg:px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
+    <div className="px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
       <div className="flex justify-between items-center">
         <h1
           className={`hero-font flex-1 text-5xl ${
@@ -42,7 +42,7 @@ const Featured = () => {
         >
           Featured Products
         </h1>
-        <p className="pr-5 lg:pr-0 hidden sm:block sm:flex-1 text-neutral-400 text-end flex-2">
+        <p className=" hidden sm:block sm:flex-1 text-neutral-400 text-end flex-2">
           Discover our handpicked selection of premium products, carefully
           curated for quality and customer satisfaction.
         </p>

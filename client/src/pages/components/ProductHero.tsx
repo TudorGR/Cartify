@@ -161,7 +161,7 @@ const ProductHero = ({
                     <img
                       src={data.image}
                       alt={data.name}
-                      className="pointer-events-none h-full"
+                      className="pointer-events-none object-cover h-full"
                     />
                   </div>
                   <div
@@ -172,7 +172,7 @@ const ProductHero = ({
                     <img
                       src={data.image}
                       alt={data.name}
-                      className="pointer-events-none h-full"
+                      className="pointer-events-none object-cover h-full"
                     />
                   </div>
                   <div
@@ -183,7 +183,7 @@ const ProductHero = ({
                     <img
                       src={data.image}
                       alt={data.name}
-                      className="pointer-events-none h-full"
+                      className="pointer-events-none object-cover h-full"
                     />
                   </div>
                 </div>
@@ -199,7 +199,7 @@ const ProductHero = ({
                     src={data.image}
                     alt={data.name}
                     draggable={false}
-                    className="h-full w-full object-cover select-none will-change-transform"
+                    className={`  h-full w-full object-cover select-none will-change-transform`}
                     style={{
                       transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
                       transform: isZoomed ? "scale(1.6)" : "scale(1)",
@@ -303,11 +303,11 @@ const ProductHero = ({
             </div>
             <button
               onClick={handleAddToCart}
-              className={`cursor-pointer text-white w-full ${
+              className={`cursor-pointer  text-white w-full ${
                 lightMode
                   ? "bg-neutral-800 hover:bg-neutral-700"
                   : "bg-neutral-500 hover:bg-neutral-400"
-              } rounded-lg transition-colors`}
+              } rounded-lg  hover:scale-105 active:scale-95 transition-all`}
             >
               {isInCart ? "Added to Cart ✓" : "Add to Cart"}
             </button>

@@ -20,15 +20,24 @@ import { MdOutlineSportsBasketball } from "react-icons/md";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlinePets } from "react-icons/md";
 import { FiFilter, FiChevronDown } from "react-icons/fi";
+import { CiCircleChevUp } from "react-icons/ci";
+import { CiCircleChevDown } from "react-icons/ci";
+import { CiNoWaitingSign } from "react-icons/ci";
 
 interface FilterProps {
   leftSlider: number;
   rightSlider: number;
   setLeftSlider: (value: number) => void;
   setRightSlider: (value: number) => void;
-  fetchProducts: (leftSlider: number, rightSlider: number) => void;
+  fetchProducts: (
+    leftSlider: number,
+    rightSlider: number,
+    order: string
+  ) => void;
   discount: boolean;
   setDiscount: Dispatch<SetStateAction<boolean>>;
+  order: string;
+  setOrder: Dispatch<SetStateAction<string>>;
 }
 
 const Filters = ({
@@ -39,6 +48,8 @@ const Filters = ({
   fetchProducts,
   setDiscount,
   discount,
+  order,
+  setOrder,
 }: FilterProps) => {
   // Mobile expand/collapse state
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +71,7 @@ const Filters = ({
   const { lightMode } = useContext(UserContext);
 
   function clg() {
-    fetchProducts(leftSlider, rightSlider);
+    fetchProducts(leftSlider, rightSlider, order);
   }
   const clgFunc = useDebounce(clg, 1000);
 
@@ -104,9 +115,7 @@ const Filters = ({
 
       <div
         id="filters-panel"
-        className={`${
-          isOpen ? "block" : "hidden"
-        } md:block flex flex-col gap-4`}
+        className={`${isOpen ? "block" : "hidden"} md:flex flex flex-col gap-4`}
       >
         <div
           className={`transition-all flex flex-col gap-4 border ${
@@ -300,6 +309,44 @@ const Filters = ({
             >
               Promotions
             </label>
+          </div>
+        </div>
+        <div
+          className={`transition-all border ${
+            lightMode
+              ? "bg-neutral-50 border-neutral-200"
+              : " bg-neutral-900 border-neutral-800"
+          } p-6 rounded-xl flex flex-col gap-4`}
+        >
+          <h2 className="text-2xl">Order</h2>
+          <div className="flex flex-col gap-4 items-start">
+            <p
+              onClick={() => setOrder("none")}
+              className={`flex gap-2 items-center cursor-pointer ${
+                order == "none" ? "text-black" : "text-neutral-400"
+              }`}
+            >
+              <CiNoWaitingSign className="w-6 h-6" />
+              None
+            </p>
+            <p
+              onClick={() => setOrder("high")}
+              className={`flex gap-2 items-center cursor-pointer ${
+                order == "high" ? "text-black" : "text-neutral-400"
+              }`}
+            >
+              <CiCircleChevUp className="w-6 h-6" />
+              High
+            </p>
+            <p
+              onClick={() => setOrder("low")}
+              className={`flex gap-2 items-center cursor-pointer ${
+                order == "low" ? "text-black" : "text-neutral-400"
+              }`}
+            >
+              <CiCircleChevDown className="w-6 h-6" />
+              Low
+            </p>
           </div>
         </div>
       </div>

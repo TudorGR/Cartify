@@ -4,25 +4,31 @@ import { Link, useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { UserContext } from "../../../context/userContext";
-import { RiArrowDownSLine } from "react-icons/ri";
 
+import { RiArrowDownSLine } from "react-icons/ri";
 import { RiComputerLine } from "react-icons/ri";
-import { FaHome, FaShoppingCart } from "react-icons/fa";
-import { TbHorseToy } from "react-icons/tb";
-import { LuBrush } from "react-icons/lu";
+import { RiArrowDownSFill } from "react-icons/ri";
+
+import { FaHome } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaCar } from "react-icons/fa";
 import { FaTshirt } from "react-icons/fa";
-import { FaBook } from "react-icons/fa6";
-import { MdOutlineSportsBasketball } from "react-icons/md";
-import { IoCartSharp, IoFastFoodOutline } from "react-icons/io5";
-import { MdOutlinePets } from "react-icons/md";
-import { IoCartOutline } from "react-icons/io5";
-import { IoPersonCircleOutline } from "react-icons/io5";
-import { IoIosSearch, IoMdClose } from "react-icons/io";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
-import { RiArrowDownSFill } from "react-icons/ri";
+
+import { TbHorseToy } from "react-icons/tb";
+import { LuBrush } from "react-icons/lu";
+
+import { FaBook } from "react-icons/fa6";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+
+import { MdOutlineSportsBasketball } from "react-icons/md";
+import { MdOutlinePets } from "react-icons/md";
+
+import { IoFastFoodOutline } from "react-icons/io5";
+import { IoPersonSharp } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 
 import logo from "../../assets/logo.png";
 
@@ -46,6 +52,25 @@ const Navbar = ({ color: _color }: { color: string }) => {
   const navigate = useNavigate();
   const [isSearching, setIsSearching] = useState(false);
   const { lightMode, setLightMode, cart } = useContext(UserContext);
+
+  // Badge animation state
+  const [cartBump, setCartBump] = useState(false);
+  const prevCartCountRef = useRef(0);
+  const cartCount = Array.from(cart.values()).reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
+  useEffect(() => {
+    const prev = prevCartCountRef.current;
+    if (cartCount > prev) {
+      setCartBump(true);
+      const t = setTimeout(() => setCartBump(false), 200);
+      prevCartCountRef.current = cartCount;
+      return () => clearTimeout(t);
+    }
+    prevCartCountRef.current = cartCount;
+  }, [cartCount]);
 
   async function handleSearch() {
     const q = searchValue.trim();
@@ -199,16 +224,16 @@ const Navbar = ({ color: _color }: { color: string }) => {
             <p className="headings uppercase text-2xl">Cartify</p>
           </div>
           <div className="hidden md:flex gap-5 flex-1 justify-around">
-            <Link to={"/"} className="py-4 ">
+            <Link to={"/"} className="py-4 font-semibold">
               Home
             </Link>
-            <Link to={"/products/All"} className="py-4 ">
+            <Link to={"/products/All"} className="py-4 font-semibold">
               Shop
             </Link>
             <div
               onMouseLeave={() => setDropDown(false)}
               onMouseEnter={() => setDropDown(true)}
-              className=" relative py-4 text-nowrap flex items-center"
+              className=" relative py-4 text-nowrap flex items-center font-semibold"
             >
               Categories
               <RiArrowDownSFill className="w-6 h-6" />
@@ -335,12 +360,13 @@ const Navbar = ({ color: _color }: { color: string }) => {
                 </ul>
               </div>
             </div>
-            <Link to={"/contact"} className="py-4 text-nowrap ">
+            <Link to={"/contact"} className="py-4 text-nowrap font-semibold">
               Contact Us
             </Link>
           </div>
           <div className="flex justify-end gap-4 flex-1">
             <button
+              aria-label="theme switch"
               className="cursor-pointer"
               onClick={() => setLightMode(!lightMode)}
             >
@@ -351,19 +377,26 @@ const Navbar = ({ color: _color }: { color: string }) => {
               )}
             </button>
             <button
+              aria-label="search bar"
               className="cursor-pointer"
               onClick={() => setSearchBar((prev) => !prev)}
             >
-              <IoIosSearch className="w-8 h-8" />
+              <FaMagnifyingGlass className="w-7 h-7" />
             </button>
             <Link to={"/profile"} className="hidden md:block">
-              <IoPersonCircleOutline className="w-8 h-8" />
+              <IoPersonSharp className="w-7 h-7" />
             </Link>
-            <Link to={"/cart"} className="flex gap-1 items-center">
-              <IoCartSharp className="w-8 h-8" />
-              {Array.from(cart.values()).reduce(
-                (sum, item) => sum + item.quantity,
-                0
+            <Link to={"/cart"} className="relative flex items-center">
+              <FaShoppingCart className="w-7 h-7" />
+              {cartCount > 0 && (
+                <span
+                  className={`absolute -top-1 -right-2 min-w-[18px] h-[18px] px-1 rounded-full text-[11px] leading-[18px] text-white bg-rose-600 text-center transform transition-transform duration-200 ${
+                    cartBump ? "scale-110" : "scale-100"
+                  }`}
+                  aria-label={`Cart items: ${cartCount}`}
+                >
+                  {cartCount}
+                </span>
               )}
             </Link>
             <button
@@ -376,12 +409,12 @@ const Navbar = ({ color: _color }: { color: string }) => {
           </div>
         </div>
       </div>
-      {/* Mobile slide-in menu */}
       <div
         className={`fixed top-0 left-0 h-full w-3/4 max-w-sm z-30 transform transition-transform duration-300 ${
           lightMode ? "bg-white text-black" : "bg-black text-white"
         } ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
         role="dialog"
+        aria-label="menu"
         aria-modal="true"
       >
         <div className="flex items-center justify-between h-16 px-5 border-b border-neutral-700/20">

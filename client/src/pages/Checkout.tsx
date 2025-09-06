@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { IoMdDoneAll } from "react-icons/io";
 import axios from "axios";
 import { toast } from "react-hot-toast"; // Add this import
+import PageAnimationWrapper from "./components/PageAnimationWrapper";
 
 const Checkout = () => {
   const { lightMode, cart, setCart } = useContext(UserContext);
@@ -119,133 +120,135 @@ const Checkout = () => {
   }
 
   return (
-    <div
-      className={`transition-all relative flex flex-col justify-between gap-20 pt-24 overflow-hidden min-h-screen ${
-        lightMode ? "bg-white text-black" : "bg-black text-white"
-      }`}
-    >
-      <Navbar color="black" />
-      <div>
-        <div className="mx-auto w-fit my-10 flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
-                corp === "c"
-                  ? lightMode
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                  : lightMode
-                  ? "bg-neutral-200 text-neutral-500"
-                  : "bg-neutral-700 text-neutral-400"
-              }`}
-            >
-              1
+    <PageAnimationWrapper>
+      <div
+        className={`transition-all relative flex flex-col justify-between gap-20 pt-24 overflow-hidden min-h-screen ${
+          lightMode ? "bg-white text-black" : "bg-black text-white"
+        }`}
+      >
+        <Navbar color="black" />
+        <div className="px-5">
+          <div className="mx-auto w-fit my-10 flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+                  corp === "c"
+                    ? lightMode
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                    : lightMode
+                    ? "bg-neutral-200 text-neutral-500"
+                    : "bg-neutral-700 text-neutral-400"
+                }`}
+              >
+                1
+              </div>
+              <button
+                className={`font-medium transition-all duration-300 ${
+                  corp === "c"
+                    ? lightMode
+                      ? "text-black"
+                      : "text-white"
+                    : lightMode
+                    ? "text-neutral-500"
+                    : "text-neutral-400"
+                }`}
+              >
+                Checkout
+              </button>
             </div>
-            <button
-              className={`font-medium transition-all duration-300 ${
-                corp === "c"
-                  ? lightMode
-                    ? "text-black"
-                    : "text-white"
-                  : lightMode
-                  ? "text-neutral-500"
-                  : "text-neutral-400"
-              }`}
-            >
-              Checkout
-            </button>
-          </div>
 
-          <div
-            className={`flex-1 h-[2px] mx-4 transition-all duration-300 ${
-              corp === "p"
-                ? lightMode
-                  ? "bg-black"
-                  : "bg-white"
-                : lightMode
-                ? "bg-neutral-200"
-                : "bg-neutral-700"
-            }`}
-            style={{ minWidth: "60px" }}
-          ></div>
-
-          <div className="flex items-center gap-2">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+              className={`flex-1 h-[2px] mx-4 transition-all duration-300 ${
                 corp === "p"
                   ? lightMode
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
+                    ? "bg-black"
+                    : "bg-white"
                   : lightMode
-                  ? "bg-neutral-200 text-neutral-500"
-                  : "bg-neutral-700 text-neutral-400"
+                  ? "bg-neutral-200"
+                  : "bg-neutral-700"
               }`}
-            >
-              2
+              style={{ minWidth: "60px" }}
+            ></div>
+
+            <div className="flex items-center gap-2">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+                  corp === "p"
+                    ? lightMode
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                    : lightMode
+                    ? "bg-neutral-200 text-neutral-500"
+                    : "bg-neutral-700 text-neutral-400"
+                }`}
+              >
+                2
+              </div>
+              <button
+                className={`font-medium transition-all duration-300 ${
+                  corp === "p"
+                    ? lightMode
+                      ? "text-black"
+                      : "text-white"
+                    : lightMode
+                    ? "text-neutral-500"
+                    : "text-neutral-400"
+                }`}
+              >
+                Payment
+              </button>
             </div>
-            <button
-              className={`font-medium transition-all duration-300 ${
-                corp === "p"
-                  ? lightMode
-                    ? "text-black"
-                    : "text-white"
-                  : lightMode
-                  ? "text-neutral-500"
-                  : "text-neutral-400"
-              }`}
-            >
-              Payment
-            </button>
           </div>
+          {corp == "c" ? (
+            <div className="w-full max-w-5xl gap-6 mx-auto h-full flex flex-col sm:flex-row">
+              <CheckoutForm data={data} setData={setData} setCorp={setCorp} />
+              <CartSummaryCheckout />
+            </div>
+          ) : (
+            <div className="w-full max-w-5xl gap-6 mx-auto h-full flex sm:flex-row flex-col">
+              <PaymentForm
+                card={card}
+                setCard={setCard}
+                setPayed={setPayed}
+                setCorp={setCorp}
+                pay={pay}
+              />
+              <CartSummaryCheckout />
+            </div>
+          )}
         </div>
-        {corp == "c" ? (
-          <div className="w-full max-w-5xl gap-6 mx-auto h-full flex">
-            <CheckoutForm data={data} setData={setData} setCorp={setCorp} />
-            <CartSummaryCheckout />
-          </div>
-        ) : (
-          <div className="w-full max-w-5xl gap-6 mx-auto h-full flex">
-            <PaymentForm
-              card={card}
-              setCard={setCard}
-              setPayed={setPayed}
-              setCorp={setCorp}
-              pay={pay}
-            />
-            <CartSummaryCheckout />
+        <Footer />
+        {payed && (
+          <div className="z-20 px-5 absolute top-0 left-0 w-full h-screen bg-black/10 flex items-center justify-center">
+            <div
+              className={`py-6 px-20 rounded-xl flex items-center gap-4 flex-col w-fit h-fit ${
+                lightMode ? "bg-white text-black" : "bg-neutral-800 text-white"
+              }`}
+            >
+              <div className="w-20 h-20 rounded-full bg-neutral-500 flex items-center justify-center">
+                <IoMdDoneAll className="w-8 h-8" />
+              </div>
+              <h2>Thank You!</h2>
+              <p>
+                Your order has been confirmed and it is on the way. Check your
+                email for the details.
+              </p>
+              <Link
+                to={"/"}
+                className={`${
+                  lightMode
+                    ? "bg-neutral-800 hover:bg-neutral-700"
+                    : "bg-neutral-600 hover:bg-neutral-500"
+                } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
+              >
+                Go to Homepage
+              </Link>
+            </div>
           </div>
         )}
       </div>
-      <Footer />
-      {payed && (
-        <div className="z-20 absolute top-0 left-0 w-full h-screen bg-black/10 flex items-center justify-center">
-          <div
-            className={`py-6 px-20 rounded-xl flex items-center gap-4 flex-col w-fit h-fit ${
-              lightMode ? "bg-white text-black" : "bg-neutral-800 text-white"
-            }`}
-          >
-            <div className="w-20 h-20 rounded-full bg-neutral-500 flex items-center justify-center">
-              <IoMdDoneAll className="w-8 h-8" />
-            </div>
-            <h2>Thank You!</h2>
-            <p>
-              Your order has been confirmed and it is on the way. Check your
-              email for the details.
-            </p>
-            <Link
-              to={"/"}
-              className={`${
-                lightMode
-                  ? "bg-neutral-800 hover:bg-neutral-700"
-                  : "bg-neutral-600 hover:bg-neutral-500"
-              } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
-            >
-              Go to Homepage
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
+    </PageAnimationWrapper>
   );
 };
 

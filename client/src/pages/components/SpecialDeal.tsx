@@ -109,7 +109,7 @@ const SpecialDeal = () => {
           } text-2xl`}
         >
           Special{" "}
-          <span className="text-2xl  text-neutral-400 underline">
+          <span className="text-2xl  text-neutral-500 underline">
             {countDownDay}
           </span>{" "}
           Deal

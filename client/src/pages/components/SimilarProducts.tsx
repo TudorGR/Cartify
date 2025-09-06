@@ -49,16 +49,16 @@ const SimilarProducts = ({ category, productId }: SimilarProps) => {
   }, [category, productId]);
 
   return (
-    <div className="pl-5 lg:px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
+    <div className="px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
       <div className="flex justify-between items-center">
         <h1
-          className={`flex-2 sm:flex-1 text-2xl ${
+          className={`hero-font flex-2 sm:flex-1 text-5xl ${
             lightMode ? "text-black" : "text-white"
           }`}
         >
           Similar Products
         </h1>
-        <div className="pr-5 lg:pr-0 flex flex-1 gap-4 justify-end">
+        <div className=" flex flex-1 gap-4 justify-end">
           <p className=" sm:block hidden text-end text-neutral-400">
             Discover products that match your interests and find items you'll
             love.

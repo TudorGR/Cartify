@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../context/userContext";
+import PageAnimationWrapper from "./components/PageAnimationWrapper";
 
 export interface ProductType {
   id: string;
@@ -25,8 +26,13 @@ const ProductPage = () => {
   const [discount, setDiscount] = useState(false);
   const [visible, setVisible] = useState(18);
   const { lightMode } = useContext(UserContext);
+  const [order, setOrder] = useState("none");
 
-  async function fetchProducts(leftSlider: number, rightSlider: number) {
+  async function fetchProducts(
+    leftSlider: number,
+    rightSlider: number,
+    order: string
+  ) {
     try {
       setProducts([]);
       setLoading(true);
@@ -37,6 +43,19 @@ const ProductPage = () => {
         (item: ProductType) =>
           item.price >= leftSlider && item.price <= rightSlider
       );
+      if (order == "low") {
+        filtered.sort((a: ProductType, b: ProductType) => {
+          const priceA = a.discountedPrice ?? a.price;
+          const priceB = b.discountedPrice ?? b.price;
+          return priceA - priceB;
+        });
+      } else if (order == "high") {
+        filtered.sort((a: ProductType, b: ProductType) => {
+          const priceA = a.discountedPrice ?? a.price;
+          const priceB = b.discountedPrice ?? b.price;
+          return priceB - priceA;
+        });
+      }
       setAllProducts(filtered);
       setProducts(filtered);
     } catch (error) {
@@ -46,8 +65,12 @@ const ProductPage = () => {
   }
 
   useEffect(() => {
-    fetchProducts(leftSlider, rightSlider);
+    fetchProducts(leftSlider, rightSlider, order);
   }, [category]);
+
+  useEffect(() => {
+    fetchProducts(leftSlider, rightSlider, order);
+  }, [order]);
 
   useEffect(() => {
     if (discount) {
@@ -61,41 +84,48 @@ const ProductPage = () => {
   }, [discount, allProducts]);
 
   return (
-    <div
-      className={`${
-        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
-      } relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between transition-all`}
-    >
-      <Navbar color="black" />
-      <div className="px-4 sm:px-5 w-full max-w-6xl mx-auto h-full">
-        <p className="my-2">
-          Home {">"} All {category && category != "All" ? `> ${category}` : ""}
-        </p>
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-          <Filters
-            discount={discount}
-            setDiscount={setDiscount}
-            leftSlider={leftSlider}
-            rightSlider={rightSlider}
-            setLeftSlider={setLeftSlider}
-            setRightSlider={setRightSlider}
-            fetchProducts={fetchProducts}
-          />
-          <div className="w-full">
-            <Products
+    <PageAnimationWrapper>
+      <div
+        className={`${
+          lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+        } relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between transition-all`}
+      >
+        <Navbar color="black" />
+        <div className="px-4 sm:px-5 w-full max-w-6xl mx-auto h-full">
+          <p className="my-2">
+            Home {">"} All{" "}
+            {category && category != "All" ? `> ${category}` : ""}
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+            <Filters
+              order={order}
+              setOrder={setOrder}
+              discount={discount}
+              setDiscount={setDiscount}
               leftSlider={leftSlider}
               rightSlider={rightSlider}
-              category={category ?? "All"}
-              products={products}
-              visible={visible}
-              setVisible={setVisible}
-              loading={loading}
+              setLeftSlider={setLeftSlider}
+              setRightSlider={setRightSlider}
+              fetchProducts={fetchProducts}
             />
+            <div className="w-full">
+              <Products
+                order={order}
+                setOrder={setOrder}
+                leftSlider={leftSlider}
+                rightSlider={rightSlider}
+                category={category ?? "All"}
+                products={products}
+                visible={visible}
+                setVisible={setVisible}
+                loading={loading}
+              />
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </PageAnimationWrapper>
   );
 };
 

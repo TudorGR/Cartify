@@ -7,6 +7,7 @@ import SimilarProducts from "./components/SimilarProducts";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/userContext";
+import PageAnimationWrapper from "./components/PageAnimationWrapper";
 
 const ProductDetails = () => {
   const [data, setData] = useState({
@@ -42,22 +43,24 @@ const ProductDetails = () => {
 
   const { lightMode } = useContext(UserContext);
   return (
-    <div
-      className={`transition-all relative flex flex-col gap-20 pt-24 overflow-hidden ${
-        lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
-      }`}
-    >
-      <Navbar color="black" />
-      <ProductHero
-        data={data}
-        loading={loading}
-        quantity={quantity}
-        setQuantity={setQuantity}
-      />
-      <DescriptionReview productId={data.id} />
-      <SimilarProducts category={data.category} productId={data.id} />
-      <Footer />
-    </div>
+    <PageAnimationWrapper>
+      <div
+        className={`transition-all relative flex flex-col gap-20 pt-24 overflow-hidden ${
+          lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
+        }`}
+      >
+        <Navbar color="black" />
+        <ProductHero
+          data={data}
+          loading={loading}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
+        <DescriptionReview productId={data.id} />
+        <SimilarProducts category={data.category} productId={data.id} />
+        <Footer />
+      </div>
+    </PageAnimationWrapper>
   );
 };
 

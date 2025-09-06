@@ -33,21 +33,21 @@ const MayLike = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
+    <div className="px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
       <div className="flex justify-between items-center">
         <h1
-          className={`flex-1 text-2xl ${
+          className={`hero-font flex-1 text-5xl ${
             lightMode ? "text-black" : "text-white"
           }`}
         >
-          You may also like
+          You May Also Like
         </h1>
-        <p className="flex-1 text-neutral-400 text-end">
+        <p className="hidden sm:block flex-1 text-neutral-400 text-end">
           Handpicked recommendations based on your browsing and shopping
           preferences.
         </p>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-2 overflow-auto">
         {products.map((p: ProductType) => (
           <Product
             discountedPrice={p.discountedPrice}

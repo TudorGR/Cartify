@@ -1,21 +1,26 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import ProductPage from "./pages/ProductPage";
-import ProductDetails from "./pages/ProductDetails";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Contact from "./pages/Contact";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Profile from "./pages/Profile";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider, UserContext } from "../context/userContext";
-import { useContext } from "react";
+import { NavigationProvider } from "../context/navigationContext";
+import { useContext, lazy, Suspense } from "react";
 import axios from "axios";
-import ProtectedRoute from "./pages/components/ProtectedRoute";
+import UseAnimations from "react-useanimations";
+import loading from "react-useanimations/lib/loading";
+
+const Home = lazy(() => import("./pages/Home"));
+const ProductPage = lazy(() => import("./pages/ProductPage"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Profile = lazy(() => import("./pages/Profile"));
+const ProtectedRoute = lazy(() => import("./pages/components/ProtectedRoute"));
+import { AnimatePresence } from "framer-motion";
 
 axios.defaults.withCredentials = true;
 
@@ -57,10 +62,25 @@ function ToasterWrapper() {
   );
 }
 
-function App() {
+function SuspenseFallback() {
+  const { lightMode } = useContext(UserContext);
   return (
-    <UserContextProvider>
-      <Routes>
+    <div
+      className={`h-screen w-full flex items-center justify-center ${
+        lightMode ? "bg-white" : "bg-neutral-950"
+      }`}
+    >
+      <UseAnimations animation={loading} size={50} />
+    </div>
+  );
+}
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/products/:category" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -80,7 +100,19 @@ function App() {
           }
         />
       </Routes>
-      <ToasterWrapper />
+    </AnimatePresence>
+  );
+}
+
+function App() {
+  return (
+    <UserContextProvider>
+      <NavigationProvider>
+        <Suspense fallback={<SuspenseFallback />}>
+          <AnimatedRoutes />
+        </Suspense>
+        <ToasterWrapper />
+      </NavigationProvider>
     </UserContextProvider>
   );
 }

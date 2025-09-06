@@ -8,6 +8,9 @@ import imageRoutes from "./routes/imageRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import cookieParser from "cookie-parser";
+import oauthRoutes from "./routes/oauthRoutes.js";
+import passport from "./config/passport.js";
+import session from "express-session";
 
 const app = express();
 app.use(express.json());
@@ -18,12 +21,26 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "your-session-secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // app.use("/images", express.static("images"));
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use(imageRoutes);
 app.use(orderRoutes);
 app.use(reviewRoutes);
+app.use(oauthRoutes);
 app.use(express.urlencoded({ extended: false }));
 
 const dbUri = process.env.MONGODB_URI;

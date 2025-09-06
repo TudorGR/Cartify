@@ -50,6 +50,10 @@ const Categories = () => {
             />
           ) : (
             <img
+              loading="lazy"
+              width="400"
+              height="300"
+              alt="electronics image"
               src={Electronics}
               className={`h-full object-cover ${
                 lightMode ? "brightness-50" : "brightness-100"
@@ -74,6 +78,10 @@ const Categories = () => {
               />
             ) : (
               <img
+                loading="lazy"
+                width="400"
+                height="300"
+                alt="toys image"
                 src={Toys}
                 className={`absolute object-cover mt-10 sm:h-fill w-full h-full translate-y-[-20%] ${
                   lightMode ? "brightness-50" : "brightness-100"
@@ -97,6 +105,10 @@ const Categories = () => {
               />
             ) : (
               <img
+                loading="lazy"
+                width="400"
+                height="300"
+                alt="beauty image"
                 src={Beauty}
                 className={`absolute object-cover mt-10 sm:h-fill w-full h-full translate-y-[-20%] ${
                   lightMode ? "brightness-50" : "brightness-100"
@@ -121,6 +133,10 @@ const Categories = () => {
             />
           ) : (
             <img
+              loading="lazy"
+              width="400"
+              height="300"
+              alt="automotive image"
               src={Automotive}
               className={`h-full object-cover ${
                 lightMode ? "brightness-50" : "brightness-100"

@@ -77,10 +77,26 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     const saved = localStorage.getItem("lightMode");
     return saved !== null ? JSON.parse(saved) : true;
   });
-  const [cart, setCart] = useState<Map<string, CartItem>>(new Map());
+  const [cart, setCart] = useState<Map<string, CartItem>>(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      try {
+        const cartArray = JSON.parse(savedCart);
+        return new Map(cartArray);
+      } catch (error) {
+        console.error("Error parsing cart from localStorage:", error);
+      }
+    }
+    return new Map();
+  });
   const [favourites, setFavourites] = useState<Map<string, FavouriteItem>>(
     new Map()
   );
+
+  useEffect(() => {
+    const cartArray = Array.from(cart.entries());
+    localStorage.setItem("cart", JSON.stringify(cartArray));
+  }, [cart]);
 
   const addToCart = (product: Omit<CartItem, "quantity">) => {
     setCart((prev) => {
@@ -88,13 +104,11 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       const existingItem = newCart.get(product.id);
 
       if (existingItem) {
-        // If item already exists, increase quantity
         newCart.set(product.id, {
           ...existingItem,
           quantity: existingItem.quantity + 1,
         });
       } else {
-        // If new item, add with quantity 1
         newCart.set(product.id, {
           ...product,
           quantity: 1,
@@ -123,7 +137,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
           ...existingItem,
           quantity,
         });
-      } else if (quantity <= 0) {
+      } else if (existingItem && quantity <= 0) {
         newCart.delete(productId);
       }
 
@@ -158,6 +172,14 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   useEffect(() => {
     localStorage.setItem("lightMode", JSON.stringify(lightMode));
+  }, [lightMode]);
+
+  useEffect(() => {
+    if (lightMode) {
+      document.body.classList.remove("dark");
+    } else {
+      document.body.classList.add("dark");
+    }
   }, [lightMode]);
 
   return (

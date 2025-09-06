@@ -1,44 +1,61 @@
-import { useContext } from "react";
-import Categories from "./components/Categories";
-import Featured from "./components/Featured";
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import NewsLetter from "./components/NewsLetter";
-import SpecialDeal from "./components/SpecialDeal";
-import Testimonials from "./components/Testimonials";
+import { lazy, Suspense, useContext } from "react";
 import { UserContext } from "../../context/userContext";
-import Discounted from "./components/Discounted";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+const Categories = lazy(() => import("./components/Categories"));
+const Footer = lazy(() => import("./components/Footer"));
+const NewsLetter = lazy(() => import("./components/NewsLetter"));
+const SpecialDeal = lazy(() => import("./components/SpecialDeal"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const Featured = lazy(() => import("./components/Featured"));
+const Discounted = lazy(() => import("./components/Discounted"));
+import UseAnimations from "react-useanimations";
+import loading from "react-useanimations/lib/loading";
+import PageAnimationWrapper from "./components/PageAnimationWrapper";
 
 const Home = () => {
   const { lightMode } = useContext(UserContext);
 
-  return (
+  const LoadingFallback = () => (
     <div
-      className={`transition-all relative flex flex-col gap-20 overflow-hidden ${
+      className={`h-screen w-full flex items-center justify-center ${
         lightMode ? "bg-white" : "bg-neutral-950"
       }`}
     >
-      <Navbar color="white" />
-      <Hero />
-      <Featured />
-      <div
-        className={`h-[1px] border-b max-w-5xl w-full mx-auto ${
-          lightMode ? "border-neutral-100" : "border-neutral-800"
-        }`}
-      ></div>
-      <Categories />
-      <SpecialDeal />
-      <div
-        className={`h-[1px] border-b max-w-5xl w-full mx-auto ${
-          lightMode ? "border-neutral-100" : "border-neutral-800"
-        }`}
-      ></div>
-      <Discounted />
-      <Testimonials />
-      <NewsLetter />
-      <Footer />
+      <UseAnimations animation={loading} size={50} />
     </div>
+  );
+
+  return (
+    <PageAnimationWrapper>
+      <div
+        className={`transition-all relative flex flex-col gap-20 overflow-hidden ${
+          lightMode ? "bg-white" : "bg-neutral-950"
+        }`}
+      >
+        <Suspense fallback={<LoadingFallback />}>
+          <Navbar color="white" />
+          <Hero />
+          <Featured />
+          <div
+            className={`h-[1px] border-b max-w-5xl w-full mx-auto ${
+              lightMode ? "border-neutral-100" : "border-neutral-800"
+            }`}
+          ></div>
+          <Categories />
+          <SpecialDeal />
+          <div
+            className={`h-[1px] border-b max-w-5xl w-full mx-auto ${
+              lightMode ? "border-neutral-100" : "border-neutral-800"
+            }`}
+          ></div>
+          <Discounted />
+          <Testimonials />
+          <NewsLetter />
+          <Footer />
+        </Suspense>
+      </div>
+    </PageAnimationWrapper>
   );
 };
 

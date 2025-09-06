@@ -55,7 +55,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
           : "border-neutral-700 bg-neutral-900 text-white"
       } border h-fit rounded-xl p-6 flex flex-col gap-4`}
     >
-      <div className="flex gap-4">
+      <div className="flex gap-4 sm:flex-row flex-col">
         <div className="flex flex-col gap-2 flex-1">
           <label htmlFor="Name">Name*</label>
           <input
@@ -110,7 +110,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
           />
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 sm:flex-row flex-col">
         <div className="flex flex-col gap-2 flex-1">
           <label htmlFor="Street">Street Address*</label>
           <input
@@ -146,7 +146,7 @@ const CheckoutForm = ({ setCorp, data, setData }: CheckoutProps) => {
           />
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 sm:flex-row flex-col">
         <div className="flex flex-col gap-2 flex-1">
           <label htmlFor="Country">Country*</label>
           <input

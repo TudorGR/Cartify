@@ -7,6 +7,16 @@
   font-family: "Roboto", sans-serif;
 }
 
+/* Add this to prevent white flash */
+body {
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+body.dark {
+  background-color: #0a0a0a; /* or rgb(10, 10, 10) to match bg-neutral-950 */
+}
+
 .headings {
   font-family: "Poppins", sans-serif;
 }

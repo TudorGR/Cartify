@@ -8,6 +8,7 @@ import {
   IoMdHeartEmpty,
 } from "react-icons/io";
 import toast from "react-hot-toast";
+import LazyImage from "./LazyImage";
 
 interface ProductProps {
   id: string;
@@ -69,12 +70,13 @@ const Product = ({
       }`}
     >
       {discountedPrice && (
-        <div className="absolute text-white w-fit h-fit rounded-full left-2 top-2 bg-red-500/50 px-2 right-0 z-10">
+        <div className="absolute text-white w-fit h-fit rounded-full top-1 left-1 md:left-2 md:top-2 bg-red-500/70 px-2 right-0 z-10">
           -10%
         </div>
       )}
 
       <button
+        aria-label="add to favourites"
         onClick={handleFavouriteToggle}
         className={`hover:scale-110 active:scale-90 absolute right-2 top-2 z-10 transition-all duration-200  rounded-full w-8 h-8 flex items-center justify-center cursor-pointer`}
       >
@@ -86,19 +88,23 @@ const Product = ({
       </button>
 
       <Link to={`/product/${id}`}>
-        <img
+        <LazyImage
+          loading="lazy"
+          decoding="async"
           alt="some 'preview' hover effect..."
-          className="pointer-events-none w-60 h-80 bg-neutral-200 rounded-xl object-cover"
+          className="pointer-events-none w-30 md:w-60 h-40 md:h-80 bg-neutral-200 rounded-lg md:rounded-xl object-cover"
           src={image}
         />
       </Link>
-      <div className="flex justify-between max-w-60 w-full">
+      <div className="flex justify-between max-w-30 md:max-w-60 w-full">
         <div>
-          <p className="max-h-8 text-nowrap truncate max-w-49">{name}</p>
+          <p className="max-h-8 text-nowrap truncate max-w-29 md:max-w-49">
+            {name}
+          </p>
           {discountedPrice ? (
             <div className="flex gap-2 ">
               <p>${discountedPrice}</p>
-              <p className="text-neutral-400 line-through">${price}</p>
+              <p className="text-neutral-500 line-through">${price}</p>
             </div>
           ) : (
             <p className="">${price}</p>
@@ -109,7 +115,7 @@ const Product = ({
             lightMode
               ? "border border-neutral-300 active:bg-neutral-300"
               : "border border-neutral-700 active:bg-neutral-700"
-          } active:scale-90 flex items-center justify-center cursor-pointer text-neutral-400  rounded-full w-10 h-10 shrink-0 transition-all duration-100`}
+          } active:scale-90 hover:scale-110  md:flex items-center justify-center cursor-pointer text-neutral-500 hidden rounded-full w-10 h-10 shrink-0 transition-all duration-100`}
           onClick={() => {
             addToCart({
               id,
@@ -121,9 +127,7 @@ const Product = ({
             setClicked(!clicked);
           }}
         >
-          <div className="active:scale-110">
-            {isInCart ? <IoMdCheckmark /> : <IoMdAdd />}
-          </div>
+          <div>{isInCart ? <IoMdCheckmark /> : <IoMdAdd />}</div>
         </button>
       </div>
     </div>

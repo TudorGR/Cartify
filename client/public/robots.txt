@@ -1,0 +1,8 @@
+# Allow crawling of all content
+User-agent: *
+Allow: /
+
+# Disallow crawling of private user data
+Disallow: /profile
+Disallow: /checkout
+Disallow: /cart
