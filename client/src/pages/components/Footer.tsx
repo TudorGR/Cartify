@@ -17,7 +17,7 @@ const Footer = () => {
     "transition-colors hover:text-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-sm";
 
   return (
-    <footer className={`w-full border-t ${wrapperClasses}`}>
+    <footer className={`w-full px-5 border-t ${wrapperClasses}`}>
       <div className="max-w-5xl mx-auto  py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
           <div>

@@ -25,18 +25,14 @@ const Contact = () => {
     >
       <Navbar color="white" />
       <div
-        className={`overflow-hidden  transition-all ${
+        className={` transition-all ${
           lightMode ? "bg-hero-light text-black" : "bg-hero-dark text-white"
         } `}
       >
-        <div className=" w-full max-w-5xl relative mx-auto h-full gap-6 flex">
-          <img
-            src={hero}
-            alt="hero"
-            className="absolute h-full pt-20 object-cover"
-          />
+        <div className="mt-20 w-full max-w-5xl relative mx-auto h-full  flex md:flex-row flex-col">
+          <img src={hero} alt="hero" className="absolute h-full object-cover" />
           <div
-            className={`z-10 ${
+            className={` mx-5 z-10 ${
               lightMode ? "bg-white/50" : "bg-black/50"
             } h-fit my-auto p-4 rounded-xl flex-1 gap-4  flex flex-col justify-center`}
           >

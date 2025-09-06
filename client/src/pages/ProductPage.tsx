@@ -67,11 +67,11 @@ const ProductPage = () => {
       } relative flex flex-col gap-20 pt-24 overflow-hidden min-h-screen justify-between transition-all`}
     >
       <Navbar color="black" />
-      <div className="w-full max-w-5xl  mx-auto h-full">
+      <div className="px-4 sm:px-5 w-full max-w-6xl mx-auto h-full">
         <p className="my-2">
           Home {">"} All {category && category != "All" ? `> ${category}` : ""}
         </p>
-        <div className="flex gap-6">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <Filters
             discount={discount}
             setDiscount={setDiscount}
@@ -81,15 +81,17 @@ const ProductPage = () => {
             setRightSlider={setRightSlider}
             fetchProducts={fetchProducts}
           />
-          <Products
-            leftSlider={leftSlider}
-            rightSlider={rightSlider}
-            category={category ?? "All"}
-            products={products}
-            visible={visible}
-            setVisible={setVisible}
-            loading={loading}
-          />
+          <div className="w-full">
+            <Products
+              leftSlider={leftSlider}
+              rightSlider={rightSlider}
+              category={category ?? "All"}
+              products={products}
+              visible={visible}
+              setVisible={setVisible}
+              loading={loading}
+            />
+          </div>
         </div>
       </div>
       <Footer />

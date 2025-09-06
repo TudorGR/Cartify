@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import image from "../assets/cartify.webp";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -46,15 +47,15 @@ const Login = () => {
 
   return (
     <div
-      className={`relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen ${
+      className={`relative sm:px-5 flex flex-col gap-20 overflow-hidden justify-between min-h-screen ${
         lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
       } transition-all`}
     >
       <Navbar color="black" />
       <div className="w-full max-w-5xl mx-auto h-full">
         <div
-          className={`mt-20 border overflow-hidden w-full rounded-2xl flex ${
-            lightMode ? "border-neutral-300" : "border-neutral-700"
+          className={`mt-20 sm:border overflow-hidden w-full rounded-2xl flex ${
+            lightMode ? " sm:border-neutral-300" : " sm:border-neutral-700"
           }`}
         >
           <form
@@ -128,10 +129,12 @@ const Login = () => {
             </p>
           </form>
           <div
-            className={`flex-1 p-6 shrink-0 ${
+            className={`sm:block hidden flex-1 shrink-0 ${
               lightMode ? "bg-neutral-200" : "bg-neutral-700"
             }`}
-          ></div>
+          >
+            <img src={image} alt="" className="h-full w-full object-cover" />
+          </div>
         </div>
       </div>
 

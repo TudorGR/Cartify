@@ -17,16 +17,23 @@ const NewsLetter = () => {
 
   const { lightMode } = useContext(UserContext);
   return (
-    <div className="h-75">
+    <div className="h-90 sm:h-75 px-5">
       <div className="w-full max-w-5xl mx-auto h-full flex flex-col gap-6 items-center">
-        <h2 className={`${lightMode ? "text-black" : "text-white"} text-4xl`}>
+        <h2
+          className={`text-center ${
+            lightMode ? "text-black" : "text-white"
+          } text-4xl`}
+        >
           Get 10% off your first order!
         </h2>
-        <p className={`${lightMode ? "text-black" : "text-white"}`}>
+        <p className={`text-center ${lightMode ? "text-black" : "text-white"}`}>
           Subscribe to our newsletter to get a 10% off your first order and to
           never miss any discounts.
         </p>
-        <form onSubmit={handleSubmit} className="flex gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full sm:w-min sm:flex-row flex-col gap-4"
+        >
           <input
             required
             value={text}

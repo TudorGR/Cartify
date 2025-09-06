@@ -9,7 +9,7 @@ const ContactForm = () => {
   const { lightMode } = useContext(UserContext);
 
   return (
-    <div className="my-20 z-10 h-full flex-1 flex items-center justify-center">
+    <div className="mx-5  my-10 sm:my-20 z-10 h-full flex-1 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className={`rounded-2xl p-6 flex flex-col gap-4 ${
@@ -18,7 +18,7 @@ const ContactForm = () => {
       >
         <h2 className="text-4xl">Get in Touch</h2>
         <p>You can reach us anytime</p>
-        <div className="flex gap-4">
+        <div className="sm:flex-row flex-col flex gap-4">
           <input
             required
             className={`flex-1 border ${
@@ -70,14 +70,14 @@ const ContactForm = () => {
               : "border-neutral-600 bg-neutral-800 text-white"
           } px-4 py-2 rounded-lg`}
         ></textarea>
-        <div className="flex gap-4">
+        <div className="sm:flex-row flex-col flex gap-4">
           <button
             type="submit"
             className={`${
               lightMode
                 ? "bg-neutral-800 hover:bg-neutral-700"
                 : "bg-neutral-500 hover:bg-neutral-400"
-            } rounded-lg px-6 py-3 w-fit text-white transition-colors`}
+            } rounded-lg sm:w-fit w-full h-fit px-6 py-3 w-fit text-white transition-colors`}
           >
             Submit
           </button>

@@ -113,7 +113,7 @@ const DescriptionReview = ({ productId }: DescriptionReviewProps) => {
 
   return (
     <div className={wrapperClasses}>
-      <div className="w-full max-w-5xl mx-auto  py-12 flex flex-col gap-6">
+      <div className="px-5 w-full max-w-5xl mx-auto  py-12 flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <section className="flex flex-col gap-4">
             <h2

@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import image from "../assets/cartify.webp";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -50,15 +51,15 @@ const Signup = () => {
 
   return (
     <div
-      className={`relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen ${
+      className={`relative sm:px-5 flex flex-col gap-20 overflow-hidden justify-between min-h-screen ${
         lightMode ? "bg-white text-black" : "bg-neutral-950 text-white"
       } transition-all`}
     >
       <Navbar color="black" />
       <div className="w-full max-w-5xl mx-auto h-full">
         <div
-          className={`mt-20 border overflow-hidden w-full rounded-xl flex ${
-            lightMode ? "border-neutral-300" : "border-neutral-700"
+          className={`mt-20 sm:border overflow-hidden w-full rounded-xl flex ${
+            lightMode ? "sm:border-neutral-300" : "sm:border-neutral-700"
           }`}
         >
           <form
@@ -79,8 +80,8 @@ const Signup = () => {
                 Login
               </Link>
             </p>
-            <div className="flex gap-4">
-              <div className="flex flex-col gap-2">
+            <div className="flex sm:flex-row flex-col gap-4">
+              <div className="flex flex-col gap-2 flex-1">
                 <label htmlFor="name">Full Name</label>
                 <input
                   required
@@ -97,7 +98,7 @@ const Signup = () => {
                   placeholder="Michael Joe"
                 />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 flex-1">
                 <label htmlFor="email">Enter your Email Address</label>
                 <input
                   required
@@ -115,8 +116,8 @@ const Signup = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-4">
-              <div className="flex flex-col gap-2">
+            <div className="flex sm:flex-row flex-col gap-4">
+              <div className="flex flex-col gap-2 flex-1">
                 <label htmlFor="password">Password</label>
                 <input
                   required
@@ -133,7 +134,7 @@ const Signup = () => {
                   placeholder="***********"
                 />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 flex-1 ">
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   required
@@ -187,7 +188,9 @@ const Signup = () => {
               Create Account
             </button>
           </form>
-          <div className="flex-1 bg-neutral-500 p-6 shrink-0"></div>
+          <div className=" hidden md:block flex-1 bg-neutral-500  shrink-0">
+            <img src={image} alt="" className="h-full w-full object-cover" />
+          </div>
         </div>
       </div>
       <Footer />

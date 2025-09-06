@@ -56,38 +56,42 @@ const SpecialDeal = () => {
 
   return (
     <div className="grid grid-cols-2 max-w-5xl w-full mx-auto">
-      <div className="grid grid-cols-4 gap-4 p-4">
+      <div className="grid grid-cols-4 gap-1 sm:gap-4 p-4 self-center">
         <div
-          className={`${
-            lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-xl text-white py-16 flex items-center justify-center flex-col`}
-        >
-          <div className="text-5xl">{countDown.days}</div>
-          <div>Days</div>
-        </div>
-        <div
-          className={`${
+          className={`h-10 sm:h-full ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
           } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
         >
-          <div className="text-5xl">{countDown.hours}</div>
-          <div>Hours</div>
+          <div className="text-xl sm:text-5xl ">{countDown.days}</div>
+          <div className="hidden sm:block">Days</div>
+          <div className="block sm:hidden">D</div>
         </div>
         <div
-          className={`${
+          className={`h-10 sm:h-full ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
           } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
         >
-          <div className="text-5xl">{countDown.minutes}</div>
-          <div>Minutes</div>
+          <div className="text-xl sm:text-5xl ">{countDown.hours}</div>
+          <div className="hidden sm:block">Hours</div>
+          <div className="block sm:hidden">H</div>
         </div>
         <div
-          className={`${
+          className={`h-10 sm:h-full ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
           } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
         >
-          <div className="text-5xl">{countDown.seconds}</div>
-          <div>Seconds</div>
+          <div className="text-xl sm:text-5xl ">{countDown.minutes}</div>
+          <div className="hidden sm:block">Minutes</div>
+          <div className="block sm:hidden">M</div>
+        </div>
+        <div
+          className={`h-10 sm:h-full ${
+            lightMode ? "bg-neutral-600" : "bg-neutral-500"
+          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
+        >
+          <div className="text-xl sm:text-5xl ">{countDown.seconds}</div>
+          <div className="hidden sm:block">Seconds</div>
+          <div className="block sm:hidden">S</div>
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center justify-center">
@@ -99,7 +103,11 @@ const SpecialDeal = () => {
           10%
         </p>
 
-        <p className={` ${lightMode ? "text-black" : "text-white"} text-2xl`}>
+        <p
+          className={`text-center ${
+            lightMode ? "text-black" : "text-white"
+          } text-2xl`}
+        >
           Special{" "}
           <span className="text-2xl  text-neutral-400 underline">
             {countDownDay}

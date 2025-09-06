@@ -13,7 +13,7 @@ const Terms = () => {
       } transition-all relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen`}
     >
       <Navbar color="black" />
-      <div className="mt-20 w-full max-w-5xl mx-auto h-full">
+      <div className="mt-20 px-5 w-full max-w-5xl mx-auto h-full">
         <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
         <p className="mb-4">
           Welcome to Cartify! By accessing or using our website and services,

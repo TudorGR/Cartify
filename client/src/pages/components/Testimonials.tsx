@@ -25,7 +25,7 @@ const Testimonials = () => {
 
   return (
     <div
-      className={` relative h-150 ${
+      className={`px-5 relative h-175 sm:h-150 ${
         lightMode ? "bg-neutral-300" : "bg-neutral-700"
       } `}
     >
@@ -34,15 +34,15 @@ const Testimonials = () => {
         className="z-0 pointer-events-none opacity-60 object-contain absolute w-full h-full left-0 top-0"
         src={testimonials}
       />
-      <div className="relative z-10 w-full max-w-5xl mx-auto h-full gap-6 flex justify-between items-center">
+      <div className="relative z-10 w-full flex-col sm:flex-row max-w-5xl mx-auto h-full gap-6 flex justify-center items-center">
         <div
-          className={`flex flex-col items-start gap-6 ${
+          className={`w-full sm:w-fit flex flex-col items-start gap-6 ${
             lightMode ? "bg-white" : "bg-black"
           } p-4 rounded-xl`}
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 ">
             <h2
-              className={`text-5xl ${lightMode ? "text-black" : "text-white"}`}
+              className={` text-5xl ${lightMode ? "text-black" : "text-white"}`}
             >
               From our <br /> Customers.
             </h2>
@@ -78,7 +78,7 @@ const Testimonials = () => {
           </div>
         </div>
         <div
-          className="pointer-events-none max-w-100 flex overflow-x-scroll scroll-smooth no-scrollbar"
+          className="pointer-events-none max-w-full sm:max-w-100 flex overflow-x-scroll scroll-smooth no-scrollbar"
           ref={scrollRef}
         >
           <div

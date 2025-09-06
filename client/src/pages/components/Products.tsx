@@ -47,12 +47,13 @@ const Products = ({
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex justify-between items-center">
         <h2 className="text-4xl">{category}</h2>
-        <p>
-          Showing {visible > products.length ? products.length : visible} of{" "}
-          {products.length} Products
+        <p className="flex gap-1">
+          <span className="hidden sm:block">Showing</span>
+          {visible > products.length ? products.length : visible} of{" "}
+          {products.length} <span className="hidden sm:block">Products</span>
         </p>
       </div>
-      <div className="grid grid-cols-3 justify-items-center gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
         {products.length > 0 &&
           products
             .slice(0, visible)

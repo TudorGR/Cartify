@@ -64,7 +64,7 @@ const Product = ({
 
   return (
     <div
-      className={`transition-all flex flex-col gap-2 relative group ${
+      className={`shrink-0 transition-all flex flex-col gap-2 relative group ${
         lightMode ? "text-black" : "text-white"
       }`}
     >

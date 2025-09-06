@@ -101,7 +101,7 @@ const ProductHero = ({
   const isInCart = cart.has(data.id);
 
   return (
-    <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
+    <div className="px-5 w-full max-w-5xl mx-auto h-full flex flex-col">
       <p className="my-2 flex">
         {loading ? (
           <Skeleton
@@ -114,12 +114,12 @@ const ProductHero = ({
           `Home > All > ${data.category} > ${data.name}`
         )}
       </p>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid-rows-2 grid sm:grid-cols-2 sm:grid-rows-1 gap-10 ">
         <div className="flex flex-col items-start">
-          <div className="grid grid-cols-[1fr_3fr] h-full w-full gap-6">
+          <div className="grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[1fr_3fr] h-full w-full gap-6">
             {loading ? (
               <>
-                <div className="flex flex-col justify-between gap-6">
+                <div className="hidden sm:flex flex-col justify-between gap-6">
                   <div className=" rounded-xl overflow-hidden flex-1">
                     <Skeleton
                       containerClassName={`${
@@ -156,7 +156,7 @@ const ProductHero = ({
               </>
             ) : (
               <>
-                <div className="flex flex-col justify-between gap-6">
+                <div className=" hidden sm:flex sm:flex-col justify-between gap-6">
                   <div className=" rounded-xl flex-1 overflow-hidden">
                     <img
                       src={data.image}

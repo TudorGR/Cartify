@@ -33,8 +33,8 @@ const Discounted = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
-      <div className="flex justify-between items-center">
+    <div className="pl-5 lg:px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
+      <div className="flex justify-between items-center gap-2">
         <h1
           className={`hero-font flex-1 text-5xl ${
             lightMode ? "text-black" : "text-white"
@@ -42,12 +42,12 @@ const Discounted = () => {
         >
           Promotions
         </h1>
-        <p className="flex-1 text-neutral-400 text-end">
+        <p className="pr-5 lg:pr-0 hidden sm:block md:flex-1 text-neutral-400 flex-2 text-end">
           Discover our handpicked selection of discounted products, carefully
           curated for quality and customer satisfaction.
         </p>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-2 w-full overflow-auto">
         {products.map((p: ProductType) => (
           <Product
             discountedPrice={p.discountedPrice}

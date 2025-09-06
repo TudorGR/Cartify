@@ -13,7 +13,7 @@ const Privacy = () => {
       } relative flex flex-col gap-20 overflow-hidden justify-between min-h-screen`}
     >
       <Navbar color="black" />
-      <div className="mt-20 w-full max-w-5xl mx-auto h-full">
+      <div className="mt-20 px-5 w-full max-w-5xl mx-auto h-full">
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
         <p className="mb-4">
           At Cartify, your privacy is important to us. This Privacy Policy

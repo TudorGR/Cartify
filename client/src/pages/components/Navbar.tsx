@@ -21,6 +21,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { IoIosSearch, IoMdClose } from "react-icons/io";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { RiArrowDownSFill } from "react-icons/ri";
 
 import logo from "../../assets/logo.png";
@@ -31,12 +32,14 @@ interface Product {
   price: string;
 }
 
-const Navbar = ({ color }: { color: string }) => {
+const Navbar = ({ color: _color }: { color: string }) => {
   const [dropDown, setDropDown] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [items, setItems] = useState<Product[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const searchBarRef = useRef<HTMLDivElement | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -69,6 +72,11 @@ const Navbar = ({ color }: { color: string }) => {
     setSearchValue("");
     setItems([]);
     setSelectedIndex(-1);
+  }
+
+  function closeMobileMenu() {
+    setMobileMenuOpen(false);
+    setMobileCategoriesOpen(false);
   }
 
   function navigateToProduct(productId: number) {
@@ -104,6 +112,19 @@ const Navbar = ({ color }: { color: string }) => {
   useEffect(() => {
     setSelectedIndex(-1);
   }, [items]);
+
+  // Close mobile menu with Escape
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        closeMobileMenu();
+      }
+    }
+    if (mobileMenuOpen) {
+      window.addEventListener("keydown", onKey);
+    }
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileMenuOpen]);
 
   function useDebounce<T extends (...args: any[]) => void>(func: T, wait = 0) {
     const timeoutRef = useRef<number | null>(null);
@@ -142,13 +163,19 @@ const Navbar = ({ color }: { color: string }) => {
         className={`fixed inset-0 ${
           lightMode ? "bg-black/10" : "bg-black/20"
         }  transition-opacity duration-300 ${
-          dropDown || searchBar
-            ? "opacity-100 z-5"
+          dropDown || searchBar || mobileMenuOpen
+            ? "opacity-100 z-10"
             : "opacity-0 pointer-events-none"
         }`}
+        onClick={() => {
+          // clicking backdrop closes any open overlays
+          if (mobileMenuOpen) closeMobileMenu();
+          if (dropDown) setDropDown(false);
+          if (searchBar) closeSearch();
+        }}
       ></div>
       <div
-        className="w-full top-0 absolute z-20"
+        className="w-full px-5 top-0 absolute z-20"
         style={{
           color: lightMode ? "black" : "white",
           background:
@@ -171,7 +198,7 @@ const Navbar = ({ color }: { color: string }) => {
             />
             <p className="headings uppercase text-2xl">Cartify</p>
           </div>
-          <div className="flex flex-1 justify-around">
+          <div className="hidden md:flex gap-5 flex-1 justify-around">
             <Link to={"/"} className="py-4 ">
               Home
             </Link>
@@ -329,7 +356,7 @@ const Navbar = ({ color }: { color: string }) => {
             >
               <IoIosSearch className="w-8 h-8" />
             </button>
-            <Link to={"/profile"}>
+            <Link to={"/profile"} className="hidden md:block">
               <IoPersonCircleOutline className="w-8 h-8" />
             </Link>
             <Link to={"/cart"} className="flex gap-1 items-center">
@@ -339,14 +366,151 @@ const Navbar = ({ color }: { color: string }) => {
                 0
               )}
             </Link>
+            <button
+              aria-label="Open menu"
+              className="md:hidden cursor-pointer"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <FaBars className="w-7 h-7" />
+            </button>
           </div>
         </div>
+      </div>
+      {/* Mobile slide-in menu */}
+      <div
+        className={`fixed top-0 left-0 h-full w-3/4 max-w-sm z-30 transform transition-transform duration-300 ${
+          lightMode ? "bg-white text-black" : "bg-black text-white"
+        } ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="flex items-center justify-between h-16 px-5 border-b border-neutral-700/20">
+          <div className="flex items-center ">
+            <img
+              src={logo}
+              alt="logo"
+              className={`w-8 ${lightMode ? "" : "invert"}`}
+            />
+            <span className="headings text-2xl">Cartify</span>
+          </div>
+          <button
+            aria-label="Close menu"
+            className="p-2"
+            onClick={closeMobileMenu}
+          >
+            <IoMdClose className="w-6 h-6" />
+          </button>
+        </div>
+        <nav className="px-5 py-4">
+          <Link onClick={closeMobileMenu} to="/" className="block py-3">
+            Home
+          </Link>
+          <Link
+            onClick={closeMobileMenu}
+            to="/products/All"
+            className="block py-3"
+          >
+            Shop
+          </Link>
+          <button
+            className="w-full flex items-center justify-between py-3"
+            onClick={() => setMobileCategoriesOpen((v) => !v)}
+            aria-expanded={mobileCategoriesOpen}
+          >
+            <span>Categories</span>
+            <RiArrowDownSLine
+              className={`w-5 h-5 transition-transform ${
+                mobileCategoriesOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+          {mobileCategoriesOpen && (
+            <div className="pl-4 pb-2 flex flex-col gap-2 text-neutral-400">
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Electronics"
+                className="flex items-center gap-2"
+              >
+                <RiComputerLine /> Electronics
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/HomeGoods"
+                className="flex items-center gap-2"
+              >
+                <FaHome /> Home Goods
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Toys"
+                className="flex items-center gap-2"
+              >
+                <TbHorseToy /> Toys
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Beauty"
+                className="flex items-center gap-2"
+              >
+                <LuBrush /> Beauty
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Automotive"
+                className="flex items-center gap-2"
+              >
+                <FaCar /> Automotive
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Apparel"
+                className="flex items-center gap-2"
+              >
+                <FaTshirt /> Apparel
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Books"
+                className="flex items-center gap-2"
+              >
+                <FaBook /> Books
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Sports"
+                className="flex items-center gap-2"
+              >
+                <MdOutlineSportsBasketball /> Sports
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Food"
+                className="flex items-center gap-2"
+              >
+                <IoFastFoodOutline /> Food
+              </Link>
+              <Link
+                onClick={closeMobileMenu}
+                to="/products/Pets"
+                className="flex items-center gap-2"
+              >
+                <MdOutlinePets /> Pets
+              </Link>
+            </div>
+          )}
+          <Link onClick={closeMobileMenu} to="/contact" className="block py-3">
+            Contact Us
+          </Link>
+          <Link onClick={closeMobileMenu} to="/profile" className="block py-3">
+            Profile
+          </Link>
+        </nav>
       </div>
       {searchBar && (
         <>
           <div
             ref={searchBarRef}
-            className={`absolute left-0 top-0 w-full border-b ${
+            className={`px-5 absolute left-0 top-0 w-full border-b ${
               lightMode ? "border-neutral-300" : "border-neutral-700"
             }  z-20 flex items-center justify-center h-20 ${
               lightMode ? "bg-white" : "bg-black"
@@ -386,7 +550,7 @@ const Navbar = ({ color }: { color: string }) => {
                 lightMode ? "bg-white" : "bg-black"
               }`}
             >
-              <div className="w-full max-w-2xl flex gap-2 flex-col my-6 max-h-100 overflow-auto">
+              <div className="px-4 w-full max-w-2xl flex gap-2 flex-col my-6 max-h-100 overflow-auto">
                 <ul className="w-full max-w-2xl flex gap-2 flex-col max-h-100 overflow-auto">
                   <li className="mr-10 flex py-2 justify-between hover:text-black cursor-pointer text-neutral-400 hover:underline">
                     <Skeleton
@@ -447,7 +611,7 @@ const Navbar = ({ color }: { color: string }) => {
                 {items.map((item, index) => (
                   <li
                     onClick={() => navigateToProduct(item.id)}
-                    className={`mr-10 py-2 flex justify-between cursor-pointer hover:underline ${
+                    className={`mr-10 py-2 px-4 flex justify-between cursor-pointer hover:underline ${
                       index === selectedIndex
                         ? lightMode
                           ? "bg-neutral-100 text-black  rounded-lg"
