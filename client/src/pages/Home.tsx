@@ -38,14 +38,14 @@ const Home = () => {
           <Hero />
           <Featured />
           <div
-            className={`h-[1px] border-b max-w-5xl w-full mx-auto ${
+            className={`h-[1px] border-b max-w-5xl w-[90%] mx-auto ${
               lightMode ? "border-neutral-100" : "border-neutral-800"
             }`}
           ></div>
           <Categories />
           <SpecialDeal />
           <div
-            className={`h-[1px] border-b max-w-5xl w-full mx-auto ${
+            className={`h-[1px] border-b max-w-5xl w-[90%] mx-auto ${
               lightMode ? "border-neutral-100" : "border-neutral-800"
             }`}
           ></div>

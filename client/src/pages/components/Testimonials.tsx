@@ -37,13 +37,15 @@ const Testimonials = () => {
       />
       <div className="relative z-10 w-full flex-col sm:flex-row max-w-5xl mx-auto h-full gap-6 flex justify-center items-center">
         <div
-          className={`w-full sm:w-fit flex flex-col items-start gap-6 ${
+          className={` mx-auto sm:w-fit flex flex-col items-center sm:items-start gap-2 sm:gap-6 ${
             lightMode ? "bg-white" : "bg-black"
           } p-4 rounded-xl`}
         >
-          <div className="flex flex-col gap-6 ">
+          <div className="flex flex-col gap-2 sm:gap-6 ">
             <h2
-              className={` text-5xl ${lightMode ? "text-black" : "text-white"}`}
+              className={`text-3xl sm:text-4xl ${
+                lightMode ? "text-black" : "text-white"
+              }`}
             >
               From our <br /> Customers.
             </h2>
@@ -53,7 +55,7 @@ const Testimonials = () => {
               Here's what other customers had to say about Cartify.
             </p>
           </div>
-          <div className="flex gap-6">
+          <div className="flex justify-between gap-6 w-full sm:justify-center">
             <button
               aria-label="previous"
               disabled={btnPress}

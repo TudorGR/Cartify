@@ -371,9 +371,9 @@ const Navbar = ({ color: _color }: { color: string }) => {
               onClick={() => setLightMode(!lightMode)}
             >
               {lightMode ? (
-                <FaMoon className="w-6 h-6" />
+                <FaMoon className="w-7 h-7" />
               ) : (
-                <FaSun className="w-6 h-6" />
+                <FaSun className="w-7 h-7" />
               )}
             </button>
             <button
