@@ -5,6 +5,11 @@
 * {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  -ms-overflow-style: none; /* IE and old Edge */
+  scrollbar-width: none; /* Firefox */
+}
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Add this to prevent white flash */
