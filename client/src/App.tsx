@@ -7,6 +7,7 @@ import { useContext, lazy, Suspense } from "react";
 import axios from "axios";
 import UseAnimations from "react-useanimations";
 import loading from "react-useanimations/lib/loading";
+import "./api"; // add this line
 
 const Home = lazy(() => import("./pages/Home"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));

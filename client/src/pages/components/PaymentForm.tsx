@@ -17,17 +17,10 @@ type PaymentFormProps = {
     }>
   >;
   pay: () => void;
-  setPayed: (value: boolean) => void;
   setCorp: Dispatch<SetStateAction<string>>;
 };
 
-const PaymentForm = ({
-  setPayed,
-  setCorp,
-  card,
-  setCard,
-  pay,
-}: PaymentFormProps) => {
+const PaymentForm = ({ setCorp, card, setCard, pay }: PaymentFormProps) => {
   const { lightMode } = useContext(UserContext);
 
   function handlePay(e: React.FormEvent<HTMLFormElement>) {

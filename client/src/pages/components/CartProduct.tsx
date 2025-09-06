@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../../../context/userContext";
-import { MdDelete, MdDeleteOutline } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 interface CartItem {

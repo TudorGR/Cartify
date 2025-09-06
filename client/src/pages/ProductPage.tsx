@@ -110,8 +110,6 @@ const ProductPage = () => {
             />
             <div className="w-full">
               <Products
-                order={order}
-                setOrder={setOrder}
                 leftSlider={leftSlider}
                 rightSlider={rightSlider}
                 category={category ?? "All"}

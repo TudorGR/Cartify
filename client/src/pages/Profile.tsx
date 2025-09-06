@@ -47,7 +47,7 @@ const Profile = () => {
     ? "bg-white text-neutral-700"
     : "bg-neutral-900 text-neutral-300";
   const headingClasses = lightMode ? "text-neutral-900" : "text-neutral-100";
-  const dividerBorder = lightMode ? "border-neutral-200" : "border-neutral-800";
+  // const dividerBorder = lightMode ? "border-neutral-200" : "border-neutral-800";
   const cardClasses = lightMode
     ? "bg-neutral-50 border border-neutral-200"
     : "bg-neutral-800 border border-neutral-700";

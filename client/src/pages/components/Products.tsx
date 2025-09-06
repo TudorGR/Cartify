@@ -1,9 +1,4 @@
-import {
-  useContext,
-  useEffect,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useContext, useEffect } from "react";
 import Product from "./Product";
 import LoadingProduct from "./LoadingProduct";
 import { Link } from "react-router-dom";
@@ -26,8 +21,6 @@ interface ProductsProps {
   loading: boolean;
   leftSlider: number;
   rightSlider: number;
-  order: string;
-  setOrder: Dispatch<SetStateAction<string>>;
 }
 
 const Products = ({
@@ -38,8 +31,6 @@ const Products = ({
   loading,
   leftSlider,
   rightSlider,
-  order,
-  setOrder,
 }: ProductsProps) => {
   const { lightMode } = useContext(UserContext);
 

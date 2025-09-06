@@ -32,7 +32,7 @@ const DescriptionReview = ({ productId }: DescriptionReviewProps) => {
     ? "bg-neutral-50 text-neutral-600"
     : "bg-neutral-900 text-neutral-300";
   const headingClasses = lightMode ? "text-neutral-900" : "text-neutral-100";
-  const dividerBorder = lightMode ? "border-neutral-200" : "border-neutral-800";
+  // const dividerBorder = lightMode ? "border-neutral-200" : "border-neutral-800";
   const cardClasses = lightMode
     ? "bg-white border-neutral-200"
     : "bg-neutral-800 border-neutral-700";

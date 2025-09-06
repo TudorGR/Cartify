@@ -102,7 +102,7 @@ const Checkout = () => {
       const deliveryFee = subtotalNum > 0 ? 10 : 0;
       const totalNum = subtotalNum - discountNum + deliveryFee;
 
-      const response = await axios.post("http://localhost:3000/orders", {
+      await axios.post("http://localhost:3000/orders", {
         email: data.email,
         productsIds: Array.from(cart.values()).map((item) => item.id),
         totalPrice: totalNum,
@@ -210,7 +210,6 @@ const Checkout = () => {
               <PaymentForm
                 card={card}
                 setCard={setCard}
-                setPayed={setPayed}
                 setCorp={setCorp}
                 pay={pay}
               />

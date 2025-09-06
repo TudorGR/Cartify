@@ -14,12 +14,24 @@ import session from "express-session";
 
 const app = express();
 app.use(express.json());
+
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(
+  Boolean
+);
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      // allow SSR / same-origin and Vercel preview domains
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 
 app.use(
@@ -44,13 +56,17 @@ app.use(oauthRoutes);
 app.use(express.urlencoded({ extended: false }));
 
 const dbUri = process.env.MONGODB_URI;
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 mongoose
   .connect(dbUri)
   .then(() => console.log("connected to DB"))
   .catch((err) => console.log("error", err));
 
-app.listen(port, () =>
-  console.log(`Server running on http://localhost:${port}`)
-);
+if (!process.env.VERCEL) {
+  app.listen(port, () =>
+    console.log(`Server running on http://localhost:${port}`)
+  );
+}
+
+export default app;

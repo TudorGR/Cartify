@@ -56,7 +56,15 @@ export const loginUser = async (req, res) => {
         {},
         (err, token) => {
           if (err) throw err;
-          res.cookie("token", token).json(user);
+          res
+            .cookie("token", token, {
+              httpOnly: true,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+              maxAge: 7 * 24 * 60 * 60 * 1000,
+              domain: process.env.COOKIE_DOMAIN || undefined,
+            })
+            .json(user);
         }
       );
     } else {
