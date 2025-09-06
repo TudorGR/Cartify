@@ -13,6 +13,8 @@ import passport from "./config/passport.js";
 import session from "express-session";
 
 const app = express();
+// Behind Vercel/Proxies, trust proxy for secure cookies to work correctly
+app.set("trust proxy", 1);
 app.use(express.json());
 
 const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(
@@ -39,7 +41,10 @@ app.use(
     secret: process.env.SESSION_SECRET || "your-session-secret",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false },
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    },
   })
 );
 

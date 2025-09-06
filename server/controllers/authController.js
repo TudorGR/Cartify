@@ -138,5 +138,12 @@ export const updateProfile = async (req, res) => {
 };
 
 export const logoutUser = (req, res) => {
-  res.clearCookie("token").json({ message: "Logged out" });
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      domain: process.env.COOKIE_DOMAIN || undefined,
+    })
+    .json({ message: "Logged out" });
 };
