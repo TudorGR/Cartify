@@ -1,6 +1,14 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import UserModel from "../models/user.js";
+import mongoose from "mongoose";
+
+// Utility function to ensure DB connection
+const ensureDbConnection = async () => {
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error("Database not connected");
+  }
+};
 
 passport.use(
   new GoogleStrategy(
@@ -11,6 +19,9 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        // Ensure database connection
+        await ensureDbConnection();
+        
         let user = await UserModel.findOne({ googleId: profile.id });
 
         if (user) {
@@ -46,6 +57,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const user = await UserModel.findById(id).select("-password");
     done(null, user);
   } catch (error) {

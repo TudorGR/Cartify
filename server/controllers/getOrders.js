@@ -1,4 +1,12 @@
 import OrderModel from "../models/order.js";
+import mongoose from "mongoose";
+
+// Utility function to ensure DB connection
+const ensureDbConnection = async () => {
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error("Database not connected");
+  }
+};
 
 const randomDelay = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -10,6 +18,9 @@ function wait(ms) {
 export async function getOrders(req, res) {
   const email = req.params.email;
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const orders = await OrderModel.find({ email });
     setTimeout(() => {
       if (orders) {
@@ -27,6 +38,9 @@ export async function addOrder(req, res) {
   const { email, productsIds, totalPrice, orderDate } = req.body;
 
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     await wait(randomDelay(200, 500));
 
     OrderModel.create({

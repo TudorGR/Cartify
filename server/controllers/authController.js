@@ -1,9 +1,20 @@
 import UserModel from "../models/user.js";
 import { hashPassword, comparePasswords } from "../helpers/auth.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+
+// Utility function to ensure DB connection
+const ensureDbConnection = async () => {
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error("Database not connected");
+  }
+};
 
 export const registerUser = async (req, res) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const { name, email, password } = req.body;
 
     if (!name) {
@@ -39,6 +50,9 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const { email, password } = req.body;
 
     // Add timeout wrapper for database operations
@@ -95,26 +109,39 @@ export const loginUser = async (req, res) => {
 };
 
 export const getProfile = async (req, res) => {
-  const { token } = req.cookies;
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
-      if (err) throw err;
+  try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
+    const { token } = req.cookies;
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
+        if (err) throw err;
 
-      const user = await UserModel.findById(decoded.id).select("-password");
+        const user = await UserModel.findById(decoded.id).select("-password");
 
-      if (!user) {
-        return res.json({ error: "User not found" });
-      }
+        if (!user) {
+          return res.json({ error: "User not found" });
+        }
 
-      res.json(user);
+        res.json(user);
+      });
+    } else {
+      res.json(null);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      error: "Failed to get profile",
     });
-  } else {
-    res.json(null);
   }
 };
 
 export const updateProfile = async (req, res) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const { token } = req.cookies;
 
     if (!token) {

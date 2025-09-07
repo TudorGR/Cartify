@@ -1,7 +1,18 @@
 import ReviewModel from "../models/review.js";
+import mongoose from "mongoose";
+
+// Utility function to ensure DB connection
+const ensureDbConnection = async () => {
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error("Database not connected");
+  }
+};
 
 export const getReviews = async (req, res) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const { productId } = req.params;
     const reviews = await ReviewModel.find({ productId }).sort({
       createdAt: -1,
@@ -15,6 +26,9 @@ export const getReviews = async (req, res) => {
 // Get review statistics for a product
 export const getReviewStats = async (req, res) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const { productId } = req.params;
     const reviews = await ReviewModel.find({ productId });
 
@@ -46,6 +60,9 @@ export const getReviewStats = async (req, res) => {
 
 export const createReview = async (req, res) => {
   try {
+    // Ensure database connection
+    await ensureDbConnection();
+    
     const { productId, name, email, rating, comment } = req.body;
 
     const review = new ReviewModel({

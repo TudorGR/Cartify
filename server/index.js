@@ -34,6 +34,21 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
+// Session configuration for OAuth
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'fallback-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+}));
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Database connection
 const dbUri = process.env.MONGODB_URI;
 const port = process.env.PORT || 3000;
@@ -44,25 +59,50 @@ mongoose.set("strictQuery", true);
 
 // Create a connection promise
 let isConnected = false;
+let connectionPromise = null;
 
 const connectDB = async () => {
-  if (isConnected) {
+  if (isConnected && mongoose.connection.readyState === 1) {
     return;
   }
 
+  // If there's already a connection attempt in progress, wait for it
+  if (connectionPromise) {
+    return connectionPromise;
+  }
+
+  connectionPromise = mongoose.connect(dbUri, {
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 10000,
+    socketTimeoutMS: 10000,
+    maxPoolSize: 5,
+    retryWrites: true,
+    retryReads: true,
+    heartbeatFrequencyMS: 2000,
+    serverSelectionRetryDelayMS: 1000,
+  });
+
   try {
-    await mongoose.connect(dbUri, {
-      serverSelectionTimeoutMS: 5000,
-      connectTimeoutMS: 5000,
-      socketTimeoutMS: 5000,
-      maxPoolSize: 5,
-      retryWrites: true,
-      retryReads: true,
-    });
+    await connectionPromise;
     isConnected = true;
     console.log("Connected to DB");
+    
+    // Handle connection events
+    mongoose.connection.on('disconnected', () => {
+      console.log('MongoDB disconnected');
+      isConnected = false;
+      connectionPromise = null;
+    });
+
+    mongoose.connection.on('error', (error) => {
+      console.log('MongoDB error:', error);
+      isConnected = false;
+      connectionPromise = null;
+    });
+
   } catch (error) {
     console.log("Database connection error:", error);
+    connectionPromise = null;
     throw error;
   }
 };
@@ -73,6 +113,7 @@ app.use(async (req, res, next) => {
     await connectDB();
     next();
   } catch (error) {
+    console.error("Database connection failed:", error);
     res.status(500).json({ error: "Database connection failed" });
   }
 });
