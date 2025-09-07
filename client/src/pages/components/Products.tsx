@@ -52,7 +52,7 @@ const Products = ({
           {products.length} Products
         </p>
       </div>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
+      <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
         {products.length > 0 &&
           products
             .slice(0, visible)
