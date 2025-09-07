@@ -19,7 +19,7 @@ A modern, responsive e‑commerce frontend showcasing professional React develop
 ## Demo
 
 - **Live Site**: [Here](https://cartify-neon.vercel.app/)
-- **Video Walkthrough**: [Add demo video link here]
+- **Video Walkthrough**: [Here](https://github.com/user-attachments/assets/937ca7fc-1fce-46c6-b31c-db70235151a7)
 
 ### Screenshots
 
