@@ -55,58 +55,66 @@ const SpecialDeal = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 max-w-5xl w-full mx-auto">
-      <div className="grid grid-cols-4 gap-1 sm:gap-4 p-4 self-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center max-w-5xl w-full mx-auto px-5">
+      <div className="grid grid-cols-4 gap-2 sm:gap-4 p-3 sm:p-4 self-center">
         <div
-          className={`h-10 sm:h-full ${
+          className={`min-h-18 sm:min-h-28 ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-4 sm:py-12 flex items-center justify-center flex-col shadow-sm`}
         >
-          <div className="text-xl sm:text-5xl ">{countDown.days}</div>
+          <div className="text-2xl md:text-5xl font-semibold">
+            {countDown.days}
+          </div>
           <div className="hidden sm:block">Days</div>
           <div className="block sm:hidden">D</div>
         </div>
         <div
-          className={`h-10 sm:h-full ${
+          className={`min-h-18 sm:min-h-28 ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-4 sm:py-12 flex items-center justify-center flex-col shadow-sm`}
         >
-          <div className="text-xl sm:text-5xl ">{countDown.hours}</div>
+          <div className="text-2xl md:text-5xl font-semibold">
+            {countDown.hours}
+          </div>
           <div className="hidden sm:block">Hours</div>
           <div className="block sm:hidden">H</div>
         </div>
         <div
-          className={`h-10 sm:h-full ${
+          className={`min-h-18 sm:min-h-28 ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-4 sm:py-12 flex items-center justify-center flex-col shadow-sm`}
         >
-          <div className="text-xl sm:text-5xl ">{countDown.minutes}</div>
+          <div className="text-2xl md:text-5xl font-semibold">
+            {countDown.minutes}
+          </div>
           <div className="hidden sm:block">Minutes</div>
           <div className="block sm:hidden">M</div>
         </div>
         <div
-          className={`h-10 sm:h-full ${
+          className={`min-h-18 sm:min-h-28 ${
             lightMode ? "bg-neutral-600" : "bg-neutral-500"
-          } rounded-xl text-white py-12 flex items-center justify-center flex-col`}
+          } rounded-xl text-white py-4 sm:py-12 flex items-center justify-center flex-col shadow-sm`}
         >
-          <div className="text-xl sm:text-5xl ">{countDown.seconds}</div>
+          <div className="text-2xl md:text-5xl font-semibold">
+            {countDown.seconds}
+          </div>
           <div className="hidden sm:block">Seconds</div>
           <div className="block sm:hidden">S</div>
         </div>
       </div>
-      <div className="flex flex-col gap-4 items-center justify-center">
+      <div className="flex flex-col gap-2 sm:gap-4 items-center justify-center text-center sm:text-left">
         <p
           className={`${
             lightMode ? "text-black" : "text-white"
-          } text-7xl hero-font`}
+          } text-5xl sm:text-7xl hero-font leading-none`}
         >
           10%
         </p>
 
         <p
-          className={`text-center ${
+          className={`${
             lightMode ? "text-black" : "text-white"
-          } text-2xl`}
+          } text-xl sm:text-2xl`}
         >
           Special{" "}
           <span className="text-2xl  text-neutral-500 underline">
@@ -120,7 +128,7 @@ const SpecialDeal = () => {
             lightMode
               ? "bg-neutral-800 hover:bg-neutral-700"
               : "bg-neutral-500 hover:bg-neutral-400"
-          } rounded-lg px-6 py-3 text-white transition-colors gap-1 flex items-center`}
+          } rounded-lg px-5 sm:px-6 py-2.5 sm:py-3 text-white transition-colors gap-1 inline-flex items-center`}
         >
           Shop now
           <MdNavigateNext className="w-6 h-6" />

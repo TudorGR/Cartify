@@ -36,7 +36,7 @@ const MayLike = () => {
     <div className="px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col">
       <div className="flex justify-between items-center">
         <h1
-          className={`hero-font flex-1 text-5xl ${
+          className={`hero-font flex-1 text-4xl sm:text-5xl ${
             lightMode ? "text-black" : "text-white"
           }`}
         >

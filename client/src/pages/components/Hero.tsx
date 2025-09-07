@@ -37,7 +37,7 @@ const Hero = () => {
               </p>
             </div>
           </div>
-          <p className="hero-font rounded-lg relative md:absolute md:top-50 md:left-25 w-100 text-6xl  md:text-7xl  md:w-50 mt-3 sm:mt-6 md:mt-0">
+          <p className="hero-font rounded-lg relative md:absolute md:top-50 md:left-25 w-80 sm:w-100 text-5xl sm:text-6xl md:text-7xl  md:w-50 mt-3 sm:mt-6 md:mt-0">
             <span className="hero-font md:tracking-widest">Because</span>{" "}
             Shopping Should Be Fun
           </p>

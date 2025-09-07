@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <PageAnimationWrapper>
       <div
-        className={`transition-all relative flex flex-col gap-20 overflow-hidden ${
+        className={`transition-all relative flex flex-col gap-10 overflow-hidden ${
           lightMode ? "bg-white" : "bg-neutral-950"
         }`}
       >

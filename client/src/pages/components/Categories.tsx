@@ -21,32 +21,30 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="px-5 w-full max-w-5xl  mx-auto h-full gap-6 flex flex-col items-center">
-      <div className="cursor-pointer max-w-xl flex flex-col gap-2 items-center">
+    <div className="px-5 w-full max-w-5xl mx-auto h-full gap-6 flex flex-col items-center">
+      <div className="cursor-pointer max-w-xl flex flex-col gap-2 items-center text-center">
         <h1
-          className={`hero-font flex-1 text-5xl ${
+          className={`hero-font flex-1 text-4xl sm:text-5xl ${
             lightMode ? "text-black" : "text-white"
           }`}
         >
           Categories
         </h1>
-        <p className="text-neutral-400 text-center">
+        <p className="text-neutral-500 text-sm sm:text-base">
           Browse through our diverse product categories to find exactly what
           you're looking for. From electronics to beauty products, we have it
           all.
         </p>
       </div>
-      <div className="grid-cols-3 grid h-100 gap-2 sm:gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-rows-2 gap-3 sm:gap-6 w-full">
         <div
           onClick={() => navigate("/products/Electronics")}
-          className="cursor-pointer bg-neutral-500 rounded-2xl w-full h-full relative overflow-hidden"
+          className="group cursor-pointer bg-neutral-500 rounded-2xl w-full relative overflow-hidden aspect-[24/10] sm:aspect-[4/5] sm:row-span-2 shadow-sm"
         >
           {loading ? (
             <Skeleton
-              containerClassName="absolute w-full flex-1"
-              className={`h-100 rounded-2xl pt-[50px] ${
-                lightMode ? "" : "brightness-50"
-              }`}
+              containerClassName="absolute inset-0"
+              className={`w-full h-full ${lightMode ? "" : "brightness-50"}`}
             />
           ) : (
             <img
@@ -55,26 +53,25 @@ const Categories = () => {
               height="300"
               alt="electronics image"
               src={Electronics}
-              className={`h-full object-cover ${
-                lightMode ? "brightness-50" : "brightness-100"
+              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
+                lightMode ? "brightness-75" : "brightness-100"
               }`}
             />
           )}
-          <p className="sm:text-2xl absolute bottom-2 sm:bottom-6 left-2 sm:left-6 text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <p className="text-lg sm:text-2xl font-medium drop-shadow absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
             Electronics
           </p>
         </div>
-        <div className="flex flex-col gap-2 sm:gap-6">
+        <div className="flex flex-col gap-3 sm:gap-6 sm:row-span-2 sm:grid sm:grid-rows-2 sm:h-full">
           <div
             onClick={() => navigate("/products/Toys")}
-            className="cursor-pointer bg-neutral-500 rounded-2xl w-full flex-1 relative overflow-hidden"
+            className="group cursor-pointer bg-neutral-500 rounded-2xl w-full relative overflow-hidden aspect-[24/10] sm:aspect-auto sm:h-full shadow-sm"
           >
             {loading ? (
               <Skeleton
-                containerClassName="absolute w-full flex-1"
-                className={`h-100 rounded-2xl pt-[50px] ${
-                  lightMode ? "" : "brightness-50"
-                }`}
+                containerClassName="absolute inset-0"
+                className={`w-full h-full ${lightMode ? "" : "brightness-50"}`}
               />
             ) : (
               <img
@@ -83,25 +80,24 @@ const Categories = () => {
                 height="300"
                 alt="toys image"
                 src={Toys}
-                className={`absolute object-cover mt-10 sm:h-fill w-full h-full translate-y-[-20%] ${
-                  lightMode ? "brightness-50" : "brightness-100"
+                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
+                  lightMode ? "brightness-75" : "brightness-100"
                 }`}
               />
             )}
-            <p className="sm:text-2xl absolute bottom-2 sm:bottom-6 left-2 sm:left-6 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            <p className="text-lg sm:text-2xl font-medium drop-shadow absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
               Toys
             </p>
           </div>
           <div
             onClick={() => navigate("/products/Beauty")}
-            className="cursor-pointer bg-neutral-500 rounded-2xl w-full flex-1 relative overflow-hidden"
+            className="group cursor-pointer bg-neutral-500 rounded-2xl w-full relative overflow-hidden aspect-[24/10] sm:aspect-auto sm:h-full shadow-sm"
           >
             {loading ? (
               <Skeleton
-                containerClassName="absolute w-full flex-1"
-                className={`h-100 rounded-2xl pt-[50px] ${
-                  lightMode ? "" : "brightness-50"
-                }`}
+                containerClassName="absolute inset-0"
+                className={`w-full h-full ${lightMode ? "" : "brightness-50"}`}
               />
             ) : (
               <img
@@ -110,26 +106,25 @@ const Categories = () => {
                 height="300"
                 alt="beauty image"
                 src={Beauty}
-                className={`absolute object-cover mt-10 sm:h-fill w-full h-full translate-y-[-20%] ${
-                  lightMode ? "brightness-50" : "brightness-100"
+                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
+                  lightMode ? "brightness-75" : "brightness-100"
                 }`}
               />
             )}
-            <p className="sm:text-2xl absolute bottom-2 sm:bottom-6 left-2 sm:left-6 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            <p className="text-lg sm:text-2xl font-medium drop-shadow absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
               Beauty
             </p>
           </div>
         </div>
         <div
           onClick={() => navigate("/products/Automotive")}
-          className="cursor-pointer bg-neutral-500 rounded-2xl w-full h-full relative overflow-hidden"
+          className="group cursor-pointer bg-neutral-500 rounded-2xl w-full relative overflow-hidden aspect-[24/10] sm:aspect-[4/5] sm:row-span-2 shadow-sm"
         >
           {loading ? (
             <Skeleton
-              containerClassName="absolute w-full flex-1"
-              className={`h-100 rounded-2xl pt-[50px] ${
-                lightMode ? "" : "brightness-50"
-              }`}
+              containerClassName="absolute inset-0"
+              className={`w-full h-full ${lightMode ? "" : "brightness-50"}`}
             />
           ) : (
             <img
@@ -138,12 +133,13 @@ const Categories = () => {
               height="300"
               alt="automotive image"
               src={Automotive}
-              className={`h-full object-cover ${
-                lightMode ? "brightness-50" : "brightness-100"
+              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
+                lightMode ? "brightness-75" : "brightness-100"
               }`}
             />
           )}
-          <p className="sm:text-2xl absolute bottom-2 sm:bottom-6 left-2 sm:left-6 text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <p className="text-lg sm:text-2xl font-medium drop-shadow absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
             Automotive
           </p>
         </div>
