@@ -38,20 +38,21 @@ app.use(cors(corsOptions));
 
 app.use(cookieParser());
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "your-session-secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    },
-  })
-);
+// Remove or comment out the session middleware for now
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET || "your-session-secret",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       secure: process.env.NODE_ENV === "production",
+//       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+//     },
+//   })
+// );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // app.use("/images", express.static("images"));
 app.use(authRoutes);
@@ -73,7 +74,12 @@ mongoose.set("strictQuery", true);
 
 mongoose
   .connect(dbUri, {
-    serverSelectionTimeoutMS: 8000, // fail fast to avoid 10s+ serverless timeouts
+    serverSelectionTimeoutMS: 5000, // Reduce from 8000 to 5000
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 5000,
+    maxPoolSize: 5, // Limit connection pool
+    retryWrites: true,
+    retryReads: true,
   })
   .then(() => console.log("connected to DB"))
   .catch((err) => console.log("error", err));

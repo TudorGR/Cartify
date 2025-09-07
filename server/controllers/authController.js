@@ -41,19 +41,33 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await UserModel.findOne({ email });
+    // Add timeout wrapper for database operations
+    const timeoutPromise = new Promise(
+      (_, reject) =>
+        setTimeout(() => reject(new Error("Database timeout")), 25000) // 25 seconds max
+    );
+
+    const user = await Promise.race([
+      UserModel.findOne({ email }),
+      timeoutPromise,
+    ]);
 
     if (!user) {
       return res.json({
         error: "No user found",
       });
     }
-    const match = await comparePasswords(password, user.password);
+
+    const match = await Promise.race([
+      comparePasswords(password, user.password),
+      timeoutPromise,
+    ]);
+
     if (match) {
       jwt.sign(
         { email: user.email, id: user._id, name: user.name },
         process.env.JWT_SECRET,
-        {},
+        { expiresIn: "7d" }, // Add explicit expiration
         (err, token) => {
           if (err) throw err;
           res
@@ -74,6 +88,9 @@ export const loginUser = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      error: "Login failed - please try again",
+    });
   }
 };
 
