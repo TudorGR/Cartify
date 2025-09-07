@@ -20,7 +20,7 @@ export async function getOrders(req, res) {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const orders = await OrderModel.find({ email });
     setTimeout(() => {
       if (orders) {
@@ -40,7 +40,7 @@ export async function addOrder(req, res) {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     await wait(randomDelay(200, 500));
 
     OrderModel.create({

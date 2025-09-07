@@ -12,7 +12,7 @@ export const getReviews = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { productId } = req.params;
     const reviews = await ReviewModel.find({ productId }).sort({
       createdAt: -1,
@@ -28,7 +28,7 @@ export const getReviewStats = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { productId } = req.params;
     const reviews = await ReviewModel.find({ productId });
 
@@ -62,7 +62,7 @@ export const createReview = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { productId, name, email, rating, comment } = req.body;
 
     const review = new ReviewModel({

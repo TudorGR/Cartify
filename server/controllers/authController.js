@@ -14,7 +14,7 @@ export const registerUser = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { name, email, password } = req.body;
 
     if (!name) {
@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { email, password } = req.body;
 
     // Add timeout wrapper for database operations
@@ -112,7 +112,7 @@ export const getProfile = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { token } = req.cookies;
     if (token) {
       jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
@@ -141,7 +141,7 @@ export const updateProfile = async (req, res) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const { token } = req.cookies;
 
     if (!token) {

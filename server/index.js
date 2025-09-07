@@ -35,15 +35,17 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // Session configuration for OAuth
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'fallback-secret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "fallback-secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
+);
 
 // Initialize Passport
 app.use(passport.initialize());
@@ -86,20 +88,19 @@ const connectDB = async () => {
     await connectionPromise;
     isConnected = true;
     console.log("Connected to DB");
-    
+
     // Handle connection events
-    mongoose.connection.on('disconnected', () => {
-      console.log('MongoDB disconnected');
+    mongoose.connection.on("disconnected", () => {
+      console.log("MongoDB disconnected");
       isConnected = false;
       connectionPromise = null;
     });
 
-    mongoose.connection.on('error', (error) => {
-      console.log('MongoDB error:', error);
+    mongoose.connection.on("error", (error) => {
+      console.log("MongoDB error:", error);
       isConnected = false;
       connectionPromise = null;
     });
-
   } catch (error) {
     console.log("Database connection error:", error);
     connectionPromise = null;

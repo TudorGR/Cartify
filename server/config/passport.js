@@ -21,7 +21,7 @@ passport.use(
       try {
         // Ensure database connection
         await ensureDbConnection();
-        
+
         let user = await UserModel.findOne({ googleId: profile.id });
 
         if (user) {
@@ -59,7 +59,7 @@ passport.deserializeUser(async (id, done) => {
   try {
     // Ensure database connection
     await ensureDbConnection();
-    
+
     const user = await UserModel.findById(id).select("-password");
     done(null, user);
   } catch (error) {
