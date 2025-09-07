@@ -18,7 +18,7 @@ const Login = () => {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const promise = axios
-      .post("http://localhost:3000/login", {
+      .post("/login", {
         email,
         password,
       })

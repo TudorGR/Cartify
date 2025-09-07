@@ -34,8 +34,7 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
-// Ensure preflight requests are handled fast
-app.options("*", cors(corsOptions));
+// CORS middleware will handle preflight automatically in Express 5
 
 app.use(cookieParser());
 
