@@ -6,6 +6,10 @@ import mongoose from "mongoose";
 // Utility function to ensure DB connection
 const ensureDbConnection = async () => {
   if (mongoose.connection.readyState !== 1) {
+    console.log(
+      "Database not connected, current state:",
+      mongoose.connection.readyState
+    );
     throw new Error("Database not connected");
   }
 };
@@ -18,18 +22,19 @@ export const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name) {
-      return res.json({
+      return res.status(400).json({
         error: "name is required",
       });
     }
     if (!password) {
-      return res.json({
+      return res.status(400).json({
         error: "Password is required",
       });
     }
+
     const exist = await UserModel.findOne({ email });
     if (exist) {
-      return res.json({
+      return res.status(409).json({
         error: "Email is already taken",
       });
     }
@@ -42,9 +47,12 @@ export const registerUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    return res.json(user);
+    return res.status(201).json(user);
   } catch (error) {
-    console.log(error);
+    console.error("Registration error:", error);
+    return res.status(500).json({
+      error: "Registration failed - please try again",
+    });
   }
 };
 
@@ -58,7 +66,7 @@ export const loginUser = async (req, res) => {
     // Add timeout wrapper for database operations
     const timeoutPromise = new Promise(
       (_, reject) =>
-        setTimeout(() => reject(new Error("Database timeout")), 25000) // 25 seconds max
+        setTimeout(() => reject(new Error("Database operation timeout")), 20000) // 20 seconds max
     );
 
     const user = await Promise.race([
@@ -67,7 +75,7 @@ export const loginUser = async (req, res) => {
     ]);
 
     if (!user) {
-      return res.json({
+      return res.status(401).json({
         error: "No user found",
       });
     }
@@ -83,7 +91,10 @@ export const loginUser = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "7d" }, // Add explicit expiration
         (err, token) => {
-          if (err) throw err;
+          if (err) {
+            console.error("JWT sign error:", err);
+            return res.status(500).json({ error: "Token generation failed" });
+          }
           res
             .cookie("token", token, {
               httpOnly: true,
@@ -96,12 +107,12 @@ export const loginUser = async (req, res) => {
         }
       );
     } else {
-      return res.json({
+      return res.status(401).json({
         error: "Password incorrect",
       });
     }
   } catch (error) {
-    console.log(error);
+    console.error("Login error:", error);
     return res.status(500).json({
       error: "Login failed - please try again",
     });

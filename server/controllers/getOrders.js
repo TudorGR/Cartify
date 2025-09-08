@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 // Utility function to ensure DB connection
 const ensureDbConnection = async () => {
   if (mongoose.connection.readyState !== 1) {
+    console.log(
+      "Database not connected, current state:",
+      mongoose.connection.readyState
+    );
     throw new Error("Database not connected");
   }
 };
@@ -30,6 +34,7 @@ export async function getOrders(req, res) {
       }
     }, randomDelay(200, 500));
   } catch (error) {
+    console.error("Get orders error:", error);
     return res.status(500).json({ message: "Error fetching orders" });
   }
 }
@@ -43,7 +48,7 @@ export async function addOrder(req, res) {
 
     await wait(randomDelay(200, 500));
 
-    OrderModel.create({
+    await OrderModel.create({
       email,
       status: "Pending",
       productsIds,
@@ -53,6 +58,7 @@ export async function addOrder(req, res) {
 
     return res.status(200).json({ message: "Added order" });
   } catch (error) {
+    console.error("Add order error:", error);
     return res.status(500).json({ message: "Error adding order" });
   }
 }

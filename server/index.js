@@ -13,6 +13,18 @@ import passport from "./config/passport.js";
 import session from "express-session";
 
 const app = express();
+
+// Environment variable validation
+const requiredEnvVars = ["MONGODB_URI", "JWT_SECRET"];
+const missingEnvVars = requiredEnvVars.filter((envVar) => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+  console.error("Missing required environment variables:", missingEnvVars);
+  if (!process.env.VERCEL) {
+    process.exit(1);
+  }
+}
+
 app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,17 +67,18 @@ app.use(passport.session());
 const dbUri = process.env.MONGODB_URI;
 const port = process.env.PORT || 3000;
 
-// Set Mongoose options for serverless
+// Optimize for serverless - disable buffering and set strict mode
 mongoose.set("bufferCommands", false);
 mongoose.set("strictQuery", true);
 
-// Create a connection promise
-let isConnected = false;
+// Global connection cache for serverless
+let cachedConnection = null;
 let connectionPromise = null;
 
 const connectDB = async () => {
-  if (isConnected && mongoose.connection.readyState === 1) {
-    return;
+  // If we have a cached connection and it's ready, return it
+  if (cachedConnection && mongoose.connection.readyState === 1) {
+    return cachedConnection;
   }
 
   // If there's already a connection attempt in progress, wait for it
@@ -73,37 +86,37 @@ const connectDB = async () => {
     return connectionPromise;
   }
 
-  connectionPromise = mongoose.connect(dbUri, {
-    serverSelectionTimeoutMS: 10000,
-    connectTimeoutMS: 10000,
-    socketTimeoutMS: 10000,
-    maxPoolSize: 5,
-    retryWrites: true,
-    retryReads: true,
-    heartbeatFrequencyMS: 2000,
-    serverSelectionRetryDelayMS: 1000,
-  });
-
   try {
-    await connectionPromise;
-    isConnected = true;
-    console.log("Connected to DB");
+    connectionPromise = mongoose.connect(dbUri, {
+      maxPoolSize: 1, // Limit to 1 connection for serverless
+      serverSelectionTimeoutMS: 5000, // Reduce timeout for faster failure
+      socketTimeoutMS: 45000, // Keep socket alive longer than function timeout
+      bufferMaxEntries: 0, // Disable mongoose buffering
+      bufferCommands: false, // Disable mongoose buffering
+      family: 4, // Use IPv4, skip trying IPv6
+    });
+
+    cachedConnection = await connectionPromise;
+    console.log("Connected to MongoDB");
 
     // Handle connection events
     mongoose.connection.on("disconnected", () => {
       console.log("MongoDB disconnected");
-      isConnected = false;
+      cachedConnection = null;
       connectionPromise = null;
     });
 
     mongoose.connection.on("error", (error) => {
       console.log("MongoDB error:", error);
-      isConnected = false;
+      cachedConnection = null;
       connectionPromise = null;
     });
+
+    return cachedConnection;
   } catch (error) {
-    console.log("Database connection error:", error);
+    console.error("Database connection error:", error);
     connectionPromise = null;
+    cachedConnection = null;
     throw error;
   }
 };
@@ -120,7 +133,32 @@ app.use(async (req, res, next) => {
 });
 
 // Health check endpoint
-app.get("/health", (_req, res) => res.status(200).send("ok"));
+app.get("/health", async (req, res) => {
+  try {
+    const dbState = mongoose.connection.readyState;
+    const states = {
+      0: "disconnected",
+      1: "connected",
+      2: "connecting",
+      3: "disconnecting",
+    };
+
+    res.status(200).json({
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      database: {
+        state: states[dbState] || "unknown",
+        readyState: dbState,
+      },
+      environment: process.env.NODE_ENV || "development",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error.message,
+    });
+  }
+});
 
 // Routes
 app.use(authRoutes);
@@ -129,6 +167,25 @@ app.use(imageRoutes);
 app.use(orderRoutes);
 app.use(reviewRoutes);
 app.use(oauthRoutes);
+
+// Error handling middleware
+app.use((error, req, res, next) => {
+  console.error("Unhandled error:", error);
+
+  // Don't expose internal errors in production
+  const isDevelopment = process.env.NODE_ENV !== "production";
+  const errorMessage = isDevelopment ? error.message : "Internal server error";
+
+  res.status(500).json({
+    error: errorMessage,
+    ...(isDevelopment && { stack: error.stack }),
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
 
 // Initialize connection for local development
 if (!process.env.VERCEL) {

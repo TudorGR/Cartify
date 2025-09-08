@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 // Utility function to ensure DB connection
 const ensureDbConnection = async () => {
   if (mongoose.connection.readyState !== 1) {
+    console.log(
+      "Database not connected, current state:",
+      mongoose.connection.readyState
+    );
     throw new Error("Database not connected");
   }
 };
