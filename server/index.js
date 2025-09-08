@@ -91,8 +91,6 @@ const connectDB = async () => {
       maxPoolSize: 1, // Limit to 1 connection for serverless
       serverSelectionTimeoutMS: 5000, // Reduce timeout for faster failure
       socketTimeoutMS: 45000, // Keep socket alive longer than function timeout
-      bufferMaxEntries: 0, // Disable mongoose buffering
-      bufferCommands: false, // Disable mongoose buffering
       family: 4, // Use IPv4, skip trying IPv6
     });
 
@@ -124,34 +122,69 @@ const connectDB = async () => {
 // Middleware to ensure DB connection before handling requests
 app.use(async (req, res, next) => {
   try {
+    // Skip database connection for health check and favicon
+    if (req.path === '/health' || req.path === '/favicon.ico' || req.path === '/favicon.png') {
+      return next();
+    }
+    
     await connectDB();
     next();
   } catch (error) {
     console.error("Database connection failed:", error);
-    res.status(500).json({ error: "Database connection failed" });
+    
+    // Provide more helpful error messages
+    let errorMessage = "Database connection failed";
+    
+    if (error.message.includes("IP") || error.message.includes("whitelist")) {
+      errorMessage = "Database access denied. Please check MongoDB Atlas IP whitelist settings.";
+    } else if (error.message.includes("authentication")) {
+      errorMessage = "Database authentication failed. Please check credentials.";
+    } else if (error.message.includes("timeout")) {
+      errorMessage = "Database connection timeout. Please try again.";
+    }
+    
+    res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 
 // Health check endpoint
 app.get("/health", async (req, res) => {
   try {
-    const dbState = mongoose.connection.readyState;
-    const states = {
-      0: "disconnected",
-      1: "connected",
-      2: "connecting",
-      3: "disconnecting",
-    };
-
-    res.status(200).json({
+    const response = {
       status: "ok",
       timestamp: new Date().toISOString(),
-      database: {
+      environment: process.env.NODE_ENV || "development",
+      server: "running"
+    };
+
+    // Try to check database status (optional)
+    try {
+      await connectDB();
+      const dbState = mongoose.connection.readyState;
+      const states = {
+        0: "disconnected",
+        1: "connected",
+        2: "connecting",
+        3: "disconnecting",
+      };
+
+      response.database = {
         state: states[dbState] || "unknown",
         readyState: dbState,
-      },
-      environment: process.env.NODE_ENV || "development",
-    });
+        connected: dbState === 1
+      };
+    } catch (dbError) {
+      response.database = {
+        state: "error",
+        connected: false,
+        error: dbError.message
+      };
+    }
+
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({
       status: "error",

@@ -22,8 +22,6 @@ export const connectDB = async () => {
       maxPoolSize: 1, // Limit to 1 connection for serverless
       serverSelectionTimeoutMS: 5000, // Reduce timeout for faster failure
       socketTimeoutMS: 45000, // Keep socket alive longer than function timeout
-      bufferMaxEntries: 0, // Disable mongoose buffering
-      bufferCommands: false, // Disable mongoose buffering
       family: 4, // Use IPv4, skip trying IPv6
     });
 
