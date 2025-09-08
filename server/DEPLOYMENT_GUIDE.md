@@ -3,16 +3,19 @@
 ## 🔧 Changes Made for Better Serverless Performance
 
 ### 1. **Fixed MongoDB Connection Options**
+
 - Removed invalid `bufferMaxEntries` and `bufferCommands` from connection options
 - These are Mongoose-specific settings, not MongoDB driver options
 - Kept only valid MongoDB driver options: `maxPoolSize`, `serverSelectionTimeoutMS`, `socketTimeoutMS`, `family`
 
 ### 2. **Improved Error Handling**
+
 - Added specific error messages for common connection issues
 - Better health check endpoint that works without database connection
 - Skip database connection for static assets (favicon, etc.)
 
 ### 3. **Connection Optimizations**
+
 - Global connection caching for serverless functions
 - Proper connection cleanup and error handling
 - Optimized timeouts for Vercel's serverless environment
@@ -20,9 +23,11 @@
 ## 🚨 **CRITICAL: MongoDB Atlas Configuration**
 
 ### **Fix IP Whitelist Issue**
+
 Your error logs show: `Could not connect to any servers in your MongoDB Atlas cluster`
 
 **Steps to fix:**
+
 1. Go to [MongoDB Atlas Dashboard](https://cloud.mongodb.com)
 2. Navigate to **Network Access** in your project
 3. Click **Add IP Address**
@@ -77,6 +82,7 @@ After deployment, test these:
 ## 🔄 **Alternative: Move to Render**
 
 If Vercel continues to have issues, consider:
+
 - **Client**: Keep on Vercel (perfect for React apps)
 - **Server**: Move to Render, Railway, or DigitalOcean App Platform
 - **Benefits**: Persistent connections, better for database-heavy apps

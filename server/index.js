@@ -123,29 +123,36 @@ const connectDB = async () => {
 app.use(async (req, res, next) => {
   try {
     // Skip database connection for health check and favicon
-    if (req.path === '/health' || req.path === '/favicon.ico' || req.path === '/favicon.png') {
+    if (
+      req.path === "/health" ||
+      req.path === "/favicon.ico" ||
+      req.path === "/favicon.png"
+    ) {
       return next();
     }
-    
+
     await connectDB();
     next();
   } catch (error) {
     console.error("Database connection failed:", error);
-    
+
     // Provide more helpful error messages
     let errorMessage = "Database connection failed";
-    
+
     if (error.message.includes("IP") || error.message.includes("whitelist")) {
-      errorMessage = "Database access denied. Please check MongoDB Atlas IP whitelist settings.";
+      errorMessage =
+        "Database access denied. Please check MongoDB Atlas IP whitelist settings.";
     } else if (error.message.includes("authentication")) {
-      errorMessage = "Database authentication failed. Please check credentials.";
+      errorMessage =
+        "Database authentication failed. Please check credentials.";
     } else if (error.message.includes("timeout")) {
       errorMessage = "Database connection timeout. Please try again.";
     }
-    
-    res.status(500).json({ 
+
+    res.status(500).json({
       error: errorMessage,
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      details:
+        process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
 });
@@ -157,7 +164,7 @@ app.get("/health", async (req, res) => {
       status: "ok",
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || "development",
-      server: "running"
+      server: "running",
     };
 
     // Try to check database status (optional)
@@ -174,13 +181,13 @@ app.get("/health", async (req, res) => {
       response.database = {
         state: states[dbState] || "unknown",
         readyState: dbState,
-        connected: dbState === 1
+        connected: dbState === 1,
       };
     } catch (dbError) {
       response.database = {
         state: "error",
         connected: false,
-        error: dbError.message
+        error: dbError.message,
       };
     }
 
