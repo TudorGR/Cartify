@@ -12,7 +12,7 @@ import {
   FiLinkedin,
   FiMessageCircle,
 } from "react-icons/fi";
-import hero from "../assets/hero.png";
+import hero from "../assets/hero.webp";
 import PageAnimationWrapper from "./components/PageAnimationWrapper";
 
 const Contact = () => {
@@ -34,8 +34,12 @@ const Contact = () => {
           <div className="mt-20 w-full max-w-5xl relative mx-auto h-full  flex md:flex-row flex-col">
             <img
               src={hero}
-              alt="hero"
+              alt="Contact page background with shopping theme"
               className="absolute h-full object-cover"
+              width={1536}
+              height={1024}
+              loading="lazy"
+              decoding="async"
             />
             <div
               className={` mx-5 z-10 ${

@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useContext, useEffect, useState } from "react";
-import Electronics from "../../assets/Electronics.png";
-import Toys from "../../assets/Toys.png";
-import Beauty from "../../assets/Beauty.png";
-import Automotive from "../../assets/Automotive.png";
+import Electronics from "../../assets/Electronics.webp";
+import Toys from "../../assets/Toys.webp";
+import Beauty from "../../assets/Beauty.webp";
+import Automotive from "../../assets/Automotive.webp";
 import { UserContext } from "../../../context/userContext";
 
 const Categories = () => {

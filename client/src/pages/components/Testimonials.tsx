@@ -1,4 +1,4 @@
-import testimonials from "../../assets/testimonials.png";
+import testimonials from "../../assets/testimonials.webp";
 import { useContext, useRef, useState } from "react";
 import { UserContext } from "../../../context/userContext";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../../../context/userContext";
-import hero2 from "../../assets/hero2.png";
+import hero2 from "../../assets/hero2.webp";
 import { Link } from "react-router-dom";
 import PageWrapperRight from "./PageWrapperRight";
 
@@ -54,9 +54,13 @@ const Hero = () => {
           </Link>
         </div>
         <img
-          alt="hero"
+          alt="Woman shopping with colorful bags - Cartify hero image"
           className="z-0 sm:pt-20  md:pt-12 object-contain object-bottom lg:object-contain block sm:absolute mx-auto lg:w-full h-full sm:bottom-0 sm:ml-[30vw] lg:ml-40 sm:w-[90vw] w-[100vw]"
           src={hero2}
+          width={1536}
+          height={1024}
+          fetchPriority="high"
+          decoding="async"
         />
       </PageWrapperRight>
     </div>
