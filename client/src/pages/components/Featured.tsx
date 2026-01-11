@@ -48,7 +48,7 @@ const Featured = () => {
         </p>
       </div>
       <div className="flex justify-between gap-2 overflow-auto">
-        {products.map((p: ProductType) => (
+        {products.map((p: ProductType, index: number) => (
           <Product
             discountedPrice={p.discountedPrice}
             key={p.id}
@@ -56,6 +56,7 @@ const Featured = () => {
             name={p.name}
             price={p.price}
             image={p.image}
+            priority={index < 4}
           />
         ))}
         {loading &&

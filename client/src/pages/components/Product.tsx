@@ -15,6 +15,7 @@ interface ProductProps {
   name: string;
   price: number;
   image?: string;
+  priority?: boolean;
   [key: string]: any;
   discountedPrice: number | null;
 }
@@ -27,6 +28,7 @@ const Product = ({
   discountedPrice,
   image,
   price,
+  priority = false,
 }: ProductProps) => {
   const [clicked, setClicked] = useState(false);
   const {
@@ -89,11 +91,12 @@ const Product = ({
 
       <Link to={`/product/${id}`}>
         <LazyImage
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
           decoding="async"
-          alt="some 'preview' hover effect..."
+          alt={`${name} - product image`}
           className="pointer-events-none w-30 md:w-60 h-40 md:h-80 bg-neutral-200 rounded-lg md:rounded-xl object-cover"
           src={image}
+          fetchPriority={priority ? "high" : "auto"}
         />
       </Link>
       <div className="flex justify-between max-w-30 md:max-w-60 w-full">

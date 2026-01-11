@@ -17,10 +17,11 @@ export default function LazyImage({
   rootMargin = "200px",
   fallbackSrc = DEFAULT_FALLBACK,
   onLoad,
+  loading = "lazy",
   ...imgProps
 }: LazyImageProps) {
   const [shouldLoad, setShouldLoad] = useState<boolean>(
-    typeof window !== "undefined" && "loading" in HTMLImageElement.prototype
+    loading === "eager" || (typeof window !== "undefined" && "loading" in HTMLImageElement.prototype)
   );
   const [loaded, setLoaded] = useState(false);
   const ref = useRef<HTMLImageElement | null>(null);
@@ -52,7 +53,7 @@ export default function LazyImage({
           src={finalSrc}
           alt={alt}
           className={`${className ?? ""} ${loaded ? "" : "opacity-0"}`}
-          loading="lazy"
+          loading={loading}
           decoding="async"
           onLoad={(e) => {
             setLoaded(true);
